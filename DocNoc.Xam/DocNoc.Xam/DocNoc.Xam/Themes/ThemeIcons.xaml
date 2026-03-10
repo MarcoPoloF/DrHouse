@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="DocNoc.Xam.Themes.ThemeIcons"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- ICONS -->
+
+    <x:String x:Key="Icon-Back">&#xe709;</x:String>
+    <x:String x:Key="Icon-Bell">&#xe700;</x:String>
+    <x:String x:Key="Icon-BillingInfo">&#xe739;</x:String>
+    <x:String x:Key="Icon-ChangePassword">&#xe73f;</x:String>
+    <x:String x:Key="Icon-FAQ">&#xe72c;</x:String>
+    <x:String x:Key="Icon-Logout">&#xe747;</x:String>
+    <x:String x:Key="Icon-Patients">&#xe714;</x:String>
+    <x:String x:Key="Icon-PrivacyPolicy">&#xe746;</x:String>
+    <x:String x:Key="Icon-Profile">&#xe70e;</x:String>
+    <x:String x:Key="Icon-Search">&#xe705;</x:String>
+    <x:String x:Key="Icon-Sort">&#xe70a;</x:String>
+    <x:String x:Key="Icon-TermsService">&#xe737;</x:String>
+    <x:String x:Key="Icon-Ayuda">&#xe72c;</x:String>
+
+</ResourceDictionary>

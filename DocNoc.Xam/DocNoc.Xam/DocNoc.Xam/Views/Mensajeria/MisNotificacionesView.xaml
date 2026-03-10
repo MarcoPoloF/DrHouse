@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Mis Notificaciones (dn-10-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Mensajeria.MisNotificacionesView"
+             x:Name="NotificacionesPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Notificaciones">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Icon-Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference NotificacionesPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource SfButtonStyle-Icon}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <Grid>
+
+            <!--<ImageButton HorizontalOptions="End" Source="add.png" Margin="5" Command="{Binding PopupCommand}" 
+                         CommandParameter="{StaticResource AddPopup}" BackgroundColor="Transparent"/>-->
+
+            <!--  ListView for Category  -->
+            <!--<SfListView:SfListView x:Name="CategoryTile" Grid.Row="1" ItemsSource="{Binding Notificaciones}"
+                                   Style="{StaticResource SfListViewStyle-Base}">
+
+                <SfListView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="{StaticResource White}" Padding="10">
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Text="{Binding TextoMensaje}"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding ArchivaNotificacionCommand}"
+                                    CommandParameter="{Binding IdMensaje}"
+                                    NumberOfTapsRequired="1"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </DataTemplate>
+                </SfListView:SfListView.ItemTemplate>
+
+            </SfListView:SfListView>-->
+            <SfListView:SfListView x:Name="listView" ItemsSource="{Binding Notificaciones}" AutoFitMode="Height" ItemSpacing="10,5">
+                <SfListView:SfListView.Behaviors>
+                    <Behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.ArchivaNotificacionCommand, Source={x:Reference NotificacionesPage}}" />
+                </SfListView:SfListView.Behaviors>
+                <SfListView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="Transparent">
+                            <Frame Style="{StaticResource FrameStyle-ListBox}">
+                                <Label Text="{Binding TextoMensaje}" Style="{StaticResource LabelStyle-Text}" LineBreakMode="WordWrap"/>
+                            </Frame>
+                        </Grid>
+                            
+                    </DataTemplate>
+                </SfListView:SfListView.ItemTemplate>
+            </SfListView:SfListView>
+            <!--<SfListView:SfListView x:Name="listView" ItemsSource="{Binding Notificaciones}">
+                <SfListView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                --><!--<Label FontFamily="{StaticResource Montserrat-SemiBold}" Text="{Binding TextoMensaje}"/>--><!--
+                                <Button Text="{Binding TextoMensaje}" Command="{Binding Path=BindingContext.ArchivaNotificacionCommand, Source={x:Reference NotificacionesPage}}" CommandParameter="{x:Reference listView}"/>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </SfListView:SfListView.ItemTemplate> 
+            </SfListView:SfListView>-->
+
+        </Grid>
+
+    </ContentPage.Content>
+
+</ContentPage>

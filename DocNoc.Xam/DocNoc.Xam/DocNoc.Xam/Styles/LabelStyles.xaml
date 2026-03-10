@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Resource Dictionary: Label Styles-->
+<ResourceDictionary
+    x:Class="DocNoc.Xam.Styles.LabelStyles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    
+    <!-- LABEL STYLES: Base -->
+
+    <!-- Label Style: Base Style -->
+    <Style x:Key="LabelStyle-Base" TargetType="Label">
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <!-- Label Style: Centered -->
+    <Style x:Key="LabelStyle-Centered" TargetType="Label">
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <!-- LABEL STYLES: TEXT -->
+
+    <!-- Label Style: Centered Bold -->
+    <Style x:Key="LabelStyle-CenteredBold" TargetType="Label" BasedOn="{StaticResource LabelStyle-Centered}">
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <!-- Label Style: Text -->
+    <Style x:Key="LabelStyle-Text" TargetType="Label" BasedOn="{StaticResource LabelStyle-Base}">
+        <Setter Property="FontFamily" Value="{StaticResource Font-Text}" />
+    </Style>
+
+    <!-- Label Style: Text, Primary Color -->
+    <Style x:Key="LabelStyle-TextPrimary" TargetType="Label" BasedOn="{StaticResource LabelStyle-Text}">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+    </Style>
+
+    <!-- Label Style: Text, Primary Dark Color -->
+    <Style x:Key="LabelStyle-TextPrimaryDark" TargetType="Label" BasedOn="{StaticResource LabelStyle-Text}">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryDarkColor}" />
+    </Style>
+
+    <!-- Label Style: Text, Secondary Color -->
+    <Style x:Key="LabelStyle-TextSecondary" TargetType="Label" BasedOn="{StaticResource LabelStyle-Text}">
+        <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+    </Style>
+
+    <!-- Label Style: Text, Red Color -->
+    <Style x:Key="LabelStyle-TextRed" TargetType="Label" BasedOn="{StaticResource LabelStyle-Text}">
+        <Setter Property="TextColor" Value="{StaticResource Red}" />
+    </Style>
+
+    <!-- Label Style: Text, Small Size -->
+    <Style x:Key="LabelStyle-TextSmall" TargetType="Label" BasedOn="{StaticResource LabelStyle-Text}">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
+    </Style>
+
+    <!-- Label Style: Reminder Text -->
+    <Style x:Key="LabelStyle-ReminderText" TargetType="Label" BasedOn="{StaticResource LabelStyle-Text}">
+        <Setter Property="TextColor" Value="{StaticResource Gray-600}" />
+        <Setter Property="FontAttributes" Value="Italic" />
+    </Style>
+
+    <!-- LABEL STYLES: HIGHLIGHT -->
+
+    <!-- Label Style: Highlight -->
+    <Style x:Key="LabelStyle-Highlight" TargetType="Label" BasedOn="{StaticResource LabelStyle-Base}">
+        <Setter Property="FontFamily" Value="{StaticResource Font-Highlight}" />
+    </Style>
+
+    <!-- Label Style: Highlight, Large -->
+    <Style x:Key="LabelStyle-HighlightLarge" TargetType="Label" BasedOn="{StaticResource LabelStyle-Highlight}">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
+    </Style>
+
+    <!-- Label Style: Highlight, Primary Color -->
+    <Style x:Key="LabelStyle-HighlightPrimary" TargetType="Label" BasedOn="{StaticResource LabelStyle-Highlight}">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+    </Style>
+
+    <!-- Label Style: Highlight, PrimaryDarken Color -->
+    <Style x:Key="LabelStyle-HighlightPrimaryDarken" TargetType="Label" BasedOn="{StaticResource LabelStyle-Highlight}">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryDarkenColor}" />
+    </Style>
+
+    <!-- Label Style: Highlight, Secondary Color -->
+    <Style x:Key="LabelStyle-HighlightSecondary" TargetType="Label" BasedOn="{StaticResource LabelStyle-Highlight}">
+        <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+    </Style>
+
+    <!-- Label Style: Highlight Text, Red Color -->
+    <Style x:Key="LabelStyle-HighlightRed" TargetType="Label" BasedOn="{StaticResource LabelStyle-Highlight}">
+        <Setter Property="TextColor" Value="{StaticResource Red}" />
+    </Style>
+
+    <!-- Label Style: Highlight, White Color -->
+    <Style x:Key="LabelStyle-HighlightWhite" TargetType="Label" BasedOn="{StaticResource LabelStyle-Highlight}">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- LABEL STYLES: TITLE -->
+
+    <!-- Label Style: Base Title -->
+    <Style x:Key="LabelStyle-Title" TargetType="Label" BasedOn="{StaticResource LabelStyle-Base}">
+        <Setter Property="FontFamily" Value="{StaticResource Font-Title}" />
+        <Setter Property="LineBreakMode" Value="NoWrap" />
+        <Setter Property="MaxLines" Value="1" />
+    </Style>
+
+    <!-- Label Style: Title, Primary Color -->
+    <Style x:Key="LabelStyle-TitlePrimary" TargetType="Label" BasedOn="{StaticResource LabelStyle-Title}">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+    </Style>
+
+    <!-- Label Style: Title, Secondary Color -->
+    <Style x:Key="LabelStyle-TitleSecondary" TargetType="Label" BasedOn="{StaticResource LabelStyle-Title}">
+        <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+    </Style>
+
+    <!-- Label Style: Popup Title -->
+    <Style x:Key="LabelStyle-PopupTitle" TargetType="Label" BasedOn="{StaticResource LabelStyle-Title}">
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
+    </Style>
+
+    <!-- LABEL STYLES: ICON -->
+
+    <!-- Label Style: Base Icon Style -->
+    <Style x:Key="LabelStyle-BaseIcon" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource Font-Icons}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+    </Style>
+
+    <!-- Label Style: Icon, Primary Color -->
+    <Style x:Key="LabelStyle-IconPrimary" TargetType="Label" BasedOn="{StaticResource LabelStyle-BaseIcon}">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+    </Style>
+
+    <!-- Label Style: Icon, Primary Color, Large -->
+    <Style x:Key="LabelStyle-IconPrimaryLarge" TargetType="Label" BasedOn="{StaticResource LabelStyle-IconPrimary}">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
+    </Style>
+
+    <!-- Label Style: Icon, Red -->
+    <Style x:Key="LabelStyle-IconRed" TargetType="Label" BasedOn="{StaticResource LabelStyle-BaseIcon}">
+        <Setter Property="TextColor" Value="{StaticResource Red}" />
+    </Style>
+
+    <!-- Label Style: Icon, Red, Large -->
+    <Style x:Key="LabelStyle-IconRedLarge" TargetType="Label" BasedOn="{StaticResource LabelStyle-IconRed}">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
+    </Style>
+
+</ResourceDictionary>
+    

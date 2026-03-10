@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Lista de Médicos (dn-14-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:SfBusyIndicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:SfPullToRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+             xmlns:SfRating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Medicos.ListaMedicosView"
+             x:Name="ListaMedicosPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Cancelar Cita -->
+            <SfPopupLayout:SfPopupLayout x:Key="SortPopup" IsOpen="False">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="APLICAR" AppearanceMode="OneButton" 
+                                             ShowCloseButton="True" HeaderTitle="Ordenar Por" IsFullScreen="False"
+                                             AcceptCommand="{Binding Path=BindingContext.SortCommand, Source={x:Reference ListaMedicosPage}}">
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="20" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <SfButtons:SfRadioGroup>
+                                        <SfButtons:SfRadioButton Text="Cita más próxima" IsChecked="{Binding Path=BindingContext.SortCitaSeleccionado, Source={x:Reference ListaMedicosPage}}"/>
+                                        <SfButtons:SfRadioButton Text="Rating" IsChecked="{Binding Path=BindingContext.SortRatingSeleccionado, Source={x:Reference ListaMedicosPage}}" />
+                                        <SfButtons:SfRadioButton Text="Apellido" IsChecked="{Binding Path=BindingContext.SortApellidoSeleccionado, Source={x:Reference ListaMedicosPage}}" />
+                                    </SfButtons:SfRadioGroup>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- Converters -->
+            <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Médicos">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference ListaMedicosPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+        <!-- Grid: Page-->
+        <Grid>
+            
+            <!-- SfPullToRefresh: Page -->
+            <SfPullToRefresh:SfPullToRefresh x:Name="PullToRefreshMedicos" IsRefreshing="{Binding IsBusy}" HeightRequest="1200"
+                                             RefreshCommand="{Binding RefreshCommand}" RefreshCommandParameter="{x:Reference PullToRefreshMedicos}">
+                <SfPullToRefresh:SfPullToRefresh.PullableContent>
+
+                    <!-- SfListView: Lista de Médicos -->
+                    <SfListView:SfListView x:Name="SfListViewMedicos" ItemsSource="{Binding Medicos}" ItemSize="240" AutoFitMode="None"
+                                           Style="{StaticResource SfListViewStyle-DoctorInfoCards}">
+
+                        <!-- Behaviors: Lista de Médicos -->
+                        <SfListView:SfListView.Behaviors>
+                            <Behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.PerfilMedicoCommand, 
+                                Source={x:Reference ListaMedicosPage}}" />
+                        </SfListView:SfListView.Behaviors>
+
+                        <!-- Header Template: Lista de Médicos -->
+                        <SfListView:SfListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout HorizontalOptions="FillAndExpand" Padding="20,20,20,0">
+
+                                    <!-- Stack Layout: Controles de Lista -->
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"
+                                                 IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolean}}">
+                                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="StartAndExpand">
+                                            <Label Text="{Binding MedicosDisponibles}"
+                                                   Style="{StaticResource LabelStyle-HighlightPrimary}"/>
+                                            <Label Text="Médicos disponibles"
+                                                   Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer  Command="{Binding PopupCommand}"  CommandParameter="{StaticResource SortPopup}"/>
+                                            </StackLayout.GestureRecognizers>
+                                            <Label Text="{StaticResource Icon-Sort}" Style="{StaticResource LabelStyle-IconPrimary}"/>
+                                            <Label Text="Ordenar" Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <!-- Busy Indicator: Búsqueda -->
+                                    <SfBusyIndicator:SfBusyIndicator Title="Buscando médicos..." IsBusy="{Binding CargaInicial}"
+                                                     Style="{StaticResource SfBusyIndicatorStyle-SlicedPrimary}"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfListView:SfListView.HeaderTemplate>
+
+                        <!-- Item Template: Lista de Médicos -->
+                        <SfListView:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <!-- Grid: Doctor Information Card -->
+                                <Grid Style="{StaticResource GridStyle-DoctorInfoCard}">
+
+                                    <!-- Image: Profile Picture -->
+                                    <Image Grid.Column="0" Grid.RowSpan="5" Aspect="AspectFill" HeightRequest="40">
+                                        <Image.Source>
+                                            <UriImageSource
+                                                CacheValidity="14"
+                                                CachingEnabled="true"
+                                                Uri="{Binding RutaImagen}" />
+                                        </Image.Source>
+                                    </Image>
+
+                                    <!-- Label: Full Name and Title -->
+                                    <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding NombreCompletoTitulo}"
+                                           Style="{StaticResource LabelStyle-Title}" LineBreakMode="TailTruncation" />
+
+                                    <!-- Label: Doctor Specialties -->
+                                    <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding TituloEspecialidad}"
+                                           Style="{StaticResource LabelStyle-HighlightPrimaryDarken}" LineBreakMode="WordWrap" MaxLines="2" />
+
+                                    <!-- Label: Professional License -->
+                                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding CedulaLetra}" LineBreakMode="TailTruncation"
+                                        Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+                                    <Image Grid.Column="2" Grid.Row="2" Source="verificado.png" Aspect="AspectFit" IsVisible="{Binding CedulaVerificada}"/>
+
+                                    <!-- Label: Next Available Appointment -->
+                                    <Label Grid.Row="3" Grid.Column="1" Text="Próxima cita disponible" Style="{StaticResource LabelStyle-TextRed}"
+                                           LineBreakMode="WordWrap" MaxLines="2" />
+                                    <Label Grid.Row="3" Grid.Column="2" Text="{Binding ProximaCitaLetra}" Style="{StaticResource LabelStyle-HighlightPrimary}"
+                                           LineBreakMode="WordWrap" MaxLines="2" />
+
+                                    <!-- Label: Rating -->
+                                    <SfRating:SfRating Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Value="{Binding Rating}"
+                                        RatingSettings="{StaticResource SfRatingSettings-Default}" Style="{StaticResource SfRatingStyle-ReadOnly}" />
+
+                                </Grid>
+                            </DataTemplate>
+                        </SfListView:SfListView.ItemTemplate>
+
+                        <!-- Left Swipe Template: Lista de Médicos (Ver Perfil) -->
+                        <SfListView:SfListView.LeftSwipeTemplate>
+                            <DataTemplate>
+                                <Grid Style="{StaticResource GridStyle-SwipePanelPrimary}" >
+                                    <Grid.GestureRecognizers>
+                                        <!-- On-Tap: PerfilMedicoCommand -->
+                                        <TapGestureRecognizer Command="{Binding BindingContext.PerfilMedicoCommand, 
+                                                        Source={x:Reference Name=ListaMedicosPage}}"  CommandParameter="{Binding}" />
+                                    </Grid.GestureRecognizers>
+                                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent">
+                                        <Label Text="Ver Perfil" TextColor="White" LineBreakMode="WordWrap" HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </SfListView:SfListView.LeftSwipeTemplate>
+
+                        <!-- Right Swipe Template: Lista de Médicos (Agendar Cita) -->
+                        <SfListView:SfListView.RightSwipeTemplate>
+                            <DataTemplate>
+                                <Grid Style="{StaticResource GridStyle-SwipePanelSecondary}" >
+                                    <Grid.GestureRecognizers>
+                                        <!-- On-Tap: AgendarCitaCommand -->
+                                        <TapGestureRecognizer Command="{Binding BindingContext.AgendarCitaCommand, 
+                                                        Source={x:Reference Name=ListaMedicosPage}}"  CommandParameter="{Binding}" />
+                                    </Grid.GestureRecognizers>
+                                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent">
+                                        <Label Text="Agendar Cita" TextColor="White" LineBreakMode="WordWrap" HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </SfListView:SfListView.RightSwipeTemplate>
+
+                    </SfListView:SfListView>
+
+                </SfPullToRefresh:SfPullToRefresh.PullableContent>
+            </SfPullToRefresh:SfPullToRefresh>
+
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Detalle de Cita (dn-25-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:SfRating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Consultas.DetalleConsultaView"
+             x:Name="DetalleConsultaPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Cancelar Cita -->
+            <SfPopupLayout:SfPopupLayout x:Key="RatePopup" IsOpen="False">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="CALIFICAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
+                                             ShowCloseButton="True" IsFullScreen="True"
+                                             AcceptCommand="{Binding Path=BindingContext.CalificarCommand, Source={x:Reference DetalleConsultaPage}}"
+                                             DeclineCommand="{Binding Path=BindingContext.CancelarCalificarCommand, Source={x:Reference DetalleConsultaPage}}">
+                        <SfPopupLayout:PopupView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10">
+                                    <Label LineBreakMode="WordWrap" Text="CALIFICAR MÉDICO" FontSize="18" HorizontalOptions="Center" TextColor="{StaticResource Black}"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.HeaderTemplate>
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <ScrollView>
+                                    <StackLayout x:Name="stack" Padding="10" Spacing="10" VerticalOptions="Start" HorizontalOptions="FillAndExpand"
+                                             BackgroundColor="{DynamicResource PageBackground}">
+
+                                        <!-- Frame: Información del Médico -->
+                                        <Frame  HorizontalOptions="FillAndExpand" Padding="20" BackgroundColor="White" CornerRadius="10" HasShadow="False">
+
+                                            <!-- Grid: Información del Médico -->
+                                            <Grid ColumnSpacing="0" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{OnIdiom Default=Auto, Desktop=0.5*}" />
+                                                    <ColumnDefinition Width="{OnIdiom Default=*, Desktop=*}" />
+                                                    <ColumnDefinition Width="32" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <!--  Product Image  -->
+                                                <Image Grid.RowSpan="4" Margin="8,0,16,0" Aspect="Fill" 
+                                                   HeightRequest="{OnIdiom Default=150, Desktop=120}"
+                                                   WidthRequest="{OnIdiom Default=140, Desktop=200}">
+                                                    <Image.Source>
+                                                        <UriImageSource CacheValidity="14" CachingEnabled="true" Uri="{Binding Path=BindingContext.Consulta.RutaImagen, Source={x:Reference DetalleConsultaPage}}" />
+                                                    </Image.Source>
+                                                </Image>
+
+                                                <!--  Nombre del Médico  -->
+                                                <Label Grid.Row="0" Grid.Column="1" Margin="0,0,0,8" FontFamily="{StaticResource Montserrat-SemiBold}" 
+                                                   LineBreakMode="TailTruncation" MaxLines="1" Style="{StaticResource LabelStyle}" 
+                                                   Text="{Binding Path=BindingContext.Consulta.NombreCompletoTitulo, Source={x:Reference DetalleConsultaPage}}" TextColor="{DynamicResource Gray-900}" />
+
+                                                <!--  Especialidad del Médico  -->
+                                                <Label Grid.Row="1" Grid.Column="1" Margin="0,0,0,8" FontFamily="{StaticResource Montserrat-Medium}" FontSize="12"
+                                                   LineBreakMode="TailTruncation" LineHeight="{OnPlatform Android=1.25, Default=-1}" MaxLines="2"
+                                                   Style="{StaticResource LabelStyle}" Text="{Binding Path=BindingContext.Consulta.NombreEspecialidad, Source={x:Reference DetalleConsultaPage}}" />
+
+                                                <!--  Cédula del Médico  -->
+                                                <Label Grid.Row="2" Grid.Column="1" Margin="0,0,0,8" FontFamily="{StaticResource Montserrat-Medium}"
+                                                   FontSize="12" LineBreakMode="TailTruncation" LineHeight="{OnPlatform Android=1.25, Default=-1}"
+                                                   MaxLines="2" Style="{StaticResource LabelStyle}" Text="{Binding Path=BindingContext.Consulta.Cedula, Source={x:Reference DetalleConsultaPage}}" />
+
+                                            </Grid>
+
+                                        </Frame>
+
+                                        <!-- Frame: Cajas de Calificación -->
+                                        <Frame  HorizontalOptions="FillAndExpand" Padding="20" BackgroundColor="White" CornerRadius="10" HasShadow="False">
+                                            <StackLayout>
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                    <Label Text="El Doctor fue puntual" FontSize="18" HorizontalOptions="StartAndExpand" TextColor="{StaticResource Black}"/>
+                                                    <SfRating:SfRating RatingSettings="{StaticResource RatingSettings}" Style="{StaticResource SfRatingEditStyle}" 
+                                                                   Value="{Binding Path=BindingContext.Calificacion1, Source={x:Reference DetalleConsultaPage}}" />
+                                                </StackLayout>
+                                                <BoxView Style="{StaticResource SeparatorStyle}" />
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                    <Label Text="El Doctor fue amable" FontSize="18" HorizontalOptions="StartAndExpand" TextColor="{StaticResource Black}"/>
+                                                    <SfRating:SfRating RatingSettings="{StaticResource RatingSettings}" Style="{StaticResource SfRatingEditStyle}" 
+                                                                   Value="{Binding Path=BindingContext.Calificacion2, Source={x:Reference DetalleConsultaPage}}" />
+                                                </StackLayout>
+                                                <BoxView Style="{StaticResource SeparatorStyle}" />
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                    <Label Text="El Doctor fue profesional" FontSize="18" HorizontalOptions="StartAndExpand" TextColor="{StaticResource Black}"/>
+                                                    <SfRating:SfRating RatingSettings="{StaticResource RatingSettings}" Style="{StaticResource SfRatingEditStyle}" 
+                                                                   Value="{Binding Path=BindingContext.Calificacion3, Source={x:Reference DetalleConsultaPage}}" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Frame>
+
+                                        <!-- Frame: Caja de Comentarios -->
+                                        <Frame  HorizontalOptions="FillAndExpand" Padding="20" BackgroundColor="White" CornerRadius="10" HasShadow="False">
+                                            <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                                                <Label Text="Comentarios" TextColor="{StaticResource Black}"/>
+                                                <BoxView Style="{StaticResource SeparatorStyle}" />
+                                                <Entry Text="{Binding Path=BindingContext.ComentarioCalificacion, Source={x:Reference DetalleConsultaPage}}" HeightRequest="180"
+                                                       BackgroundColor="{StaticResource White}" TextColor="{StaticResource Black}"/>
+                                            </StackLayout>
+                                        </Frame>
+
+                                    </StackLayout>
+                                </ScrollView>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Detalle de Consulta">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference DetalleConsultaPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <!-- Grid: Page-->
+        <Grid>
+            <!--ScrollView: Page -->
+            <ScrollView HorizontalOptions="FillAndExpand">
+                <!-- ScrollView Options -->
+                <ScrollView.VerticalOptions>
+                    <OnIdiom 
+                        x:TypeArguments="LayoutOptions"
+                        Default="CenterAndExpand"
+                        Phone="FillAndExpand" />
+                </ScrollView.VerticalOptions>
+
+                <!-- StackLayout: Contenido de la página. -->
+                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="10" Spacing="10">
+
+                    <!-- Frame: Datos de la Consulta -->
+                    <Frame  HorizontalOptions="FillAndExpand" Padding="20" BackgroundColor="White" CornerRadius="10" HasShadow="False">
+
+                        <!-- StackLayout: Datos de la Consulta -->
+                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="10">
+                            <Label Text="{Binding Consulta.FechaLetra}" TextColor="{StaticResource Black}"/>
+                            <Label Text="{Binding Consulta.ConsultaPaciente}" TextColor="{DynamicResource Red}"/>
+                            <Label Text="{Binding Consulta.MotivoLetra}" TextColor="{StaticResource Black}" LineBreakMode="WordWrap"/>
+                        </StackLayout>
+
+                    </Frame>
+
+                    <!-- Frame: Información del Médico -->
+                    <Frame  HorizontalOptions="FillAndExpand" Padding="20" BackgroundColor="White" CornerRadius="10" HasShadow="False">
+
+                        <!-- Grid: Información del Médico -->
+                        <Grid ColumnSpacing="0" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{OnIdiom Default=Auto, Desktop=0.5*}" />
+                                <ColumnDefinition Width="{OnIdiom Default=*, Desktop=*}" />
+                                <ColumnDefinition Width="32" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--  Product Image  -->
+                            <Image Grid.RowSpan="4" Margin="8,0,16,0" Aspect="Fill" 
+                                   HeightRequest="{OnIdiom Default=150, Desktop=120}"
+                                   WidthRequest="{OnIdiom Default=140, Desktop=200}">
+                                <Image.Source>
+                                    <UriImageSource CacheValidity="14" CachingEnabled="true" Uri="{Binding Consulta.RutaImagen}" />
+                                </Image.Source>
+                            </Image>
+
+                            <!--  Nombre del Médico  -->
+                            <Label Grid.Row="0" Grid.Column="1" Margin="0,0,0,8" FontFamily="{StaticResource Montserrat-SemiBold}" 
+                                   LineBreakMode="TailTruncation" MaxLines="1" Style="{StaticResource LabelStyle}" 
+                                   Text="{Binding Consulta.NombreCompletoTitulo}" TextColor="{DynamicResource Gray-900}" />
+
+                            <!--  Especialidad del Médico  -->
+                            <Label Grid.Row="1" Grid.Column="1" Margin="0,0,0,8" FontFamily="{StaticResource Montserrat-Medium}" FontSize="12"
+                                   LineBreakMode="TailTruncation" LineHeight="{OnPlatform Android=1.25, Default=-1}" MaxLines="2"
+                                   Style="{StaticResource LabelStyle}" Text="{Binding Consulta.NombreEspecialidad}" />
+
+                            <!--  Cédula del Médico  -->
+                            <Label Grid.Row="2" Grid.Column="1" Margin="0,0,0,8" FontFamily="{StaticResource Montserrat-Medium}"
+                                   FontSize="12" LineBreakMode="TailTruncation" LineHeight="{OnPlatform Android=1.25, Default=-1}"
+                                   MaxLines="2" Style="{StaticResource LabelStyle}" Text="{Binding Consulta.Cedula}" />
+
+                            <!--  Product Rating  -->
+                            <SfRating:SfRating  Grid.Row="3" Grid.Column="1" RatingSettings="{StaticResource RatingSettings}"
+                                Style="{StaticResource SfRatingStyle}" Value="{Binding Consulta.Rating}" />
+
+                        </Grid>
+
+                    </Frame>
+
+                    <!-- StackLayout: Control para Calificar -->
+                    <StackLayout HorizontalOptions="FillAndExpand" Padding="20" IsVisible="{Binding ConsultaNoCalificada}">
+
+                        <!-- SfButton: Calificar -->
+                        <SfButtons:SfButton Text="CALIFICAR CONSULTA" HorizontalOptions="FillAndExpand" Style="{StaticResource SfButtonStylePrimary}"
+                                            Command="{Binding PopupCommand}" CommandParameter="{StaticResource RatePopup}"/>
+
+                    </StackLayout>
+
+                    <!-- Frame: Diagnóstico -->
+                    <Frame  HorizontalOptions="FillAndExpand" Padding="20" BackgroundColor="White" CornerRadius="10" HasShadow="False">
+
+                        <!-- StackLayout: Diagnóstico -->
+                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="20">
+                            <Label Text="Diagnóstico" FontFamily="{StaticResource Montserrat-SemiBold}" TextColor="{StaticResource Black}"/>
+                            <Label Text="{Binding Consulta.Diagnostico}" TextColor="{StaticResource Black}" LineBreakMode="WordWrap"/>
+                        </StackLayout>
+
+                    </Frame>
+
+                    <!-- Frame: Tratamiento -->
+                    <Frame  HorizontalOptions="FillAndExpand" Padding="20" BackgroundColor="White" CornerRadius="10" HasShadow="False">
+
+                        <!-- StackLayout: Tratamiento -->
+                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="20">
+                            <Label Text="Tratamiento" FontFamily="{StaticResource Montserrat-SemiBold}" TextColor="{StaticResource Black}"/>
+                            <Label Text="{Binding Consulta.Tratamiento}" TextColor="{StaticResource Black}" LineBreakMode="WordWrap"/>
+                        </StackLayout>
+
+                    </Frame>
+
+                    <!-- StackLayout: Control para Notificar Llegada -->
+                    <StackLayout HorizontalOptions="FillAndExpand" Padding="20">
+
+                        <!-- SfButton: Calificar -->
+                        <SfButtons:SfButton Text="AGENDAR NUEVA CITA" HorizontalOptions="FillAndExpand" Style="{StaticResource SfButtonStylePrimary}"
+                                            Command="{Binding NavegarAgendaMedicoCommand}" />
+
+                    </StackLayout>
+
+                </StackLayout>
+
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

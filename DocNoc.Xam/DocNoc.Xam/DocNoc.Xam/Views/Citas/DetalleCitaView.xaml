@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Detalle de Cita (dn-25-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:SfBarcode="clr-namespace:Syncfusion.SfBarcode.XForms;assembly=Syncfusion.SfBarcode.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:SfRating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Citas.DetalleCitaView"
+             x:Name="DetalleCitaPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Cancelar Cita -->
+            <SfPopupLayout:SfPopupLayout x:Key="CancelarCitaPopup">
+                <SfPopupLayout:SfPopupLayout.PopupView>
+                    <SfPopupLayout:PopupView AcceptButtonText="Sí, confirmo" DeclineButtonText="No, regresar." AppearanceMode="TwoButton"
+                                             ShowCloseButton="False" HeaderHeight="70" AcceptCommand="{Binding Path=BindingContext.CancelCommand, Source={x:Reference DetalleCitaPage}}">
+                        <SfPopupLayout:PopupView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10">
+                                    <Label LineBreakMode="WordWrap" Text="Cancelar Cita" FontSize="19"
+                                           HorizontalOptions="Center" TextColor="{StaticResource Black}" FontAttributes="Bold"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.HeaderTemplate>
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout x:Name="stack" Orientation="Horizontal" Padding="5">
+                                    <Label BackgroundColor="Transparent" TextColor="{StaticResource Black}" FontSize="16"
+                                           Text="¿Desea confirmar la cancelación de su cita?"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Mi Cita">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference DetalleCitaPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <!-- Grid: Page-->
+        <Grid>
+            <!--ScrollView: Page -->
+            <ScrollView HorizontalOptions="FillAndExpand">
+                <!-- ScrollView Options -->
+                <ScrollView.VerticalOptions>
+                    <OnIdiom 
+                        x:TypeArguments="LayoutOptions"
+                        Default="CenterAndExpand"
+                        Phone="FillAndExpand" />
+                </ScrollView.VerticalOptions>
+
+                <!-- StackLayout: Contenido de la página. -->
+                <StackLayout Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,10">
+
+                    <!-- StackLayout: Información de la Consulta -->
+                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="20" Padding="20" BackgroundColor="White">
+
+                        <!-- StackLayout: Datos de la Consulta -->
+                        <StackLayout HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+                                <Label Text="{Binding Cita.HoraLetra}" Style="{StaticResource LabelStyle-HighlightPrimary}" />
+                                <Label Text="{Binding Cita.PacienteCita}" Style="{StaticResource LabelStyle-Highlight}" 
+                                       TextColor="{DynamicResource Red}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+                                <Label Text="{Binding Cita.NombreEspecialidad}" Style="{StaticResource LabelStyle-Highlight}"/>
+                                <Label Text="{Binding Cita.Doctor}" Style="{StaticResource LabelStyle-Highlight}"/>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!-- StackLayout: Motivo de la Consulta -->
+                        <StackLayout HorizontalOptions="FillAndExpand">
+                            <Label Text="Motivo de la Consulta" Style="{StaticResource LabelStyle-Highlight}"/>
+                            <Label Text="{Binding Cita.Motivo}" Style="{StaticResource LabelStyle-Text}"
+                                   LineBreakMode="WordWrap"/>
+                        </StackLayout>
+
+                        <!-- StackLayout: Información del Consultorio -->
+                        <StackLayout HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Cita.NombreConsultorio}" Style="{StaticResource LabelStyle-Highlight}"/>
+                            <Label Text="{Binding Cita.Direccion}" Style="{StaticResource LabelStyle-Text}"
+                                   LineBreakMode="WordWrap"/>
+                        </StackLayout>
+
+                    </StackLayout>
+
+                    <!-- StackLayout: Controles de Consulta -->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="20" Padding="20">
+
+                        <!-- SfButton: Cancelar Cita -->
+                        <SfButtons:SfButton Text="Cancelar Cita" Style="{StaticResource SfButtonStyle-BorderedTransparentButtonRed}"
+                                            Command="{Binding PopupCommand}" CommandParameter="{StaticResource CancelarCitaPopup}"/>
+
+                        <!-- SfButton: Modificar Cita -->
+                        <SfButtons:SfButton Text="Modificar Cita" Style="{StaticResource SfButtonStyle-BorderedTransparentButtonOrange}"
+                                            Command="{Binding EditCommand}" />
+
+                    </StackLayout>
+
+                    <!-- Grid: Doctor Information Card -->
+                    <Grid Style="{StaticResource GridStyle-DoctorInfoCard}">
+
+                        <!-- Image: Profile Picture -->
+                        <Image Grid.Column="0" Grid.RowSpan="5" HeightRequest="150" WidthRequest="150">
+                            <Image.Source>
+                                <UriImageSource CacheValidity="14" CachingEnabled="true" Uri="{Binding Medico.RutaImagen}" />
+                            </Image.Source>
+                        </Image>
+
+                        <!-- Label: Full Name and Title -->
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Medico.TituloNombreCompleto}"
+                                           Style="{StaticResource LabelStyle-Title}"/>
+
+                        <!-- Label: Doctor Specialties -->
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Medico.TituloEspecialidad}"
+                                           Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+
+                        <!-- Label: Professional License -->
+                        <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Spacing="10">
+                            <Label Text="{Binding Medico.CedulaLetra}"
+                                               Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+                            <Image Source="verificado.png" HeightRequest="16"
+                                               IsVisible="{Binding Medico.CedulaVerificada}"/>
+                        </StackLayout>
+
+                        <!-- Label: Rating -->
+                        <SfRating:SfRating Grid.Column="1" Grid.Row="4" Value="{Binding Cita.Rating}"
+                                           RatingSettings="{StaticResource SfRatingSettings-Default}"
+                                           Style="{StaticResource SfRatingStyle-ReadOnly}" />
+
+                    </Grid>
+
+                    <!-- StackLayout: Control de Compartir Archivos -->
+                    <StackLayout HorizontalOptions="FillAndExpand" Padding="20">
+
+                        <!-- SfButton: Compartir Archivos -->
+                        <SfButtons:SfButton Text="Compartir archivos con el médico" Command="{Binding ShareFilesCommand}"
+                                            Style="{StaticResource SfButtonStyle-BorderedTransparentButtonOrange}"/>
+
+                    </StackLayout>
+
+                    <!-- StackLayout: Código de la Consulta -->
+                    <StackLayout HorizontalOptions="FillAndExpand" Padding="20" Spacing="0" BackgroundColor="White">
+
+                        <!-- Label: Descripción -->
+                        <Label Text="Solicita al médico que realice el check-in de tu cita para conservar la información en Doc+Noc"
+                               LineBreakMode="WordWrap" Style="{StaticResource LabelStyle-Text}"/>
+
+                        <!-- SfBarcode: Código QR -->
+                        <SfBarcode:SfBarcode Symbology="QRCode" Text="{Binding Cita.CodigoQR}" />
+
+                    </StackLayout>
+
+                    <!-- StackLayout: Control para Notificar Llegada -->
+                    <StackLayout HorizontalOptions="FillAndExpand" Padding="20">
+
+                        <!-- SfButton: Notificar Llegada -->
+                        <SfButtons:SfButton Text="Avisar al médico que he llegado" Command="{Binding NotificarLlegadaCommand}"
+                                            Style="{StaticResource SfButtonStyle-WideGreen}"/>
+
+                    </StackLayout>
+
+                </StackLayout>
+
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DocNoc.Xam.Views.Medicos.CatalogListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:badge="clr-namespace:Syncfusion.XForms.BadgeView;assembly=Syncfusion.SfBadgeView.XForms"
+    xmlns:behavior="clr-namespace:DocNoc.Xam.Behaviors.Medicos"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:commonBehavior="clr-namespace:DocNoc.Xam.Behaviors"
+    xmlns:controls="clr-namespace:DocNoc.Xam.Controls"
+    xmlns:converter="clr-namespace:DocNoc.Xam.Converters"
+    xmlns:helper="clr-namespace:DocNoc.Xam.Helpers"
+    xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+    xmlns:template="clr-namespace:DocNoc.Xam.Views.Templates"
+    xmlns:SfPullToRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    x:Name="catalogListPage"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="{DynamicResource PageBackground}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="boolToColorConverter" />
+            <converter:BooleanToStringConverter x:Key="boolToStringConverter" />
+            <converter:IntToThicknessConverter x:Key="intToThicknessConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <controls:TitleView Title="Resultados">
+                    <controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <buttons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference catalogListPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </controls:TitleView.LeadingView>
+                </controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <ContentPage.Content>
+
+        <Grid>
+
+            <SfPullToRefresh:SfPullToRefresh x:Name="PullToRefresh" IsRefreshing="{Binding IsBusy}" HeightRequest="600"
+                                             RefreshCommand="{Binding RefreshCommand}" RefreshCommandParameter="{x:Reference PullToRefresh}">
+                <SfPullToRefresh:SfPullToRefresh.PullableContent>
+
+                    <!--  ListView for catalog list  -->
+                    <listView:SfListView x:Name="ListViewList" Margin="{OnIdiom Default='0,8,8,0', Desktop='15,15,15,0'}"
+                                         AutoFitMode="Height" HorizontalOptions="FillAndExpand" IsStickyHeader="False"
+                                         ItemSize="170" ItemSpacing="8,8,0,8" ItemsSource="{Binding Medicos}"
+                                         Style="{StaticResource SfListViewStyle}" AllowSwiping="True">
+                        <!--HeaderTemplate="{StaticResource CatalogDefaultHeaderTemplate}"-->
+
+                        <listView:SfListView.Behaviors>
+                            <commonBehavior:SfListViewTapBehavior Command="{Binding Path=BindingContext.ItemSelectedCommand, Source={x:Reference catalogListPage}}" />
+                        </listView:SfListView.Behaviors>
+
+                        <listView:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <template:ProductListTemplate ParentBindingContext="{Binding Path=BindingContext, Source={x:Reference catalogListPage}}" />
+                            </DataTemplate>
+                        </listView:SfListView.ItemTemplate>
+
+                        <listView:SfListView.LeftSwipeTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid BackgroundColor="LightBlue" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" Padding="10">
+                                        <Grid VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+                                            <Label Text="Ver Perfil" TextColor="White" LineBreakMode="WordWrap" HorizontalTextAlignment="Center">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding BindingContext.ItemSelectedCommand, 
+                                                        Source={x:Reference Name=catalogListPage}}"  CommandParameter="{Binding}" />
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </listView:SfListView.LeftSwipeTemplate>
+
+                        <listView:SfListView.RightSwipeTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid BackgroundColor="YellowGreen" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" Padding="10">
+                                        <Grid VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+                                            <Label Text="Agendar Cita" TextColor="White" LineBreakMode="WordWrap" HorizontalTextAlignment="Center">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding BindingContext.AgendarCitaCommand, 
+                                                        Source={x:Reference Name=catalogListPage}}"  CommandParameter="{Binding}" />
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </listView:SfListView.RightSwipeTemplate>
+
+                    </listView:SfListView>
+
+                </SfPullToRefresh:SfPullToRefresh.PullableContent>
+            </SfPullToRefresh:SfPullToRefresh>
+            
+
+        </Grid>
+
+    </ContentPage.Content>
+
+</ContentPage>

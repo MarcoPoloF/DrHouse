@@ -1,0 +1,20 @@
+{
+  "FirstNamePlaceholder": "Nombre",
+  "LastNamePlaceholder": "Apellidos",
+  "EmailPlaceholder": "Email",
+  "PasswordPlaceholder": "Contraseña",
+  "ConfirmPasswordPlaceholder": "Confirmar Contraseña",
+  "TermsAcceptance1": "ACEPTO LOS ",
+  "ServiceTermsLink": "TÉRMINOS Y CONDICIONES",
+  "TermsAcceptance2": " ASÍ COMO NUESTRA ",
+  "PrivacyPolicyLink": "POLÍTICA DE PRIVACIDAD",
+  "SignUpButton": "CREAR CUENTA",
+  "LoginText": "¿Ya tienes una cuenta? Ingresa ",
+  "LoginLink": "aquí",
+  "SignUpError": "Registro fallido",
+  "InvalidFirstName": "El nombre proporcionado no es válido.",
+  "InvalidLastName": "El apellido proporcionado no es válido.",
+  "InvalidEmail": "El email proporcionado no es válido.",
+  "InvalidPassword": "La contraseña proporcionada no es válida.",
+  "InvalidConfirmPassword":  "Las contraseñas no coinciden."
+}

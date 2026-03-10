@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Datos Personales (dn-37-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Usuarios.DatosFacturacionView"
+             x:Name="DatosFacturacionPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converters:BooleanToColorConverter x:Key="ColorConverter" />
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Datos de Facturación">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference DatosFacturacionPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+        <!-- Grid: Page-->
+        <Grid>
+            <!--ScrollView: Page -->
+            <ScrollView HorizontalOptions="FillAndExpand">
+                <!-- ScrollView Options -->
+                <ScrollView.VerticalOptions>
+                    <OnIdiom 
+                        x:TypeArguments="LayoutOptions"
+                        Default="CenterAndExpand"
+                        Phone="FillAndExpand" />
+                </ScrollView.VerticalOptions>
+
+                <StackLayout Spacing="20" Padding="0,20">
+
+                    <!--  Profile Name  -->
+                    <Label
+                        Margin="40,10,40,10"
+                        FontFamily="{StaticResource Montserrat-Bold}"
+                        HorizontalOptions="Center"
+                        Text="En caso de que requieras factura de los Médicos, deberás llenar estos datos para que ellos los vean."
+                        TextColor="{DynamicResource Gray-900}"
+                        MaxLines="4"
+                        LineBreakMode="WordWrap"
+                        VerticalOptions="Center" />
+
+                    <StackLayout BackgroundColor="White" HorizontalOptions="FillAndExpand" Padding="10,0">
+
+                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference RFCEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                            <Controls:BorderlessEntry
+                                x:Name="RFCEntry"
+                                Placeholder="RFC" Text="{Binding Usuario.RFC}"
+                                Style="{StaticResource EntryTextStyle}">
+                                <Controls:BorderlessEntry.Behaviors>
+                                    <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                </Controls:BorderlessEntry.Behaviors>
+                            </Controls:BorderlessEntry>
+                        </SfBorder:SfBorder>
+
+                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference RFCRazonSocialEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                            <Controls:BorderlessEntry
+                                x:Name="RFCRazonSocialEntry"
+                                Placeholder="Razón Social" Text="{Binding Usuario.RFCRazonSocial}"
+                                Style="{StaticResource EntryTextStyle}">
+                                <Controls:BorderlessEntry.Behaviors>
+                                    <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                </Controls:BorderlessEntry.Behaviors>
+                            </Controls:BorderlessEntry>
+                        </SfBorder:SfBorder>
+
+                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference RFCDireccionEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                            <Controls:BorderlessEntry
+                                x:Name="RFCDireccionEntry"
+                                Placeholder="Dirección" Text="{Binding Usuario.RFCDireccion}"
+                                Style="{StaticResource EntryTextStyle}">
+                                <Controls:BorderlessEntry.Behaviors>
+                                    <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                </Controls:BorderlessEntry.Behaviors>
+                            </Controls:BorderlessEntry>
+                        </SfBorder:SfBorder>
+
+                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference RFCMunicipioEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                            <Controls:BorderlessEntry
+                                x:Name="RFCMunicipioEntry"
+                                Placeholder="Municipio" Text="{Binding Usuario.RFCMunicipio}"
+                                Style="{StaticResource EntryTextStyle}">
+                                <Controls:BorderlessEntry.Behaviors>
+                                    <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                </Controls:BorderlessEntry.Behaviors>
+                            </Controls:BorderlessEntry>
+                        </SfBorder:SfBorder>
+
+                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference RFCEstadoEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                            <Controls:BorderlessEntry
+                                x:Name="RFCEstadoEntry"
+                                Placeholder="Estado" Text="{Binding Usuario.RFCEstado}"
+                                Style="{StaticResource EntryTextStyle}">
+                                <Controls:BorderlessEntry.Behaviors>
+                                    <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                </Controls:BorderlessEntry.Behaviors>
+                            </Controls:BorderlessEntry>
+                        </SfBorder:SfBorder>
+
+                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference RFCCPEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                            <Controls:BorderlessEntry
+                                x:Name="RFCCPEntry"
+                                Placeholder="CP" Text="{Binding Usuario.RFCCP}"
+                                Style="{StaticResource EntryTextStyle}">
+                                <Controls:BorderlessEntry.Behaviors>
+                                    <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                </Controls:BorderlessEntry.Behaviors>
+                            </Controls:BorderlessEntry>
+                        </SfBorder:SfBorder>
+
+                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference RFCEmailEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                            <Controls:BorderlessEntry
+                                x:Name="RFCEmailEntry"
+                                Placeholder="Correo Electrónico" Text="{Binding Usuario.RFCEmail}"
+                                Style="{StaticResource EntryTextStyle}">
+                                <Controls:BorderlessEntry.Behaviors>
+                                    <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                </Controls:BorderlessEntry.Behaviors>
+                            </Controls:BorderlessEntry>
+                        </SfBorder:SfBorder>
+
+                    </StackLayout>
+
+                    <StackLayout Spacing="10" Padding="50,0" IsVisible="{Binding HayCambios}">
+
+                        <SfButtons:SfButton Text="Guardar" Command="{Binding UpdateCommand}" CornerRadius="20" 
+                                            Style="{StaticResource GradientButtonStyle}"/>
+
+                        <!--  Forgot password link  -->
+                        <Label
+                            x:Name="CancelLabel"
+                            FontFamily="{StaticResource Montserrat-SemiBold}"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            Text="Cancelar"
+                            TextColor="LightGray">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                    </StackLayout>
+
+
+
+                </StackLayout>
+
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

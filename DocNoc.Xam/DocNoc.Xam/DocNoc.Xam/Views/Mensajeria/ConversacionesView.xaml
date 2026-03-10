@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Conversaciones-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
+             xmlns:SfBadge="clr-namespace:Syncfusion.XForms.BadgeView;assembly=Syncfusion.SfBadgeView.XForms"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfChat="clr-namespace:Syncfusion.XForms.Chat;assembly=Syncfusion.SfChat.XForms"
+             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:SfPullToRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Mensajeria.ConversacionesView"
+             x:Name="ConversacionesPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Mis Conversaciones">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Icon-Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference ConversacionesPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource SfButtonStyle-Icon}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <!-- Grid: Page-->
+        <Grid>
+
+            <!-- SfPullToRefresh: Page -->
+            <SfPullToRefresh:SfPullToRefresh x:Name="PagePullToRefresh" IsRefreshing="{Binding IsBusy}" HeightRequest="1200"
+                RefreshCommand="{Binding RefreshCommand}" RefreshCommandParameter="{x:Reference PagePullToRefresh}">
+                <SfPullToRefresh:SfPullToRefresh.PullableContent>
+
+                    <!-- SfListView: Lista de Médicos -->
+                    <SfListView:SfListView ItemsSource="{Binding Conversaciones}" Style="{Binding SfListViewStyle-Base}" 
+                        AutoFitMode="Height">
+                        <SfListView:SfListView.Behaviors>
+                            <Behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.IrChatCommand, Source={x:Reference ConversacionesPage}}" />
+                        </SfListView:SfListView.Behaviors>
+                        <!-- Item Template: Lista de Médicos -->
+                        <SfListView:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <!-- Grid: Contact Row -->
+                                <Grid Style="{StaticResource GridStyle-RecentChatCard}" >
+
+                                    <!-- Contact Image -->
+                                    <SfBadge:SfBadgeView x:Name="BadgeView" Grid.RowSpan="2">
+                                        <SfBadge:SfBadgeView.Content>
+                                            <SfBorder:SfBorder
+                                                BackgroundColor="{StaticResource Gray-200}"
+                                                BorderColor="{StaticResource Gray-White}">
+                                                <Image
+                                                    HeightRequest="40"
+                                                    WidthRequest="40" >
+                                                    <Image.Source>
+                                                        <UriImageSource Uri="{Binding RutaImagen}" 
+			                                                 CacheValidity="14" 
+			                                                 CachingEnabled="true"/>
+                                                    </Image.Source>
+                                                </Image>
+                                            </SfBorder:SfBorder>
+                                        </SfBadge:SfBadgeView.Content>
+
+                                        <SfBadge:SfBadgeView.BadgeSettings>
+                                            <SfBadge:BadgeSetting BackgroundColor="{Binding EstatusMensajeColor}"
+                                                BadgeAlignment="End" BadgePosition="BottomRight"
+                                                BadgeType="None" BadgeIcon="Dot"
+                                                Stroke="{StaticResource White}" StrokeWidth="2" />
+                                        </SfBadge:SfBadgeView.BadgeSettings>
+                                    </SfBadge:SfBadgeView>
+
+                                    <!-- Contact Name -->
+                                    <Label Grid.Column="1"
+                                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                                        FontSize="16"
+                                        HorizontalOptions="Start"
+                                        LineBreakMode="NoWrap"
+                                        Text="{Binding Nombre}"
+                                        TextColor="{DynamicResource Gray-900}" />
+
+                                    <!-- Contact Specialization -->
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding NombreEspecialidad}" />
+
+                                    <!-- Last Message Time -->
+                                    <Label Grid.Column="2" Text="{Binding HoraLetra}" />
+
+                                </Grid>
+                            </DataTemplate>
+                        </SfListView:SfListView.ItemTemplate>
+                    </SfListView:SfListView>
+
+                </SfPullToRefresh:SfPullToRefresh.PullableContent>
+            </SfPullToRefresh:SfPullToRefresh>
+
+        </Grid>
+
+    </ContentPage.Content>
+
+</ContentPage>

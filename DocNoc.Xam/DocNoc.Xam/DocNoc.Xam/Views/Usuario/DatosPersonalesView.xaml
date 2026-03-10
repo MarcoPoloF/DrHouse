@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Datos Personales (dn-37-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:ComboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfBusyIndicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfTextInputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Usuarios.DatosPersonalesView"
+             x:Name="DatosPersonalesPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Converters -->
+            <Converters:BooleanToColorConverter x:Key="ColorConverter" />
+            <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Datos Personales">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference DatosPersonalesPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView> 
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <!-- Grid: Page-->
+        <Grid>
+            <!--ScrollView: Page -->
+            <ScrollView HorizontalOptions="FillAndExpand">
+                <!-- ScrollView Options -->
+                <ScrollView.VerticalOptions>
+                    <OnIdiom 
+                        x:TypeArguments="LayoutOptions"
+                        Default="CenterAndExpand"
+                        Phone="FillAndExpand" />
+                </ScrollView.VerticalOptions>
+
+                <StackLayout Spacing="10" Padding="0,10">
+
+                    <!--  Profile image with edit label  -->
+                    <SfButtons:SfButton
+                    BackgroundColor="Transparent"
+                    BorderColor="{DynamicResource Gray-White}"
+                    BorderWidth="2"
+                    Command="{Binding EditCommand}"
+                    CornerRadius="60"
+                    HorizontalOptions="Center"
+                    WidthRequest="120">
+                        <SfButtons:SfButton.Content>
+                            <Grid HeightRequest="120" WidthRequest="120">
+
+                                <Image
+                                x:Name="ProfileImage"
+                                Aspect="AspectFill"
+                                BackgroundColor="{DynamicResource Gray-200}">
+                                    <Image.Source>
+                                        <UriImageSource
+                                                CacheValidity="14"
+                                                CachingEnabled="true"
+                                                Uri="{Binding Usuario.RutaImagen}" />
+                                    </Image.Source>
+                                </Image>
+                                <BoxView
+                                BackgroundColor="{DynamicResource Gray-Black}"
+                                HeightRequest="32"
+                                Opacity="0.6"
+                                VerticalOptions="End" />
+                                <Label
+                                FontFamily="{StaticResource Montserrat-SemiBold}"
+                                FontSize="12"
+                                HeightRequest="32"
+                                HorizontalTextAlignment="Center"
+                                Text="EDIT"
+                                TextColor="{DynamicResource Gray-White}"
+                                VerticalOptions="End"
+                                VerticalTextAlignment="Center" />
+                            </Grid>
+                        </SfButtons:SfButton.Content>
+                    </SfButtons:SfButton>
+
+                    <!--  Profile Name  -->
+                    <Label
+                        FontFamily="{StaticResource Montserrat-Bold}"
+                        Margin="0,0,0,10"
+                        FontSize="16"
+                        HorizontalOptions="Center"
+                        Text="{Binding Usuario.NombreCompleto}"
+                        TextColor="{DynamicResource Gray-900}"
+                        VerticalOptions="Center" />
+
+                    <StackLayout BackgroundColor="White" HorizontalOptions="FillAndExpand" Padding="10" Spacing="10">
+
+                        <!-- TextInput: Nombre -->
+                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                            <Label Text="Nombre" Style="{StaticResource LabelStyle-Highlight}" 
+                                   FontSize="{StaticResource FontSize-Medium}" />
+                            <!-- SfTextInputLayout: Nombre -->
+                            <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                                 ContainerBackgroundColor="{StaticResource White}">
+                                <Entry Text="{Binding Usuario.Nombre}" FontFamily="{StaticResource Font-Highlight}" 
+                                       FontSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}">
+                                    <Entry.Behaviors>
+                                        <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </SfTextInputLayout:SfTextInputLayout>
+                        </StackLayout>
+
+                        <!-- TextInput: Apellidos -->
+                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                            <Label Text="Apellidos" Style="{StaticResource LabelStyle-Highlight}" 
+                                   FontSize="{StaticResource FontSize-Medium}" />
+                            <!-- SfTextInputLayout: Apellidos -->
+                            <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                                 ContainerBackgroundColor="{StaticResource White}">
+                                <Entry Text="{Binding Usuario.Apellidos}" FontFamily="{StaticResource Font-Highlight}" 
+                                       FontSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}">
+                                    <Entry.Behaviors>
+                                        <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </SfTextInputLayout:SfTextInputLayout>
+                        </StackLayout>
+
+                        <!-- StackLayout: Fecha de Nacimiento -->
+                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                            <Label Text="Fecha de Nacimiento" Style="{StaticResource LabelStyle-Highlight}"
+                                   FontSize="{StaticResource FontSize-Medium}" />
+                            <!-- SfTextInputLayout: Fecha de Nacimiento -->
+                            <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                                 ContainerBackgroundColor="{StaticResource White}">
+                                <!-- Date Picker: Fecha de Nacimiento -->
+                                <DatePicker Date="{Binding Usuario.FechaNacimiento}" FontFamily="{StaticResource Font-Highlight}" 
+                                            FontSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}">
+                                    <DatePicker.Behaviors>
+                                        <Behaviors:EventToCommandBehavior EventName="DateSelected" Command="{Binding CheckChangesCommand}"/>
+                                    </DatePicker.Behaviors>
+                                </DatePicker>
+                            </SfTextInputLayout:SfTextInputLayout>
+                        </StackLayout>
+
+                        <!-- TextInput: Sexo -->
+                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                            <Label Text="Sexo" Style="{StaticResource LabelStyle-Highlight}" 
+                                   FontSize="{StaticResource FontSize-Medium}" />
+                            <!-- SfTextInputLayout: Sexo -->
+                            <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                                 ContainerBackgroundColor="{StaticResource White}">
+                                <ComboBox:SfComboBox DataSource="{Binding OpcionesSexo}" SelectedItem="{Binding SexoSeleccionado}" TextColor="{StaticResource Black}"
+                                                     FontFamily="{StaticResource Font-Highlight}" TextSize="{StaticResource FontSize-Medium}">
+                                    <ComboBox:SfComboBox.Behaviors>
+                                        <Behaviors:EventToCommandBehavior EventName="SelectionChanged" Command="{Binding CheckChangesCommand}"/>
+                                    </ComboBox:SfComboBox.Behaviors>
+                                </ComboBox:SfComboBox>
+                            </SfTextInputLayout:SfTextInputLayout>
+                        </StackLayout>
+
+                        <!-- TextInput: Estado Civil -->
+                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                            <Label Text="Estado Civil" Style="{StaticResource LabelStyle-Highlight}" 
+                                   FontSize="{StaticResource FontSize-Medium}" />
+                            <!-- SfTextInputLayout: Estado Civil -->
+                            <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                                 ContainerBackgroundColor="{StaticResource White}" >
+                                <ComboBox:SfComboBox DataSource="{Binding OpcionesEstadoCivil}" SelectedItem="{Binding EstadoCivilSeleccionado}"
+                                                     FontFamily="{StaticResource Font-Highlight}" TextSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}">
+                                    <ComboBox:SfComboBox.Behaviors>
+                                        <Behaviors:EventToCommandBehavior EventName="SelectionChanged" Command="{Binding CheckChangesCommand}"/>
+                                    </ComboBox:SfComboBox.Behaviors>
+                                </ComboBox:SfComboBox>
+                            </SfTextInputLayout:SfTextInputLayout>
+                        </StackLayout>
+
+                        <!-- TextInput: Email -->
+                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                            <Label Text="Email" Style="{StaticResource LabelStyle-Highlight}" 
+                                   FontSize="{StaticResource FontSize-Medium}" />
+                            <!-- SfTextInputLayout: Email -->
+                            <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                                 ContainerBackgroundColor="{StaticResource White}">
+                                <Entry Text="{Binding Usuario.Email}" FontFamily="{StaticResource Font-Highlight}" 
+                                       FontSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}">
+                                    <Entry.Behaviors>
+                                        <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </SfTextInputLayout:SfTextInputLayout>
+                        </StackLayout>
+
+                        <!-- TextInput: Teléfono -->
+                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                            <Label Text="Teléfono" Style="{StaticResource LabelStyle-Highlight}" 
+                                   FontSize="{StaticResource FontSize-Medium}" />
+                            <!-- SfTextInputLayout: Teléfono -->
+                            <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                                 ContainerBackgroundColor="{StaticResource White}">
+                                <Entry Text="{Binding Usuario.Telefono}" FontFamily="{StaticResource Font-Highlight}" 
+                                       FontSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}">
+                                    <Entry.Behaviors>
+                                        <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </SfTextInputLayout:SfTextInputLayout>
+                        </StackLayout>
+                        
+                        <!-- TextInput: Ciudad -->
+                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                            <Label Text="Estado en el que vives" Style="{StaticResource LabelStyle-Highlight}" 
+                                   FontSize="{StaticResource FontSize-Medium}" />
+                            <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                                 ContainerBackgroundColor="{StaticResource White}">
+                                <Entry Text="{Binding Usuario.Estado}" FontFamily="{StaticResource Font-Highlight}" 
+                                       FontSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}">
+                                    <Entry.Behaviors>
+                                        <Behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckChangesCommand}"/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </SfTextInputLayout:SfTextInputLayout>
+
+                        </StackLayout>
+
+                    </StackLayout>
+
+                    <StackLayout Spacing="10" Padding="20,0" IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolean}}">
+
+                        <SfButtons:SfButton Text="Guardar" Command="{Binding UpdateCommand}" CornerRadius="20" 
+                                            Style="{StaticResource GradientButtonStyle}"/>
+
+                        <!--  Forgot password link  -->
+                        <Label
+                            x:Name="CancelLabel"
+                            FontFamily="{StaticResource Montserrat-SemiBold}"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            Text="Cancelar"
+                            TextColor="LightGray">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                    </StackLayout>
+
+                    <StackLayout>
+
+                        <!-- Busy Indicator: Búsqueda -->
+                        <SfBusyIndicator:SfBusyIndicator Title="Guardando..." IsBusy="{Binding IsBusy}"
+                                             Style="{StaticResource SfBusyIndicatorStyle-SlicedPrimary}"/>
+
+                    </StackLayout>
+
+                </StackLayout>
+
+            </ScrollView>
+        </Grid>
+        
+    </ContentPage.Content>
+
+</ContentPage>

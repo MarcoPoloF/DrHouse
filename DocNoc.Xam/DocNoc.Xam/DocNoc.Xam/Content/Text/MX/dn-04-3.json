@@ -1,0 +1,8 @@
+{
+  "BotonLogin": "LOGIN",
+  "BotonRegistro": "REGISTRARME",
+  "BotonContrasena": "¿OLVIDASTE LA CONTRASEÑA?",
+  "EmailPlaceholder": "Email",
+  "PasswordPlaceholder": "Contraseña",
+  "LoginError":  "Login fallido"
+}

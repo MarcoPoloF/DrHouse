@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Resource Dictionary: Button Styles-->
+<ResourceDictionary
+    x:Class="DocNoc.Xam.Styles.ButtonStyles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
+
+    <!-- SfButton Style: Base -->
+    <Style x:Key="SfButtonStyle-Base" TargetType="SfButtons:SfButton">
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BorderColor" Value="{StaticResource Transparent}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+        <Setter Property="FontFamily" Value="{StaticResource Font-Highlight}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
+    <!-- ICON BUTTONS -->
+    
+    <!-- SfButton Style: Icon -->
+    <Style x:Key="SfButtonStyle-Icon" TargetType="SfButtons:SfButton">
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+        <Setter Property="FontFamily" Value="{StaticResource FontIcons}" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="WidthRequest" Value="40" />
+    </Style>
+
+    <!-- ROUND BUTTONS -->
+
+    <!-- SfButton Style: Round Button -->
+    <Style x:Key="SfButtonStyle-Round" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-Base}">
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="CornerRadius" Value="20" />
+    </Style>
+
+    <!-- SfButton Style: Round Button, Primary Color -->
+    <Style x:Key="SfButtonStyle-RoundPrimary" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-Round}">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- SfButton Style: Round Button, Secondary Color -->
+    <Style x:Key="SfButtonStyle-RoundSecondary" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-Round}">
+        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- SfButton Style: Round Button, Secondary Color -->
+    <Style x:Key="SfButtonStyle-RoundTransparentPrimary" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-Round}">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+        <Setter Property="BorderColor" Value="{StaticResource Primary}" />
+    </Style>
+
+    <!-- ROUND & WIDE BUTTONS -->
+
+    <!-- SfButton Style: Round Wide Button -->
+    <Style x:Key="SfButtonStyle-RoundWide" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-Round}">
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+    </Style>
+
+    <!-- SfButton Style: Round Wide Button, Primary Color -->
+    <Style x:Key="SfButtonStyle-RoundWidePrimary" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-RoundWide}">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- SfButton Style: Round Wide Button, Primary Color, White Border -->
+    <Style x:Key="SfButtonStyle-RoundWidePrimaryWhiteBorder" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-RoundWidePrimary}">
+        <Setter Property="BorderColor" Value="{StaticResource White}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!-- SfButton Style: Round Wide Button, Primary Color -->
+    <Style x:Key="SfButtonStyle-RoundWidePrimaryDarken" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-RoundWide}">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDarkenColor}" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- SfButton Style: Round Wide Button, Secondary Color -->
+    <Style x:Key="SfButtonStyle-RoundWideSecondary" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-RoundWide}">
+        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- TRANSPARENT BUTTONS -->
+
+    <!-- SfButton Style: Transparent Button -->
+    <Style x:Key="SfButtonStyle-TransparentButton" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-Base}">
+        <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+    </Style>
+
+    <!-- SfButton Style: Transparent Button, Primary Color Text -->
+    <Style x:Key="SfButtonStyle-TransparentButtonPrimary" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-TransparentButton}">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+    </Style>
+
+    <!-- SfButton Style: Transparent Button, Secondary Color Text -->
+    <Style x:Key="SfButtonStyle-TransparentButtonSecondary" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-TransparentButton}">
+        <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+    </Style>
+
+    <!-- BORDERED TRANSPARENT BUTTONS -->
+
+    <!-- SfButton Style: Bordered Transparent Button -->
+    <Style x:Key="SfButtonStyle-BorderedTransparentButton" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-TransparentButton}">
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="FontFamily" Value="{StaticResource Font-Title}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+        <Setter Property="BorderWidth" Value="2" />
+    </Style>
+
+    <!-- SfButton Style: Bordered Transparent Button, PrimaryDarken -->
+    <Style x:Key="SfButtonStyle-BorderedTransparentButtonPrimaryDarken" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-BorderedTransparentButton}">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryDarkenColor}" />
+        <Setter Property="BorderColor" Value="{StaticResource PrimaryDarkenColor}" />
+    </Style>
+
+    <!-- SfButton Style: Bordered Transparent Button, Red -->
+    <Style x:Key="SfButtonStyle-BorderedTransparentButtonRed" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-BorderedTransparentButton}">
+        <Setter Property="TextColor" Value="{StaticResource Red}" />
+        <Setter Property="BorderColor" Value="{StaticResource Red}" />
+    </Style>
+
+    <!-- SfButton Style: Bordered Transparent Button, Orange -->
+    <Style x:Key="SfButtonStyle-BorderedTransparentButtonOrange" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-BorderedTransparentButton}">
+        <Setter Property="TextColor" Value="{StaticResource Orange}" />
+        <Setter Property="BorderColor" Value="{StaticResource Orange}" />
+    </Style>
+
+    <!-- SfButton Style: Bordered Transparent Button, Green -->
+    <Style x:Key="SfButtonStyle-BorderedTransparentButtonGreen" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-BorderedTransparentButton}">
+        <Setter Property="TextColor" Value="{StaticResource Green}" />
+        <Setter Property="BorderColor" Value="{StaticResource Green}" />
+    </Style>
+
+    <!-- WIDE BUTTONS -->
+
+    <!-- SfButton Style: Wide Button -->
+    <Style x:Key="SfButtonStyle-Wide" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-Base}">
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="FontFamily" Value="{StaticResource Font-Title}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
+    </Style>
+
+    <!-- SfButton Style: Wide Button, Primary Color -->
+    <Style x:Key="SfButtonStyle-WidePrimary" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-Wide}">
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+    </Style>
+
+    <!-- SfButton Style: Wide Button, Green -->
+    <Style x:Key="SfButtonStyle-WideGreen" TargetType="SfButtons:SfButton"
+           BasedOn="{StaticResource SfButtonStyle-Wide}">
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Green}" />
+    </Style>
+
+</ResourceDictionary>

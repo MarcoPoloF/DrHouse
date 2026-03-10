@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Expediente (dn-36-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Expedientes.ExpedienteView"
+             x:Name="ExpedientePage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        <!-- PopupLayout: Cancelar Cita -->
+        <SfPopupLayout:SfPopupLayout x:Key="DeletePopup" IsOpen="False">
+            <SfPopupLayout:SfPopupLayout.PopupView >
+                <SfPopupLayout:PopupView AcceptButtonText="CONFIRMAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" HeaderHeight="50" ShowCloseButton="False"
+                                             AcceptCommand="{Binding Path=BindingContext.EliminarExpedienteCommand, Source={x:Reference ExpedientePage}}">
+                    <SfPopupLayout:PopupView.HeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="5">
+                                <Label LineBreakMode="NoWrap" Text="Confirmar Eliminación" FontSize="16" HorizontalOptions="Center" TextColor="{StaticResource Black}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </SfPopupLayout:PopupView.HeaderTemplate>
+                    <SfPopupLayout:PopupView.ContentTemplate>
+                        <DataTemplate>
+                            <StackLayout x:Name="stack" Padding="10,5" Spacing="5" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+
+                                <Label Text="{Binding Path=BindingContext.TextoConfirmacion, Source={x:Reference ExpedientePage}}" TextColor="{StaticResource Black}"/>
+
+                                <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference NombrePerfilEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                                    <Controls:BorderlessEntry x:Name="NombrePerfilEntry"  Placeholder="Nombre del Expediente" Style="{StaticResource EntryTextStyle}"
+                                            Text="{Binding Path=BindingContext.NombreExpediente, Source={x:Reference ExpedientePage}}" MinimumHeightRequest="90">
+                                    </Controls:BorderlessEntry>
+                                </SfBorder:SfBorder>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </SfPopupLayout:PopupView.ContentTemplate>
+                </SfPopupLayout:PopupView>
+            </SfPopupLayout:SfPopupLayout.PopupView>
+        </SfPopupLayout:SfPopupLayout>
+        <!-- Convertidor de Color-->
+        <Converters:BooleanToColorConverter x:Key="ColorConverter" />
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Expediente">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference ExpedientePage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
+
+                <Label Text="{Binding Usuario.NombreCompleto}" Margin="10" TextColor="{StaticResource Black}" />
+
+                <BoxView Style="{StaticResource SeparatorStyle}" />
+
+                <!-- Grid: Datos Personales -->
+                <Grid Style="{StaticResource GridStyle-PatientFileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DatosPersonalesCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Image Grid.Column="0" Source="profileexp.png" Style="{StaticResource ImageStyle-ProfileRow}"/>
+
+                    <Label Grid.Column="1" Text="Datos Personales" Style="{StaticResource LabelStyle-Highlight}" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource SeparatorStyle}" />
+
+                <!-- Grid: Alergias -->
+                <Grid Style="{StaticResource GridStyle-PatientFileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AlergiasCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Image Grid.Column="0" Source="alergias.png" Style="{StaticResource ImageStyle-ProfileRow}"/>
+
+                    <Label Grid.Column="1" Text="Alergias" Style="{StaticResource LabelStyle-Highlight}" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource SeparatorStyle}" />
+
+                <!-- Grid: Tipo de Sangre -->
+                <Grid Style="{StaticResource GridStyle-PatientFileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TipoSangreCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Image Grid.Column="0" Source="tiposangre.png" Style="{StaticResource ImageStyle-ProfileRow}"/>
+
+                    <Label Grid.Column="1" Text="Tipo de Sangre" Style="{StaticResource LabelStyle-Highlight}" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource SeparatorStyle}" />
+
+                <!-- Grid: Padecimientos Actuales -->
+                <Grid Style="{StaticResource GridStyle-PatientFileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PadecimientosActualesCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Image Grid.Column="0" Source="padecimientos.png" Style="{StaticResource ImageStyle-ProfileRow}"/>
+
+                    <Label Grid.Column="1" Text="Padecimientos Actuales" Style="{StaticResource LabelStyle-Highlight}" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource SeparatorStyle}" />
+
+                <!-- Grid: Antecedentes Familiares -->
+                <Grid Style="{StaticResource GridStyle-PatientFileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AntecedentesFamiliaresCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Image Grid.Column="0" Source="antecedentes.png" Style="{StaticResource ImageStyle-ProfileRow}"/>
+
+                    <Label Grid.Column="1" Text="Antecedentes Familiares" Style="{StaticResource LabelStyle-Highlight}" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource SeparatorStyle}" />
+
+                <!-- Grid: Historia Clínica -->
+                <Grid Style="{StaticResource GridStyle-PatientFileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding HistoriaClinicaCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Image Grid.Column="0" Source="histclinica.png" Style="{StaticResource ImageStyle-ProfileRow}"/>
+
+                    <Label Grid.Column="1" Text="Historia Clínica" Style="{StaticResource LabelStyle-Highlight}" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource SeparatorStyle}" />
+
+                <!-- Grid: Historial de Consultas -->
+                <Grid Style="{StaticResource GridStyle-PatientFileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding HistorialConsultasCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Image Grid.Column="0" Source="consultas.png" Style="{StaticResource ImageStyle-ProfileRow}"/>
+
+                    <Label Grid.Column="1" Text="Historial de Consultas" Style="{StaticResource LabelStyle-Highlight}" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource SeparatorStyle}" />
+
+                <!-- Grid: Estudios y Análisis -->
+                <Grid Style="{StaticResource GridStyle-PatientFileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EstudiosAnalisisCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Image Grid.Column="0" Source="estudios.png" Style="{StaticResource ImageStyle-ProfileRow}"/>
+
+                    <Label Grid.Column="1" Text="Estudios y Análisis" Style="{StaticResource LabelStyle-Highlight}" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource SeparatorStyle}" />
+
+                <!-- Grid: Medicamentos -->
+                <Grid Style="{StaticResource GridStyle-PatientFileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MedicamentosCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Image Grid.Column="0" Source="medicamentos.png" Style="{StaticResource ImageStyle-ProfileRow}"/>
+
+                    <Label Grid.Column="1" Text="Medicamentos" Style="{StaticResource LabelStyle-Highlight}" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource SeparatorStyle}" />
+
+                <!-- Grid: Eliminar Expediente -->
+                <Grid Style="{StaticResource GridStyle-PatientFileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PopupCommand}" CommandParameter="{StaticResource DeletePopup}"/>
+                    </Grid.GestureRecognizers>
+
+                    <Image Grid.Column="0" Source="delete.png" Style="{StaticResource ImageStyle-ProfileRow}"/>
+
+                    <Label Grid.Column="1" Text="Eliminar Expediente" Style="{StaticResource LabelStyle-Highlight}" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource SeparatorStyle}" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>

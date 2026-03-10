@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Resource Dictionary: Main Stylesheet-->
+<ResourceDictionary
+    x:Class="DocNoc.Xam.Styles.MainStylesheet"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam">
+
+    <!-- MERGED DICTIONARIES -->
+    <ResourceDictionary.MergedDictionaries>
+        <Styles:ButtonStyles/>
+        <Styles:EntryStyles/>
+        <Styles:ImageStyles/>
+        <Styles:LabelStyles/>
+        <Styles:LayoutStyles/>
+        <Styles:ListStyles/>
+        <Styles:SyncfusionStyles/>
+        <Styles:ViewStyles/>
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

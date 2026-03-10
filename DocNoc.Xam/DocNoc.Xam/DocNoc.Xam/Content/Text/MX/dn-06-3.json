@@ -1,0 +1,10 @@
+{
+  "EmailInvalid": "El email proporcionado no es válido.",
+  "EmailPlaceholder": "Email",
+  "PageTitle": "Recuperar Contraseña",
+  "RecoverPasswordButton": "RECUPERAR CONTRASEÑA",
+  "RecoverPasswordError": "Recuperción fallida",
+  "RecoverPasswordSuccess": "Contraseña recuperada",
+  "Text1Title": "¿Olvidaste la contraseña?",
+  "Text1Body": "Ingresa tu email y te enviaremos una contraseña temporal"
+}

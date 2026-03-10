@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DocNoc.Xam.Views.Medicos.ComentariosMedicoView"
+    xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+    xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+    xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+    xmlns:SfBusyIndicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+    xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+    xmlns:SfPullToRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    xmlns:SfRating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+    xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+    x:Name="ComentariosMedicoPage"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Ordenar Lista -->
+            <SfPopupLayout:SfPopupLayout x:Key="SortPopup" IsOpen="False">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="APLICAR" AppearanceMode="OneButton" 
+                                             ShowCloseButton="True" HeaderTitle="Ordenar Por" IsFullScreen="False"
+                                             AcceptCommand="{Binding Path=BindingContext.SortCommand, Source={x:Reference ComentariosMedicoPage}}">
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="20" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <SfButtons:SfRadioGroup>
+                                        <SfButtons:SfRadioButton Text="Antigüedad" IsChecked="{Binding Path=BindingContext.SortAntiguedadSeleccionado, Source={x:Reference ComentariosMedicoPage}}"/>
+                                        <SfButtons:SfRadioButton Text="Calificación" IsChecked="{Binding Path=BindingContext.SortRatingSeleccionado, Source={x:Reference ComentariosMedicoPage}}" />
+                                    </SfButtons:SfRadioGroup>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- PopupLayout: Ordenar Lista -->
+            <SfPopupLayout:SfPopupLayout x:Key="CommentDetailPopup" IsOpen="{Binding Path=BindingContext.DetalleVisible, Source={x:Reference ComentariosMedicoPage}}">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="Cerrar" AppearanceMode="OneButton" ShowCloseButton="True" IsFullScreen="True"
+                        HeaderTitle="Detalle de Comentario">
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <Grid Padding="20" RowSpacing="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <!-- Label: Reviewer Name -->
+                                    <Label Text="{Binding Path=BindingContext.Comentario.Nombre, Source={x:Reference ComentariosMedicoPage}}"
+                                        Style="{StaticResource LabelStyle-Title}"/>
+                                    <!-- Label: Review Date -->
+                                    <Label Text="{Binding Path=BindingContext.Comentario.FechaRegistroLetra, Source={x:Reference ComentariosMedicoPage}}"
+                                        Style="{StaticResource LabelStyle-TextSmall}" Grid.Column="2" HorizontalOptions="End"/>
+                                    <!-- Label: Rating -->
+                                    <SfRating:SfRating Value="{Binding Path=BindingContext.Comentario.Rating, Source={x:Reference ComentariosMedicoPage}}"
+                                        Style="{StaticResource SfRatingStyle-ReadOnly}" RatingSettings="{StaticResource SfRatingSettings-Default}"
+                                        Grid.Row="1" Grid.ColumnSpan="3"/>
+                                    <!-- Label: Review Comment -->
+                                    <ScrollView BackgroundColor="Transparent" VerticalOptions="StartAndExpand" Grid.Row="2" Grid.ColumnSpan="3">
+                                        <Label Text="{Binding Path=BindingContext.Comentario.Comentario, Source={x:Reference ComentariosMedicoPage}}"
+                                            Style="{StaticResource LabelStyle-HighlightPrimaryDarken}" LineBreakMode="WordWrap" VerticalOptions="Start"/>
+                                    </ScrollView>                                    
+                                </Grid>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- Converters -->
+            <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="{Binding Path=BindingContext.TituloPagina, Source={x:Reference ComentariosMedicoPage}}">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference ComentariosMedicoPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+    
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+        <!-- Grid: Page-->
+        <Grid>
+
+            <!-- SfPullToRefresh: Page -->
+            <SfPullToRefresh:SfPullToRefresh x:Name="PullToRefreshOpiniones" IsRefreshing="{Binding IsBusy}" HeightRequest="2000"
+                                             RefreshCommand="{Binding RefreshCommand}" RefreshCommandParameter="{x:Reference PullToRefreshOpiniones}">
+                <SfPullToRefresh:SfPullToRefresh.PullableContent>
+
+                    <!-- SfListView: Lista de Médicos -->
+                    <SfListView:SfListView x:Name="SfListViewMedicos" ItemsSource="{Binding Calificaciones}" ItemSize="160" AutoFitMode="None"
+                        Style="{StaticResource SfListViewStyle-DoctorRatings}" SelectionBackgroundColor="Transparent" SelectedItem="{Binding Comentario}">
+
+                        <!-- Header Template: Lista de Médicos -->
+                        <SfListView:SfListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout HorizontalOptions="FillAndExpand" Padding="20,20,20,0">
+
+                                    <!-- Stack Layout: Controles de Lista -->
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"
+                                                 IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolean}}">
+                                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="StartAndExpand">
+                                            <Label Text="{Binding TotalOpiniones}"
+                                                   Style="{StaticResource LabelStyle-HighlightPrimary}"/>
+                                            <Label Text="opiniones"
+                                                   Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer  Command="{Binding PopupCommand}"  CommandParameter="{StaticResource SortPopup}"/>
+                                            </StackLayout.GestureRecognizers>
+                                            <Label Text="{StaticResource Icon-Sort}" Style="{StaticResource LabelStyle-IconPrimary}"/>
+                                            <Label Text="Ordenar" Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <!-- Busy Indicator: Búsqueda -->
+                                    <SfBusyIndicator:SfBusyIndicator Title="Cargando opiniones..." IsBusy="{Binding CargaInicial}"
+                                                     Style="{StaticResource SfBusyIndicatorStyle-SlicedPrimary}"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfListView:SfListView.HeaderTemplate>
+
+                        <!-- Item Template: Lista de Opiniones -->
+                        <SfListView:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <!-- Grid: Doctor Review Card -->
+                                <Grid Style="{StaticResource GridStyle-DoctorReviewCard}">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer  Command="{Binding BindingContext.DetalleComentarioCommand, Source={x:Reference Name=ComentariosMedicoPage}}" 
+                                            CommandParameter="{Binding}"/>
+                                    </Grid.GestureRecognizers>
+
+                                    <!-- Label: Reviewer Name -->
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Nombre}"
+                                           Style="{StaticResource LabelStyle-Title}"/>
+
+                                    <!-- Label: Rating -->
+                                    <SfRating:SfRating Grid.Row="0" Grid.Column="1" Value="{Binding Rating}"
+                                                       RatingSettings="{StaticResource SfRatingSettings-Default}"
+                                                       Style="{StaticResource SfRatingStyle-ReadOnly}" />
+
+                                    <!-- Label: Review Date -->
+                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding FechaRegistroLetra}"
+                                           Style="{StaticResource LabelStyle-TextSmall}"/>
+
+                                    <!-- Label: Review Comment -->
+                                    <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Comentario}" LineBreakMode="TailTruncation"
+                                           Style="{StaticResource LabelStyle-HighlightPrimaryDarken}" MaxLines="2"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </SfListView:SfListView.ItemTemplate>
+
+                    </SfListView:SfListView>
+
+                </SfPullToRefresh:SfPullToRefresh.PullableContent>
+            </SfPullToRefresh:SfPullToRefresh>
+
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

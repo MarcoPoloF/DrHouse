@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Mis Citas (dn-26-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:SfPullToRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Citas.MisCitas"
+             x:Name="MisCitasPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Mis Citas">
+                    <Controls:TitleView.TrailingView>
+                        <!-- Button: Historial -->
+                        <SfButtons:SfButton x:Name="HistorialButton" Text="Historial" Style="{StaticResource SfButtonStyle-TransparentButtonSecondary}"
+                                            Command="{Binding Path=BindingContext.HistorialCommand, Source={x:Reference MisCitasPage}}"/>
+                    </Controls:TitleView.TrailingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+        <!-- Grid: Page-->
+        <Grid>
+            <SfPullToRefresh:SfPullToRefresh x:Name="PullToRefreshCitas" IsRefreshing="{Binding IsRefreshing}" HeightRequest="1200"
+                                             RefreshCommand="{Binding RefreshCommand}" RefreshCommandParameter="{x:Reference PullToRefreshCitas}">
+                <SfPullToRefresh:SfPullToRefresh.PullableContent>
+
+                    <!-- SfListView: Citas -->
+                    <SfListView:SfListView x:Name="ListViewCitas" ItemsSource="{Binding Citas}" Style="{StaticResource SfListViewStyle}" ItemSpacing="20" ItemSize="120">
+                        <SfListView:SfListView.Behaviors>
+                            <Behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.ItemSelectedCommand, Source={x:Reference MisCitasPage}}" />
+                        </SfListView:SfListView.Behaviors>
+                        <SfListView:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">
+                                    <StackLayout WidthRequest="60" HorizontalOptions="Start" VerticalOptions="Center" Padding="10" Spacing="0">
+                                        <Label Text="{Binding DiaFecha}" IsVisible="{Binding MostrarDia}"
+                                               Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+                                        <Label Text="{Binding MesFecha}" IsVisible="{Binding MostrarDia}"
+                                               Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+                                    </StackLayout>
+                                    <Frame BackgroundColor="White" CornerRadius="10" Padding="10" HorizontalOptions="FillAndExpand" BorderColor="Transparent" HasShadow="False">
+                                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0">
+                                            <Label Text="{Binding EstatusCita}" Style="{StaticResource LabelStyle-HighlightPrimary}"/>
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">
+                                                <Label Text="{Binding HoraLetra}" Style="{StaticResource LabelStyle-TextPrimaryDark}" WidthRequest="120"/>
+                                                <Label Text="{Binding PacienteCita}" Style="{StaticResource LabelStyle-TextSecondary}"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">
+                                                <Label Text="{Binding NombreEspecialidad}" Style="{StaticResource LabelStyle-Text}"/>
+                                                <Label Text="{Binding Doctor}" Style="{StaticResource LabelStyle-Text}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfListView:SfListView.ItemTemplate>
+                    </SfListView:SfListView>
+
+                </SfPullToRefresh:SfPullToRefresh.PullableContent>
+            </SfPullToRefresh:SfPullToRefresh>
+
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

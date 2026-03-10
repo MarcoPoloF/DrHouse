@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+		<integer>2</integer>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>UIFontIcons.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Montserrat-Medium.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
+		<string>Poppins-Light.ttf</string>
+		<string>Poppins-Regular.ttf</string>
+		<string>Poppins-SemiBold.ttf</string>
+	</array>
+	<key>CFBundleDisplayName</key>
+	<string>Doc+Noc</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>CFBundleName</key>
+	<string>DocNoc.Xam</string>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Doc+Noc requiere acceso a tu galería de fotos para seleccionar tu foto de perfil y evidencia médica.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Doc+Noc requiere acceso a tu galería de fotos para seleccionar tu foto de perfil y evidencia médica.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Doc+Noc requiere acceso a tu ubicación para encontrar consultorios cerca de tí.</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.veda.docnoc</string>
+	<key>MinimumOSVersion</key>
+	<string>12.0</string>
+	<key>CFBundleVersion</key>
+	<string>18</string>
+	<key>CFBundleShortVersionString</key>
+	<string>18</string>
+</dict>
+</plist>

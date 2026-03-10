@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:Themes = "clr-namespace:DocNoc.Xam.Themes;assembly=DocNoc.Xam"
+             xmlns:themes = "clr-namespace:DocNoc.Xam.Themes;assembly=DocNoc.Xam"
+             x:Class="DocNoc.Xam.App">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            
+            <!-- Screen Padding: Thickness -->
+            <!--<OnPlatform x:Key="ScreenPadding"  x:TypeArguments="Thickness">
+                <OnPlatform.Platforms>
+                    <On Platform="iOS" Value="0, 300, 0, 0" />
+                </OnPlatform.Platforms>
+            </OnPlatform>-->
+            
+            <ResourceDictionary.MergedDictionaries>
+                <themes:LightTheme />
+                <!-- Dictionaries: Theme -->
+                <Themes:LightTheme />
+                <Themes:ThemeIcons />
+            </ResourceDictionary.MergedDictionaries >
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

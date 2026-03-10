@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Definición de View (XAML): Buscar Médico (dn-11-3) -->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:ComboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:SfPullToRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+             xmlns:SfRating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:SfTextInputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Principal.BuscarMedicoView"
+             x:Name="BuscarMedicoPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Búsqueda Avanzada -->
+            <SfPopupLayout:SfPopupLayout x:Key="BusquedaAvanzadaPopup" IsOpen="False">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="BUSCAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
+                                             ShowCloseButton="True" IsFullScreen="True"
+                                             AcceptCommand="{Binding Path=BindingContext.BusquedaAvanzadaCommand, Source={x:Reference BuscarMedicoPage}}"
+                                             DeclineCommand="{Binding Path=BindingContext.CancelarBusquedaAvanzadaCommand, Source={x:Reference BuscarMedicoPage}}">
+                        <SfPopupLayout:PopupView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="0,5,0,0">
+                                    <Label LineBreakMode="WordWrap" Text="BÚSQUEDA AVANZADA" FontSize="16" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.HeaderTemplate>
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <ScrollView>
+                                    <StackLayout Padding="10" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                             BackgroundColor="{DynamicResource PageBackground}">
+
+                                    <!-- TextInput: Ubicación -->
+                                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                                        <Label Text="CIUDAD"
+                                               Style="{StaticResource LabelStyle-Highlight}"/>
+                                        <!-- SfTextInputLayout: Ubicación-->
+                                        <SfTextInputLayout:SfTextInputLayout Grid.Row="0" ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                 ContainerBackgroundColor="{StaticResource White}">
+                                                <ComboBox:SfComboBox DataSource="{Binding Path=BindingContext.Ciudades, Source={x:Reference BuscarMedicoPage}}" 
+                                                                 SelectedItem="{Binding Path=BindingContext.CiudadSeleccionada, Source={x:Reference BuscarMedicoPage}}"
+                                                                 DisplayMemberPath="EstadoCiudad" TextSize="{StaticResource FontSize-Medium}"
+                                                                 TextColor="{StaticResource Black}" ShowClearButton="True"/>
+                                                <!--<Entry Text="{Binding Path=BindingContext.Ubicacion, Source={x:Reference BuscarMedicoPage}}" 
+                                                   FontFamily="{StaticResource Font-Highlight}" FontSize="{StaticResource FontSize-Medium}" 
+                                                   TextColor="{StaticResource Black}" ClearButtonVisibility="WhileEditing"/>-->
+                                        </SfTextInputLayout:SfTextInputLayout>
+                                    </StackLayout>
+
+                                    <!-- StackLayout: Especialidad -->
+                                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                                        <Label Text="ESPECIALIDAD"
+                                               Style="{StaticResource LabelStyle-Highlight}"/>
+                                        <!-- SfTextInputLayout: Especialidad -->
+                                        <SfTextInputLayout:SfTextInputLayout Grid.Row="0" ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                 ContainerBackgroundColor="{StaticResource White}">
+                                            <ComboBox:SfComboBox DataSource="{Binding Path=BindingContext.Especialidades, Source={x:Reference BuscarMedicoPage}}" 
+                                                                 SelectedItem="{Binding Path=BindingContext.EspecialidadSeleccionada, Source={x:Reference BuscarMedicoPage}}"
+                                                                 DisplayMemberPath="NombreEspecialidad" TextSize="{StaticResource FontSize-Medium}"
+                                                                 TextColor="{StaticResource Black}" ShowClearButton="True"/>
+                                        </SfTextInputLayout:SfTextInputLayout>
+                                    </StackLayout>
+
+                                    <!-- StackLayout: Disponibilidad -->
+                                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                                        <Label Text="¿CUÁNDO QUIERES LA CITA?"
+                                               Style="{StaticResource LabelStyle-Highlight}"/>
+                                        <!-- SfTextInputLayout: Disponibilidad -->
+                                        <SfTextInputLayout:SfTextInputLayout Grid.Row="0" ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                 ContainerBackgroundColor="{StaticResource White}">
+                                            <ComboBox:SfComboBox DataSource="{Binding Path=BindingContext.Disponibilidad, Source={x:Reference BuscarMedicoPage}}" 
+                                                                 SelectedItem="{Binding Path=BindingContext.DisponibilidadSeleccionada, Source={x:Reference BuscarMedicoPage}}"
+                                                                 TextSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}" ShowClearButton="True"/>
+                                        </SfTextInputLayout:SfTextInputLayout>
+                                    </StackLayout>
+
+                                    <!-- StackLayout: Aseguradora -->
+                                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                                        <Label Text="ASEGURADORA"
+                                               Style="{StaticResource LabelStyle-Highlight}"/>
+                                        <!-- SfTextInputLayout: Aseguradora -->
+                                        <SfTextInputLayout:SfTextInputLayout Grid.Row="0" ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                 ContainerBackgroundColor="{StaticResource White}">
+                                            <ComboBox:SfComboBox DataSource="{Binding Path=BindingContext.Aseguradoras, Source={x:Reference BuscarMedicoPage}}" 
+                                                                 SelectedItem="{Binding Path=BindingContext.AseguradoraSeleccionada, Source={x:Reference BuscarMedicoPage}}"
+                                                                 DisplayMemberPath="NombreAseguradora" TextSize="{StaticResource FontSize-Medium}"
+                                                                 TextColor="{StaticResource Black}" ShowClearButton="True"/>
+                                        </SfTextInputLayout:SfTextInputLayout>
+                                    </StackLayout>
+
+                                    <!-- StackLayout: Rating -->
+                                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                                        <Label Text="RATING"
+                                               Style="{StaticResource LabelStyle-Highlight}"/>
+                                        <SfButtons:SfRadioGroup>
+                                                <SfButtons:SfRadioButton  Text=" (cualquiera)" FontFamily="{StaticResource Font-Highlight}"  FontSize="{StaticResource FontSize-Medium}"
+                                                                      IsChecked="{Binding Path=BindingContext.Rating0Seleccionado, Source={x:Reference BuscarMedicoPage}}" TextColor="{StaticResource Black}"/>
+                                                <SfButtons:SfRadioButton  Text=" 3" FontFamily="{StaticResource Font-Highlight}"  FontSize="{StaticResource FontSize-Medium}"
+                                                                      IsChecked="{Binding Path=BindingContext.Rating3Seleccionado, Source={x:Reference BuscarMedicoPage}}" TextColor="{StaticResource Black}"/>
+                                                <SfButtons:SfRadioButton Text=" 4" FontFamily="{StaticResource Font-Highlight}"  FontSize="{StaticResource FontSize-Medium}"
+                                                                     IsChecked="{Binding Path=BindingContext.Rating4Seleccionado, Source={x:Reference BuscarMedicoPage}}" TextColor="{StaticResource Black}"/>
+                                                <SfButtons:SfRadioButton Text=" 5" FontFamily="{StaticResource Font-Highlight}"  FontSize="{StaticResource FontSize-Medium}"
+                                                                     IsChecked="{Binding Path=BindingContext.Rating5Seleccionado, Source={x:Reference BuscarMedicoPage}}" TextColor="{StaticResource Black}"/>
+                                        </SfButtons:SfRadioGroup>
+                                    </StackLayout>
+
+                                    <!-- StackLayout: Confirmación de Cita -->
+                                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                                        <Label Text="TIPO DE CITA"
+                                               Style="{StaticResource LabelStyle-Highlight}"/>
+                                            <SfButtons:SfCheckBox Text=" Confirmación Inmediata" FontSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}"
+                                                              IsChecked="{Binding Path=BindingContext.ConfirmacionInmediata, Source={x:Reference BuscarMedicoPage}}"/>
+                                    </StackLayout>
+
+                                </StackLayout>
+                                </ScrollView>
+                                
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Buscar Médico">
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <Grid>
+            <!-- SfPullToRefresh: Page -->
+            <SfPullToRefresh:SfPullToRefresh x:Name="PullToRefreshEspecialidades" IsRefreshing="{Binding IsBusy}" HeightRequest="1200"
+                                             RefreshCommand="{Binding RefreshCommand}" RefreshCommandParameter="{x:Reference PullToRefreshEspecialidades}">
+                <SfPullToRefresh:SfPullToRefresh.PullableContent>
+
+
+                    <!-- SfListView: Especialidades -->
+                    <SfListView:SfListView Style="{StaticResource SfImageListViewStyle}" Margin="0,20,0,0" IsStickyHeader="True"
+                                   ItemsSource="{Binding Especialidades}" SelectedItem="{Binding EspecialidadSeleccionada}">
+
+                        <SfListView:SfListView.Behaviors>
+                            <Behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.BusquedaCommand, Source={x:Reference BuscarMedicoPage}}" />
+                        </SfListView:SfListView.Behaviors>
+
+                        <SfListView:SfListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Vertical" Spacing="0" VerticalOptions="StartAndExpand" Padding="0,0,0,5"
+                                             HorizontalOptions="CenterAndExpand" BackgroundColor="Transparent">
+
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="5,0">
+                                        <!-- SfTextInputLayout: Ubicación-->
+                                        <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" Hint="Ciudad "
+                                                 ContainerBackgroundColor="{StaticResource White}">
+                                            <SfTextInputLayout:SfTextInputLayout.HintLabelStyle>
+                                                <SfTextInputLayout:LabelStyle FontFamily="{StaticResource Font-Highlight}" FontSize="{StaticResource FontSize-Medium}"/>
+                                            </SfTextInputLayout:SfTextInputLayout.HintLabelStyle>
+                                            <ComboBox:SfComboBox DataSource="{Binding Ciudades}" 
+                                                                 SelectedItem="{Binding CiudadSeleccionada}"
+                                                                 DisplayMemberPath="EstadoCiudad" TextSize="{StaticResource FontSize-Medium}"
+                                                                 TextColor="{StaticResource Black}" ShowClearButton="True"/>
+                                            <!--<Entry Text="{Binding Ubicacion}" FontFamily="{StaticResource Font-Highlight}" FontSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}"/>-->
+                                        </SfTextInputLayout:SfTextInputLayout>
+                                    </StackLayout>
+
+                                    <!-- StackLayout: Controles de Búsqueda -->
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="5,0">
+                                        <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="StartAndExpand">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer  Command="{Binding PopupCommand}"  CommandParameter="{StaticResource BusquedaAvanzadaPopup}"/>
+                                            </StackLayout.GestureRecognizers>
+                                            <Label Text="Búsqueda Avanzada" Style="{StaticResource LabelStyle-Highlight}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="EndAndExpand">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer  Command="{Binding NavegarMapaCommand}"/>
+                                            </StackLayout.GestureRecognizers>
+                                            <Label Text="Ver Mapa" Style="{StaticResource LabelStyle-Highlight}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfListView:SfListView.HeaderTemplate>
+
+                        <SfListView:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid RowSpacing="5">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <!--  Category Image  -->
+                                    <Image Grid.Row="0" Aspect="AspectFit" BackgroundColor="{DynamicResource Gray-200}">
+                                        <Image.Source>
+                                            <UriImageSource Uri="{Binding RutaMedias}" CachingEnabled="true" CacheValidity="14"/>
+                                        </Image.Source>
+                                        <Image.HeightRequest>
+                                            <OnIdiom x:TypeArguments="x:Double" Phone="160" Tablet="240" Desktop="240"/>
+                                        </Image.HeightRequest>
+                                        <Image.WidthRequest>
+                                            <OnIdiom x:TypeArguments="x:Double" Phone="160" Tablet="240" Desktop="240"/>
+                                        </Image.WidthRequest>
+                                    </Image>
+
+                                    <!--  Category Name  -->
+                                    <Label Grid.Row="1" Text="{Binding NombreEspecialidad}"
+                                   HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                                   Style="{StaticResource LabelStyle-Highlight}"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </SfListView:SfListView.ItemTemplate>
+
+                        <!--  Layout to customize no. of columns in SfListView  -->
+                        <SfListView:SfListView.LayoutManager>
+                            <SfListView:GridLayout SpanCount="{Core:OnPlatformOrientationIntValue Desktop=4, PhonePortrait=2, PhoneLandscape=3, TabletPortrait=3, TabletLandscape=4}" />
+                        </SfListView:SfListView.LayoutManager>
+
+                    </SfListView:SfListView>
+
+
+                </SfPullToRefresh:SfPullToRefresh.PullableContent>
+            </SfPullToRefresh:SfPullToRefresh>
+        </Grid>
+
+    </ContentPage.Content>
+
+</ContentPage>

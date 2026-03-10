@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Mi Suscripción (dn-64-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:ComboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfBusyIndicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:SfPullToRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:SfTextInputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Suscripcion.MiSuscripcionView"
+             x:Name="MiSuscripcionPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Comprar Suscripción -->
+            <SfPopupLayout:SfPopupLayout x:Key="AddPopup" IsOpen="{Binding Path=BindingContext.ComprarAbierto, Source={x:Reference MiSuscripcionPage}}">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="COMPRAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
+                                             ShowCloseButton="True" HeaderHeight="100" IsFullScreen="True"
+                                             AcceptCommand="{Binding Path=BindingContext.BuyCommand, Source={x:Reference MiSuscripcionPage}}">
+                        <SfPopupLayout:PopupView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10">
+                                    <Label LineBreakMode="NoWrap" Text="COMPRAR SUSCRIPCIÓN" FontSize="18" HorizontalOptions="Center"
+                                           TextColor="{StaticResource Gray-Black}"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.HeaderTemplate>
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <ScrollView>
+                                    <StackLayout x:Name="stack" Padding="10" Spacing="10" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+
+                                        <Label Text="Estás por adquirir el siguiente plan:"
+                                           LineBreakMode="WordWrap" FontAttributes="Italic" TextColor="{StaticResource Gray-Black}"/>
+
+                                        <Label Text="{Binding Path=BindingContext.PlanSeleccionado.NombreSuscripcion, Source={x:Reference MiSuscripcionPage}}" 
+                                           Style="{StaticResource LabelStyle-TitlePrimary}"/>
+
+                                        <Label Text="{Binding Path=BindingContext.PlanSeleccionado.PrecioLetra, Source={x:Reference MiSuscripcionPage}}" 
+                                           Style="{StaticResource LabelStyle-TitleSecondary}"/>
+
+                                        <Label Text="{Binding Path=BindingContext.PlanSeleccionado.Periodicidad, Source={x:Reference MiSuscripcionPage}}" 
+                                           Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+
+                                        <Label Text="{Binding Path=BindingContext.PlanSeleccionado.Beneficios, Source={x:Reference MiSuscripcionPage}}" 
+                                           Style="{StaticResource LabelStyle-Text}" LineBreakMode="WordWrap"/>
+
+                                        <Label Text="Tus datos de pago están seguros. Usamos la plataforma de OpenPay de BBVA para procesar tus pagos."
+                                           LineBreakMode="WordWrap" FontAttributes="Italic" TextColor="{StaticResource Gray-Black}"/>
+
+                                        <Label Text="Selecciona la tarjeta a la que se realizarán los cobros:"
+                                           LineBreakMode="WordWrap" FontAttributes="Italic" TextColor="{StaticResource Gray-Black}"/>
+
+                                        <!-- SfTextInputLayout: Estado Civil -->
+                                        <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                                 ContainerBackgroundColor="{StaticResource White}">
+                                            <ComboBox:SfComboBox DataSource="{Binding Path=BindingContext.FormasPago, Source={x:Reference MiSuscripcionPage}}" 
+                                                    SelectedItem="{Binding Path=BindingContext.TarjetaSeleccionada, Source={x:Reference MiSuscripcionPage}}"
+                                                    FontFamily="{StaticResource Font-Highlight}" TextSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}"
+                                                    DisplayMemberPath="NumeroTarjetaCorto" Watermark="Seleccionar tarjeta..." WatermarkColor="{StaticResource Gray-500}"/>
+                                        </SfTextInputLayout:SfTextInputLayout>
+
+                                    </StackLayout>
+                                </ScrollView>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- Inverse Boolean Converter -->
+            <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Mi Suscripción">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference MiSuscripcionPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <Grid>
+            <!-- SfPullToRefresh: Page -->
+            <SfPullToRefresh:SfPullToRefresh x:Name="PullToRefreshSuscripciones" IsRefreshing="{Binding IsBusy}" HeightRequest="1200"
+                                             RefreshCommand="{Binding RefreshCommand}" RefreshCommandParameter="{x:Reference PullToRefreshSuscripciones}">
+                <SfPullToRefresh:SfPullToRefresh.PullableContent>
+
+
+                    <!-- SfListView: Suscripciones -->
+                    <SfListView:SfListView x:Name="ListViewConsultas" ItemsSource="{Binding Planes}" SelectedItem="{Binding PlanSeleccionado}"
+                                       AutoFitMode="Height" ItemSpacing="0,10" VerticalOptions="FillAndExpand" BackgroundColor="Transparent"
+                                       IsStickyHeader="true">
+
+                        <!-- Behaviors: Lista de Médicos -->
+                        <SfListView:SfListView.Behaviors>
+                            <Behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.BuyPopupCommand, 
+                                    Source={x:Reference MiSuscripcionPage}}" />
+                        </SfListView:SfListView.Behaviors>
+
+                        <!-- Header Template: Lista de Médicos -->
+                        <SfListView:SfListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout HorizontalOptions="FillAndExpand" Padding="10,5,10,5">
+
+                                    <!-- Stack Layout: Controles de Lista -->
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                        <Grid HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                            <SfButtons:SfButton x:Name="addCardButton" Style="{StaticResource MagentaButtonStyle}" Text="IR A FORMAS DE PAGO"
+                                                            HorizontalOptions="CenterAndExpand" HeightRequest="40" WidthRequest="800"
+                                                            Command="{Binding FormasPagoCommand}"/>
+                                        </Grid>
+                                    </StackLayout>                                
+
+                                    <!-- Busy Indicator: Comprando Suscripcion -->
+                                    <SfBusyIndicator:SfBusyIndicator Title="Adquiriendo suscripción..." IsBusy="{Binding ComprandoSuscripcion}"
+                                                         Style="{StaticResource SfBusyIndicatorStyle-SlicedPrimary}"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfListView:SfListView.HeaderTemplate>
+
+                        <!-- Item Template: Lista de Suscripciones -->
+                        <SfListView:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <!-- Grid: Plan Information Card -->
+                                <Grid Style="{StaticResource GridStyle-PlanInfoCard}">
+
+                                    <!-- Label: Nombre -->
+                                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding NombreSuscripcion}" Style="{StaticResource LabelStyle-TitlePrimary}"/>
+
+                                    <!-- Label: Precio -->
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding PrecioLetra}" Style="{StaticResource LabelStyle-TitleSecondary}"/>
+
+                                    <!-- Label: Beneficios -->
+                                    <Label Grid.Row="1" Grid.ColumnSpan="2" Text="Beneficios:" Style="{StaticResource LabelStyle-Text}"/>
+                                    <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Beneficios}" Style="{StaticResource LabelStyle-Text}"/>
+
+                                    <!-- Label: Periodicidad -->
+                                    <Label Grid.Row="3" Grid.ColumnSpan="2" Text="Descripción:" Style="{StaticResource LabelStyle-Text}"/>
+
+                                    <Label Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding Descripcion}" Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+
+
+                                    <!-- Label: Next Available Appointment -->
+                                    <Label Grid.Row="5" Grid.Column="0" Text="Plan Activo" Style="{StaticResource LabelStyle-HighlightRed}"
+                                       IsVisible="{Binding Activa}"/>
+
+                                    <!-- Label: Periodicidad -->
+                                    <Label Grid.Row="5" Grid.Column="1" Text="{Binding Periodicidad}" Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </SfListView:SfListView.ItemTemplate>
+
+                    </SfListView:SfListView>
+
+                </SfPullToRefresh:SfPullToRefresh.PullableContent>
+            </SfPullToRefresh:SfPullToRefresh>
+        </Grid>
+        
+
+    </ContentPage.Content>
+
+</ContentPage>

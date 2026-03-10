@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Definición de View (XAML): Mapa de Médicos (dn-13-3) -->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:CustomMap="clr-namespace:DocNoc.Xam.Custom.Maps"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Medicos.MapaMedicosView"
+             x:Name="MapaMedicosPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Converters -->
+            <Converters:SelectedItemChangedEventArgsConverter x:Key="PinSeleccionadoConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Búsqueda por Mapa">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton Text="{StaticResource Icon-Back}" Style="{StaticResource SfButtonStyle-Icon}"
+                                        Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference MapaMedicosPage}}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- Custom Map -->
+    <CustomMap:CustomMap HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                  MapType="Street" IsShowingUser="True" MapPins="{Binding Pins}" HeightRequest="800">
+        <!--Behaviors de CustomMap-->
+        <CustomMap:CustomMap.Behaviors>
+            <Behaviors:EventToCommandBehavior EventName="PinSelection" Command="{Binding PinSeleccionadoCommand}" 
+                                                      Converter="{StaticResource PinSeleccionadoConverter}"/>
+        </CustomMap:CustomMap.Behaviors>
+    </CustomMap:CustomMap>
+
+</ContentPage>

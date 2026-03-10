@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Resource Dictionary: Layout Styles-->
+<ResourceDictionary
+    x:Class="DocNoc.Xam.Styles.LayoutStyles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- STYLES: GRID -->
+
+    <!-- Grid Style: Patient File Row -->
+    <Style x:Key="GridStyle-PatientFileRow" TargetType="Grid">
+        <Setter Property="ColumnDefinitions">
+            <Setter.Value>
+                <ColumnDefinitionCollection>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </ColumnDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="ColumnSpacing" Value="10" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- Grid Style: About Row -->
+    <Style x:Key="GridStyle-AboutRow" TargetType="Grid">
+        <Setter Property="ColumnDefinitions">
+            <Setter.Value>
+                <ColumnDefinitionCollection>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </ColumnDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="20,10" />
+        <Setter Property="ColumnSpacing" Value="20" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- Grid Style: Profile Row -->
+    <Style x:Key="GridStyle-ProfileRow" TargetType="Grid">
+        <Setter Property="ColumnDefinitions">
+            <Setter.Value>
+                <ColumnDefinitionCollection>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </ColumnDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="20,15" />
+        <Setter Property="ColumnSpacing" Value="20" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- Grid Style: Doctor Info Card -->
+    <Style x:Key="GridStyle-DoctorInfoCard" TargetType="Grid">
+        <Setter Property="RowDefinitions">
+            <Setter.Value>
+                <RowDefinitionCollection>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
+                </RowDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ColumnDefinitions">
+            <Setter.Value>
+                <ColumnDefinitionCollection>
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="6*" />
+                </ColumnDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="ColumnSpacing" Value="10" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- Grid Style: Favoritos Info Card -->
+    <Style x:Key="GridStyle-FavoritoInfoCard" TargetType="Grid">
+        <Setter Property="RowDefinitions">
+            <Setter.Value>
+                <RowDefinitionCollection>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </RowDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ColumnDefinitions">
+            <Setter.Value>
+                <ColumnDefinitionCollection>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="48" />
+                </ColumnDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="0,10,10,10" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+    </Style>
+    
+    <!-- Grid Style: Plan Info Card -->
+    <Style x:Key="GridStyle-PlanInfoCard" TargetType="Grid">
+        <Setter Property="RowDefinitions">
+            <Setter.Value>
+                <RowDefinitionCollection>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </RowDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ColumnDefinitions">
+            <Setter.Value>
+                <ColumnDefinitionCollection>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </ColumnDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- Grid Style: Recent Chat Card -->
+    <Style x:Key="GridStyle-RecentChatCard" TargetType="Grid">
+        <Setter Property="RowDefinitions">
+            <Setter.Value>
+                <RowDefinitionCollection>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </RowDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ColumnDefinitions">
+            <Setter.Value>
+                <ColumnDefinitionCollection>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </ColumnDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- Grid Style: Doctor Review Card -->
+    <Style x:Key="GridStyle-DoctorReviewCard" TargetType="Grid">
+        <Setter Property="RowDefinitions">
+            <Setter.Value>
+                <RowDefinitionCollection>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="Auto" />
+                </RowDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ColumnDefinitions">
+            <Setter.Value>
+                <ColumnDefinitionCollection>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </ColumnDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- Grid Style: Swipe Panel, Primary -->
+    <Style x:Key="GridStyle-SwipePanelPrimary" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+    </Style>
+
+    <!-- Grid Style: Swipe Panel, Secondary -->
+    <Style x:Key="GridStyle-SwipePanelSecondary" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+    </Style>
+
+</ResourceDictionary>

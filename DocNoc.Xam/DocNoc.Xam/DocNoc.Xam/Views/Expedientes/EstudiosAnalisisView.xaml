@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Estudios y Análisis (dn-47-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:ComboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:sfDatePicker="clr-namespace:Syncfusion.XForms.Pickers;assembly=Syncfusion.SfPicker.XForms"
+             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:SfTextInputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Expedientes.EstudiosAnalisisView"
+             x:Name="EstudiosAnalisisPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Error de Suscripción -->
+            <SfPopupLayout:SfPopupLayout x:Key="ErrorSuscripcionPopup"  IsOpen="{Binding Path=BindingContext.ErrorSuscripcionVisible, Source={x:Reference EstudiosAnalisisPage}}">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="Visitar" DeclineButtonText="En otro momento" AppearanceMode="TwoButton" 
+                                             HeaderTitle="Doc+Noc" IsFullScreen="False"
+                                             AcceptCommand="{Binding Path=BindingContext.IrSuscripcionCommand, Source={x:Reference EstudiosAnalisisPage}}">
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <Grid Padding="5">
+                                    <Label Text="{Binding Path=BindingContext.ErrorSuscripcion, Source={x:Reference EstudiosAnalisisPage}}" 
+                                           HorizontalTextAlignment="Center" TextColor="{StaticResource Black}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- PopupLayout: Nuevo Registro -->
+            <SfPopupLayout:SfPopupLayout x:Key="AddPopup"  IsOpen="{Binding Path=BindingContext.AgregarVisible, Source={x:Reference EstudiosAnalisisPage}}">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="GUARDAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
+                                             ShowCloseButton="True" IsFullScreen="True"
+                                             AcceptCommand="{Binding Path=BindingContext.AddCommand, Source={x:Reference EstudiosAnalisisPage}}">
+                        <SfPopupLayout:PopupView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10">
+                                    <Label Text="AGREGAR ARCHIVO" Style="{StaticResource LabelStyle-PopupTitle}" TextColor="{StaticResource Black}"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.HeaderTemplate>
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <ScrollView>
+                                    <StackLayout Padding="10" Spacing="10" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+
+                                        <!-- StackLayout: Fecha del Evento -->
+                                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                                            <Label Text="Fecha" Style="{StaticResource LabelStyle-Highlight}"
+                                                   FontSize="{StaticResource FontSize-Medium}" />
+                                            <!-- SfTextInputLayout: Fecha del Evento -->
+                                            <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                                                 ContainerBackgroundColor="{StaticResource White}">
+                                                <!-- Date Picker: Fecha del Evento -->
+                                                <DatePicker Date="{Binding Path=BindingContext.FechaEvento, Source={x:Reference EstudiosAnalisisPage}}" 
+                                                            FontFamily="{StaticResource Font-Highlight}" FontSize="{StaticResource FontSize-Medium}" 
+                                                            Format="dd/MM/yyyy" TextColor="{StaticResource Black}"/>
+                                            </SfTextInputLayout:SfTextInputLayout>
+                                        </StackLayout>
+
+                                        <!-- StackLayout: Tipo de Evento -->
+                                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                                            <Label Text="Tipo"
+                                               Style="{StaticResource LabelStyle-Highlight}"/>
+                                            <!-- SfTextInputLayout: Tipo de Evento -->
+                                            <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                 ContainerBackgroundColor="{StaticResource White}">
+                                                <ComboBox:SfComboBox DataSource="{Binding Path=BindingContext.TiposEvento, Source={x:Reference EstudiosAnalisisPage}}" 
+                                                                 SelectedItem="{Binding Path=BindingContext.Tipo, Source={x:Reference EstudiosAnalisisPage}}"
+                                                                 DisplayMemberPath="TipoEvento" TextSize="{StaticResource FontSize-Medium}" TextColor="{StaticResource Black}"/>
+                                            </SfTextInputLayout:SfTextInputLayout>
+                                        </StackLayout>
+
+                                        <!-- TextInput: Descripción -->
+                                        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                                            <Label Text="Descripción" Style="{StaticResource LabelStyle-Highlight}"/>
+                                            <!-- SfTextInputLayout: Motivo -->
+                                            <SfTextInputLayout:SfTextInputLayout ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                                                 ContainerBackgroundColor="{StaticResource White}">
+                                                <Entry Text="{Binding Path=BindingContext.Descripcion, Source={x:Reference EstudiosAnalisisPage}}" 
+                                                       FontFamily="{StaticResource Font-Highlight}" FontSize="{StaticResource FontSize-Medium}"
+                                                       ClearButtonVisibility="WhileEditing" TextColor="{StaticResource Black}"/>
+                                            </SfTextInputLayout:SfTextInputLayout>
+                                        </StackLayout>
+
+                                        <!-- Button: Agregar Archivo -->
+                                        <Button Text="Elegir Archivo" HorizontalOptions="Center" Margin="20"  TextColor="{StaticResource Black}"
+                                            Command="{Binding Path=BindingContext.LoadImageCommand, Source={x:Reference EstudiosAnalisisPage}}" />
+
+                                    </StackLayout>
+                                </ScrollView>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- PopupLayout: Ver Imagen -->
+            <SfPopupLayout:SfPopupLayout x:Key="ImagePopup" IsOpen="{Binding Path=BindingContext.ImagenVisible, Source={x:Reference EstudiosAnalisisPage}}">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="Cerrar" AppearanceMode="OneButton" 
+                                             ShowCloseButton="True" HeaderHeight="100" IsFullScreen="True">
+                        <SfPopupLayout:PopupView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10">
+                                    <Label LineBreakMode="WordWrap" Text="VER IMAGEN" FontSize="18" HorizontalOptions="Center" TextColor="{StaticResource Black}"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.HeaderTemplate>
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout x:Name="stack" Padding="20" Spacing="10" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+
+                                    <Image Source="{Binding Path=BindingContext.FuenteImagen, Source={x:Reference EstudiosAnalisisPage}}" />
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- PopupLayout: Compartir Archivos -->
+            <SfPopupLayout:SfPopupLayout x:Key="ShareFilesPopup" IsOpen="{Binding Path=BindingContext.CompartirVisible, Source={x:Reference EstudiosAnalisisPage}}">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="COMPARTIR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
+                                             ShowCloseButton="True" HeaderHeight="100" IsFullScreen="True"
+                                             AcceptCommand="{Binding Path=BindingContext.CompartirArchivosCommand, Source={x:Reference EstudiosAnalisisPage}}">
+                        <SfPopupLayout:PopupView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10">
+                                    <Label LineBreakMode="WordWrap" Text="COMPARTIR ARCHIVOS" FontSize="18" HorizontalOptions="Center" TextColor="{StaticResource Black}"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.HeaderTemplate>
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout x:Name="stack" Padding="20" Spacing="10" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+
+                                    <Label Text="{Binding Path=BindingContext.InformacionCompartir, Source={x:Reference EstudiosAnalisisPage}}"
+                                           LineBreakMode="WordWrap" FontAttributes="Italic" Margin="0,0,0,10" TextColor="{StaticResource Black}"/>
+
+                                    <sfDatePicker:SfDatePicker HeaderText="Compartir hasta:" HorizontalOptions="Center" HeaderBackgroundColor="Transparent" HeaderTextColor="Black"
+                                                               Date="{Binding Path=BindingContext.CompartirHasta, Source={x:Reference EstudiosAnalisisPage}}"/>
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <Converters:BooleanToColorConverter x:Key="ColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Estudios y Análisis">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference EstudiosAnalisisPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ImageButton HorizontalOptions="End" Source="add.png" Margin="5" Command="{Binding AgregarPopupCommand}" 
+                         BackgroundColor="Transparent"/>
+            
+            <!-- SfButton: Compartir -->
+            <SfButtons:SfButton Grid.Row="1" Text="Compartir Archivos" Margin="5" Command="{Binding OpenShareCommand}"
+                                IsVisible="{Binding Path=BindingContext.CompartirHabilitado, Source={x:Reference EstudiosAnalisisPage}}"
+                                Style="{StaticResource SfButtonStyle-RoundSecondary}"/>
+
+            <!--  ListView for Category  -->
+            <SfListView:SfListView
+                x:Name="CategoryTile" Grid.Row="2" ItemsSource="{Binding Registros}"
+                Style="{StaticResource ExpedienteListViewStyle}">
+
+                <SfListView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="{DynamicResource Gray-White}" Padding="20" ColumnSpacing="10">
+                            <!-- Renglones -->
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!-- Columnas -->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Etiquetas -->
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="0" Grid.Column="0"
+                                   Text="Fecha"  LineBreakMode="NoWrap"  TextColor="{StaticResource Black}"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="1" Grid.Column="0"
+                                   Text="Tipo"  LineBreakMode="NoWrap"  TextColor="{StaticResource Black}"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="2" Grid.Column="0"
+                                   Text="Descripción"  LineBreakMode="NoWrap"  TextColor="{StaticResource Black}"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="3" Grid.Column="0"
+                                   Text="Archivo"  LineBreakMode="NoWrap"  TextColor="{StaticResource Black}"/>
+                            <!-- Valores -->
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding FechaLetra}" LineBreakMode="WordWrap"  TextColor="{StaticResource Black}"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="1" Grid.Column="1"
+                                   Text="{Binding Tipo}" LineBreakMode="WordWrap"  TextColor="{StaticResource Black}"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="2" Grid.Column="1"
+                                   Text="{Binding Descripcion}" LineBreakMode="WordWrap"  TextColor="{StaticResource Black}"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="3" Grid.Column="1"
+                                   Text="Ver Imagen" TextColor="Blue" LineBreakMode="TailTruncation">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.ImagePopupCommand, Source={x:Reference EstudiosAnalisisPage}}" 
+                                                          CommandParameter="{Binding Archivo}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <!-- Compartir Archivo -->
+                            <StackLayout Grid.Row="0" Grid.RowSpan="2" Grid.Column="2"
+                                         IsVisible="{Binding Path=BindingContext.CompartirHabilitado, Source={x:Reference EstudiosAnalisisPage}}">
+                                <SfButtons:SfCheckBox Text="" IsChecked="{Binding Compartir}"/>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </SfListView:SfListView.ItemTemplate>
+
+            </SfListView:SfListView>
+
+        </Grid>
+
+    </ContentPage.Content>
+
+</ContentPage>

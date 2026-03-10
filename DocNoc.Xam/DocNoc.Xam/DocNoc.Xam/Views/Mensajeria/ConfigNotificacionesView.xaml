@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Configuración de Notificaciones (dn-68-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam" xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Mensajeria.ConfigNotificacionesView"
+             x:Name="ConfigNotificacionesPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converters:BooleanToColorConverter x:Key="ColorConverter" />
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Notificaciones">
+                    <Controls:TitleView.LeadingView>
+                    <!-- Button: Back -->
+                    <SfButtons:SfButton Text="{StaticResource Icon-Back}" Style="{StaticResource SfButtonStyle-Icon}"
+                                        Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference ConfigNotificacionesPage}}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+        <Grid BackgroundColor="White" Padding="10" RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"  />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Label: Mensajes -->
+            <Label Grid.Row="0" Grid.Column="0" Text="Mensajes"
+                   Style="{StaticResource LabelStyle-Highlight}" />
+
+            <!-- Switch: Mensajes -->
+            <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding MensajesActivo}" ThumbColor="{StaticResource PrimaryColor}" OnColor="{StaticResource Gray-400}">
+                <Switch.Behaviors>
+                    <Behaviors:EventToCommandBehavior EventName="Toggled" Command="{Binding CambiaMensajesCommand}"/>
+                </Switch.Behaviors>
+            </Switch>
+
+            <!-- Label: Medicamentos -->
+            <Label Grid.Row="1" Grid.Column="0" Text="Medicamentos"
+                   Style="{StaticResource LabelStyle-Highlight}" />
+
+            <!-- Switch: Medicamentos -->
+            <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding MedicamentosActivo}" ThumbColor="{StaticResource PrimaryColor}" OnColor="{StaticResource Gray-400}">
+                <Switch.Behaviors>
+                    <Behaviors:EventToCommandBehavior EventName="Toggled" Command="{Binding CambiaMedicamentosCommand}"/>
+                </Switch.Behaviors>
+            </Switch>
+
+            <!-- Label: Doc+Noc -->
+            <Label Grid.Row="2" Grid.Column="0" Text="Doc+Noc"
+                   Style="{StaticResource LabelStyle-Highlight}" />
+
+            <!-- Switch: Doc+Noc -->
+            <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding DocnocActivo}" ThumbColor="{StaticResource PrimaryColor}" OnColor="{StaticResource Gray-400}">
+                <Switch.Behaviors>
+                    <Behaviors:EventToCommandBehavior EventName="Toggled" Command="{Binding CambiaDocnocCommand}"/>
+                </Switch.Behaviors>
+            </Switch>
+
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

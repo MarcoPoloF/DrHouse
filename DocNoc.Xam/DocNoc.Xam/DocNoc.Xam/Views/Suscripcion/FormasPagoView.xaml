@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Formas de Pago (dn-62-3) -->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfCards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
+             xmlns:SfGraphics="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:SfPullToRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+             xmlns:SfBusyIndicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Suscripcion.FormasPagoView"
+             x:Name="FormasPagoPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Cancelar Cita -->
+            <SfPopupLayout:SfPopupLayout x:Key="AddPopup" IsOpen="False">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="GUARDAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
+                                             ShowCloseButton="True" HeaderHeight="100" IsFullScreen="True"
+                                             AcceptCommand="{Binding Path=BindingContext.AddCommand, Source={x:Reference FormasPagoPage}}">
+                        <SfPopupLayout:PopupView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="0" Margin="0">
+                                    <!--<Label LineBreakMode="NoWrap" Text="AGREGAR FORMA DE PAGO" FontSize="18" HorizontalOptions="Center"/>-->
+                                    <!--<Label Text="Tarjetas aceptadas" HorizontalTextAlignment="Center"/>-->
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.HeaderTemplate>
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <ScrollView>
+                                    <StackLayout x:Name="stack" VerticalOptions="Start" >
+                                        <Grid HorizontalOptions="Start" VerticalOptions="Start" Padding="0" Margin="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" Text="AGREGAR FORMAs DE PAGO" FontSize="18" HorizontalOptions="Center" TextColor="{StaticResource Gray-Black}"/>
+                                            <Label Grid.Row="1" Text="Tarjetas aceptadas" HorizontalTextAlignment="Center" TextColor="{StaticResource Gray-Black}"/>
+                                            <Image Grid.Row="2" Aspect="AspectFit" BackgroundColor="Transparent" Source="openpay" />
+                                        </Grid>
+
+                                        <Label Text="Tus datos de pago están seguros. Usamos la plataforma de OpenPay de BBVA para procesar tus pagos."
+                                           LineBreakMode="WordWrap" FontAttributes="Italic" TextColor="{StaticResource Gray-Black}"/>
+
+                                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference CardNumber}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                                            <Controls:BorderlessEntry x:Name="CardNumber"  Placeholder="Número de Tarjeta" Style="{StaticResource EntryTextStyle}" MaxLength="16" Keyboard="Numeric"
+                                            Text="{Binding Path=BindingContext.NuevaTarjeta.CardNumber, Source={x:Reference FormasPagoPage}}">
+                                            </Controls:BorderlessEntry>
+                                        </SfBorder:SfBorder>
+
+                                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference CardName}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                                            <Controls:BorderlessEntry x:Name="CardName"  Placeholder="Nombre en la Tarjeta" Style="{StaticResource EntryTextStyle}"
+                                            Text="{Binding Path=BindingContext.NuevaTarjeta.HolderName, Source={x:Reference FormasPagoPage}}">
+                                            </Controls:BorderlessEntry>
+                                        </SfBorder:SfBorder>
+
+                                        <StackLayout Orientation="Horizontal" Spacing="20">
+
+                                            <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference ExpMonth}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                                                <Controls:BorderlessEntry x:Name="ExpMonth"  Placeholder="MM" Style="{StaticResource EntryTextStyle}" MaxLength="2" Keyboard="Numeric"
+                                            Text="{Binding Path=BindingContext.NuevaTarjeta.ExpirationMonth, Source={x:Reference FormasPagoPage}}">
+                                                </Controls:BorderlessEntry>
+                                            </SfBorder:SfBorder>
+
+                                            <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference ExpYear}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                                                <Controls:BorderlessEntry x:Name="ExpYear"  Placeholder="AA" Style="{StaticResource EntryTextStyle}" MaxLength="2" Keyboard="Numeric"
+                                            Text="{Binding Path=BindingContext.NuevaTarjeta.ExpirationYear, Source={x:Reference FormasPagoPage}}">
+                                                </Controls:BorderlessEntry>
+                                            </SfBorder:SfBorder>
+
+                                        </StackLayout>
+
+                                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference CVV}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                                            <Controls:BorderlessEntry x:Name="CVV"  Placeholder="Código de Seguridad" Style="{StaticResource EntryTextStyle}" MaxLength="3" Keyboard="Numeric"
+                                            Text="{Binding Path=BindingContext.NuevaTarjeta.Cvv2, Source={x:Reference FormasPagoPage}}" IsPassword="True">
+                                            </Controls:BorderlessEntry>
+                                        </SfBorder:SfBorder>
+                                        
+                                    </StackLayout>
+                                </ScrollView>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- Converters -->
+            <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
+            <Converters:BooleanToColorConverter x:Key="ColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Formas de Pago">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference FormasPagoPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <Grid>
+            <!-- SfPullToRefresh: Page -->
+            <SfPullToRefresh:SfPullToRefresh x:Name="PullToRefreshSuscripciones" IsRefreshing="{Binding IsBusy}" HeightRequest="1200"
+                                             RefreshCommand="{Binding RefreshCommand}" RefreshCommandParameter="{x:Reference PullToRefreshSuscripciones}">
+                <SfPullToRefresh:SfPullToRefresh.PullableContent>
+
+                    <!-- SfListView: Tarjetas Registradas -->
+                    <SfListView:SfListView x:Name="ListTarjetas" AutoFitMode="Height" IsScrollBarVisible="False" ItemSpacing="16,24,16,0" 
+                                   SelectionGesture="Tap" SelectionBackgroundColor="Transparent" SelectionMode="Single" 
+                                   AllowSwiping="True" ItemsSource="{Binding FormasPago}">
+
+                        <!-- Header Template: Lista de Médicos -->
+                        <SfListView:SfListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout HorizontalOptions="FillAndExpand" Padding="10,5,10,5">
+
+                                    <!-- Stack Layout: Controles de Lista -->
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                        <Grid HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                            <!--  Add Card button command  -->
+                                            <SfButtons:SfButton x:Name="addCardButton" Style="{StaticResource MagentaButtonStyle}" Text="AGREGAR TARJETA" 
+                                                                Command="{Binding PopupCommand}" CommandParameter="{StaticResource AddPopup}" 
+                                                                HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="40"  WidthRequest="800"
+                                                                IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolean}}"/>
+                                        </Grid>
+                                    </StackLayout>
+
+                                    <!-- Busy Indicator: Búsqueda -->
+                                    <SfBusyIndicator:SfBusyIndicator Title="Agregando tarjeta..." IsBusy="{Binding IsBusy}"
+                                             Style="{StaticResource SfBusyIndicatorStyle-SlicedPrimary}" Margin="5"/>
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfListView:SfListView.HeaderTemplate>
+                        
+                        <SfListView:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <SfCards:SfCardView CornerRadius="4" HasShadow="True" HeightRequest="270" WidthRequest="515"
+                                            HorizontalOptions="CenterAndExpand">
+                                    <SfCards:SfCardView.Content>
+                                        <Grid>
+                                            <SfGraphics:SfGradientView>
+                                                <SfGraphics:SfGradientView.BackgroundBrush>
+                                                    <SfGraphics:SfLinearGradientBrush>
+                                                        <SfGraphics:SfLinearGradientBrush.GradientStops>
+                                                            <SfGraphics:SfGradientStop Color="DarkSeaGreen" Offset="0.0"/>
+                                                            <SfGraphics:SfGradientStop Color="Blue" Offset="1.0"/>
+                                                        </SfGraphics:SfLinearGradientBrush.GradientStops>
+                                                    </SfGraphics:SfLinearGradientBrush>
+                                                </SfGraphics:SfGradientView.BackgroundBrush>
+                                            </SfGraphics:SfGradientView>
+
+                                            <Grid RowSpacing="27" Margin="16,20" >
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- Card Type -->
+                                                <Label Grid.Row="0" Grid.ColumnSpan="3" HorizontalOptions="Start"  VerticalOptions="Center" 
+                                                       Style="{StaticResource CardLabel}" Margin="0,3" Text="{Binding TipoLetra}"/>
+
+                                                <!-- Icon displaying card type -->
+                                                <Image Grid.Row="0" Grid.ColumnSpan="3"  HeightRequest="27" HorizontalOptions="End"  VerticalOptions="Start"
+                                                       WidthRequest="45" Source="{Binding IconoTarjeta}"/>
+
+                                                <!-- Card Number -->
+                                                <Label Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="Start" Text="{Binding NumeroTarjeta}" FontSize="20"
+                                                       FontFamily="{StaticResource Montserrat-Medium}" TextColor="{DynamicResource Gray-White}"
+                                                       LineHeight="{OnPlatform Default=-1, Android=1.5}" />
+
+                                                <!--  Card Holder Name  -->
+                                                <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Spacing="0">
+                                                    <Label Text="Tarjeta Predeterminada" FontSize="12" FontFamily="{StaticResource Montserrat-Medium}" 
+                                                           LineHeight="{OnPlatform Default=-1, Android=1.5}" TextColor="{DynamicResource Gold}"
+                                                           IsVisible="{Binding Predeterminada}"/>
+                                                </StackLayout>
+
+                                            </Grid>
+                                        </Grid>
+                                    </SfCards:SfCardView.Content>
+                                </SfCards:SfCardView>
+                            </DataTemplate>
+                        </SfListView:SfListView.ItemTemplate>
+                        
+                    </SfListView:SfListView>
+
+                </SfPullToRefresh:SfPullToRefresh.PullableContent>
+            </SfPullToRefresh:SfPullToRefresh>
+        </Grid>
+
+    </ContentPage.Content>
+
+</ContentPage>

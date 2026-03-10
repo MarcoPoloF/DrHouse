@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Home (dn-07-3).-->
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+    xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+    xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+    xmlns:SfBadge="clr-namespace:Syncfusion.XForms.BadgeView;assembly=Syncfusion.SfBadgeView.XForms"
+    xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:SfRotator="clr-namespace:Syncfusion.SfRotator.XForms;assembly=Syncfusion.SfRotator.XForms"
+    xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+    xmlns:SfPullToRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+    NavigationPage.HasNavigationBar="False"
+    d:NavigationPage.HasNavigationBar="False"
+    Shell.NavBarIsVisible="False"
+    mc:Ignorable="d"
+    x:Name="InicioPage"
+    x:Class="DocNoc.Xam.Views.Principal.HomePage"
+    BackgroundColor="{DynamicResource PageBackground}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Doc+Noc v18-dev">
+                    <Controls:TitleView.TrailingView>
+                        <StackLayout Orientation="Horizontal">
+                            <!-- SfBadge: My Notifications -->
+                            <SfBadge:SfBadgeView>
+                                <!-- SfBadge: On-tap Command -->
+                                <SfBadge:SfBadgeView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.MisNotificacionesCommand, 
+                                        Source={x:Reference InicioPage}}" />
+                                </SfBadge:SfBadgeView.GestureRecognizers>
+                                <!-- SfBadge Content -->
+                                <SfBadge:SfBadgeView.Content>
+                                    <Image Source="notificaciones.png" HeightRequest="25"/>
+                                </SfBadge:SfBadgeView.Content>
+                                <!-- SfBadge Settings -->
+                                <SfBadge:SfBadgeView.BadgeSettings>
+                                    <SfBadge:BadgeSetting BadgeAlignment="End" BadgePosition="TopRight" 
+                                        BadgeIcon="{Binding Path=BindingContext.BadgeNotificaciones, Source={x:Reference InicioPage}}" />
+                                </SfBadge:SfBadgeView.BadgeSettings>
+                            </SfBadge:SfBadgeView>
+                            <!-- SfBadge: My Chats -->
+                            <SfBadge:SfBadgeView>
+                                <!-- SfBadge: On-tap Command -->
+                                <SfBadge:SfBadgeView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.MisChatsCommand, 
+                                        Source={x:Reference InicioPage}}" />
+                                </SfBadge:SfBadgeView.GestureRecognizers>
+                                <!-- SfBadge Content -->
+                                <SfBadge:SfBadgeView.Content>
+                                    <Image Source="chats.png" HeightRequest="25"/>
+                                </SfBadge:SfBadgeView.Content>
+                                <!-- SfBadge Settings -->
+                                <SfBadge:SfBadgeView.BadgeSettings>
+                                    <SfBadge:BadgeSetting BadgeAlignment="End" BadgePosition="TopRight" 
+                                        BadgeIcon="{Binding Path=BindingContext.BadgeChats, Source={x:Reference InicioPage}}" />
+                                </SfBadge:SfBadgeView.BadgeSettings>
+                            </SfBadge:SfBadgeView>
+                        </StackLayout>
+                    </Controls:TitleView.TrailingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <ContentPage.Content>
+        <Grid>
+
+            <SfPullToRefresh:SfPullToRefresh x:Name="PullToRefresh" IsRefreshing="{Binding IsBusy}" HeightRequest="1200"
+                                            RefreshCommand="{Binding RefreshCommand}" RefreshCommandParameter="{x:Reference PullToRefresh}">
+                <SfPullToRefresh:SfPullToRefresh.PullableContent>
+
+                    <Grid Padding="10" RowSpacing="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid>
+                            <ScrollView>
+                                <Grid RowSpacing="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Label: Próximas Citas -->
+                                    <Label Grid.Row="0" Text="Próximas Citas" Style="{StaticResource LabelStyle-TitleSecondary}"/>
+
+                                    <!-- SfListView: Próximas Citas -->
+                                    <SfListView:SfListView Grid.Row="1" x:Name="listCitas" ItemsSource="{Binding Citas}" HeightRequest="120" ItemSpacing="5,0" 
+                                        Style="{StaticResource SfListViewStyle-Horizontal}" IsVisible="{Binding HayCitas}">
+                                        <SfListView:SfListView.Behaviors>
+                                            <Behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.CitaSeleccionadaCommand, Source={x:Reference InicioPage}}" />
+                                        </SfListView:SfListView.Behaviors>
+                                        <SfListView:SfListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Frame Style="{StaticResource FrameStyle-ListBox}" WidthRequest="360">
+                                                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="5">
+                                                        <Label Text="{Binding CitaLetra}" Style="{StaticResource LabelStyle-HighlightSecondary}"/>
+                                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="20">
+                                                            <StackLayout HorizontalOptions="Start" Spacing="0">
+                                                                <Label Text="{Binding Fecha}" Style="{StaticResource LabelStyle-TextPrimary}" 
+                                                            HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                                                <BoxView Style="{StaticResource BoxViewStyle-AppointmentDateSeparator}" />
+                                                                <Label Text="{Binding Hora}" Style="{StaticResource LabelStyle-TextPrimary}" 
+                                                            HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                                            </StackLayout>
+                                                            <StackLayout HorizontalOptions="StartAndExpand" Spacing="0">
+                                                                <Label Text="{Binding Doctor}" Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"
+                                                        LineBreakMode="TailTruncation" />
+                                                                <Label Text="{Binding NombreEspecialidad}" Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"
+                                                        LineBreakMode="TailTruncation" />
+                                                                <Label Text="{Binding DireccionConsultorio}" Style="{StaticResource LabelStyle-Text}" 
+                                                        LineBreakMode="TailTruncation" />
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </SfListView:SfListView.ItemTemplate>
+                                    </SfListView:SfListView>
+
+                                    <!-- Label: No hay citas -->
+                                    <Label Grid.Row="1" Text="No tiene citas programadas" Style="{StaticResource LabelStyle-ReminderText}"
+                                        IsVisible="{Binding HayCitas, Converter={StaticResource InverseBoolean}}"/>
+
+                                    <!-- Label: Mis Expedientes -->
+                                    <Label Grid.Row="2" Text="Mis Expedientes" Style="{StaticResource LabelStyle-TitleSecondary}"/>
+
+                                    <!-- SfListView: Mis Expedientes -->
+                                    <SfListView:SfListView Grid.Row="3" x:Name="listExpedientes" ItemsSource="{Binding Expedientes}" HeightRequest="40" ItemSpacing="5,0" 
+                                        Style="{StaticResource SfListViewStyle-Horizontal}">
+                                        <SfListView:SfListView.Behaviors>
+                                            <Behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.ExpedienteSeleccionadoCommand, Source={x:Reference InicioPage}}" />
+                                        </SfListView:SfListView.Behaviors>
+                                        <SfListView:SfListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid BackgroundColor="Transparent">
+                                                    <Frame Style="{StaticResource FrameStyle-ListBox}">
+                                                        <Label Text="{Binding NombreAdicional}" Style="{StaticResource LabelStyle-Text}"/>
+                                                    </Frame>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </SfListView:SfListView.ItemTemplate>
+                                    </SfListView:SfListView>
+
+                                    <!-- Mis Medicamentos -->
+                                    <Label Grid.Row="4" Text="Mis Medicamentos" Style="{StaticResource LabelStyle-TitleSecondary}" />
+
+                                    <!-- SfListView: SfListView: Mis Medicamentos -->
+                                    <SfListView:SfListView Grid.Row="5" x:Name="listMedicamentos" ItemsSource="{Binding Medicamentos}" HeightRequest="200" ItemSpacing="5,0" 
+                                        Style="{StaticResource SfListViewStyle-Horizontal}" IsVisible="{Binding HayMedicamentos}">
+
+                                        <SfListView:SfListView.Behaviors>
+                                            <Behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.MedicamentoSeleccionadoCommand, Source={x:Reference InicioPage}}" />
+                                        </SfListView:SfListView.Behaviors>
+
+                                        <SfListView:SfListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Frame Style="{StaticResource FrameStyle-ListBox}" WidthRequest="280">
+                                                    <StackLayout HorizontalOptions="FillAndExpand">
+                                                        <Label Text="{Binding FechaLetra}" Style="{StaticResource LabelStyle-TextPrimary}"/>
+                                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="20">
+                                                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                                                <Label Text="{Binding CuidadoRecomendacion}" Style="{StaticResource LabelStyle-Text}"
+                                                               IsVisible="{Binding HayIndicaciones}" />
+                                                                <Label Text="{Binding Medicamento}" Style="{StaticResource LabelStyle-Text}"/>
+                                                                <Label Text="{Binding IndicadoPor}" Style="{StaticResource LabelStyle-Text}" 
+                                                               LineBreakMode="TailTruncation" />
+                                                                <Label Text="{Binding RecetadoA}" Style="{StaticResource LabelStyle-Text}" 
+                                                               LineBreakMode="TailTruncation" />
+                                                            </StackLayout>
+                                                            <StackLayout VerticalOptions="Start">
+                                                                <SfButtons:SfCheckBox Text="" IsChecked="False" IsEnabled="False"/>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </SfListView:SfListView.ItemTemplate>
+
+                                        <SfListView:SfListView.SelectedItemTemplate>
+                                            <DataTemplate>
+                                                <Frame Style="{StaticResource FrameStyle-ListBox}" WidthRequest="320">
+                                                    <StackLayout HorizontalOptions="FillAndExpand">
+                                                        <Label Text="{Binding FechaLetra}" Style="{StaticResource LabelStyle-TextPrimary}"/>
+                                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="20">
+                                                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                                                <Label Text="{Binding CuidadoRecomendacion}" Style="{StaticResource LabelStyle-Text}" 
+                                                            IsVisible="{Binding HayIndicaciones}"/>
+                                                                <Label Text="{Binding Medicamento}" Style="{StaticResource LabelStyle-Text}"/>
+                                                                <Label Text="{Binding IndicadoPor}" Style="{StaticResource LabelStyle-Text}" 
+                                                            LineBreakMode="TailTruncation"/>
+                                                                <Label Text="{Binding RecetadoA}" Style="{StaticResource LabelStyle-Text}" 
+                                                               LineBreakMode="TailTruncation" />
+                                                                <Label Text="Tomado" IsVisible="{Binding Tomado}" Style="{StaticResource LabelStyle-TextRed}" />
+                                                            </StackLayout>
+                                                            <StackLayout VerticalOptions="Start">
+                                                                <SfButtons:SfCheckBox Text="" IsChecked="True"/>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </SfListView:SfListView.SelectedItemTemplate>
+
+                                    </SfListView:SfListView>
+
+                                    <!-- Label: No hay citas -->
+                                    <Label Grid.Row="5" Text="No tiene medicamentos programados" Style="{StaticResource LabelStyle-ReminderText}"
+                                        IsVisible="{Binding HayMedicamentos, Converter={StaticResource InverseBoolean}}"/>
+
+                                </Grid>
+                            </ScrollView>
+                        </Grid>
+
+                        <!-- SfRotator: Anuncios -->
+                        <SfRotator:SfRotator Grid.Row="1" ItemsSource="{Binding Anuncios}" HorizontalOptions="Center" VerticalOptions="Center"
+                            EnableAutoPlay="true" NavigationDelay="4000">
+                            <SfRotator:SfRotator.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding RutaMedios}" Aspect="AspectFit" />
+                                </DataTemplate>
+                            </SfRotator:SfRotator.ItemTemplate>
+                        </SfRotator:SfRotator>
+
+                    </Grid>
+
+                </SfPullToRefresh:SfPullToRefresh.PullableContent>
+            </SfPullToRefresh:SfPullToRefresh>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Mis Expedientes (dn-34-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Expedientes.MisExpedientesView"
+             x:Name="MisExpedientesPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Error de Suscripción -->
+            <SfPopupLayout:SfPopupLayout x:Key="ErrorSuscripcionPopup"  IsOpen="{Binding Path=BindingContext.ErrorSuscripcionVisible, Source={x:Reference MisExpedientesPage}}">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="Visitar" DeclineButtonText="En otro momento" AppearanceMode="TwoButton" 
+                                             HeaderTitle="Doc+Noc" IsFullScreen="False"
+                                             AcceptCommand="{Binding Path=BindingContext.IrSuscripcionCommand, Source={x:Reference MisExpedientesPage}}">
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <Grid Padding="5">
+                                    <Label Text="{Binding Path=BindingContext.ErrorSuscripcion, Source={x:Reference MisExpedientesPage}}" 
+                                           HorizontalTextAlignment="Center" TextColor="{StaticResource Black}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- PopupLayout: Cancelar Cita -->
+            <SfPopupLayout:SfPopupLayout x:Key="AddPopup" IsOpen="{Binding Path=BindingContext.AgregarVisible, Source={x:Reference MisExpedientesPage}}">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="GUARDAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" HeaderHeight="100" ShowCloseButton="False"
+                                             AcceptCommand="{Binding Path=BindingContext.AddCommand, Source={x:Reference MisExpedientesPage}}">
+                        <SfPopupLayout:PopupView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="5">
+                                    <Label LineBreakMode="NoWrap" Text="Nuevo Expediente" FontSize="16" HorizontalOptions="Center" TextColor="{StaticResource Black}"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.HeaderTemplate>
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout x:Name="stack" Padding="5" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+
+                                    <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference NombrePerfilEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                                        <Controls:BorderlessEntry x:Name="NombrePerfilEntry"  Placeholder="Nombre del Expediente" Style="{StaticResource EntryTextStyle}"
+                                            Text="{Binding Path=BindingContext.NombreExpediente, Source={x:Reference MisExpedientesPage}}" MinimumHeightRequest="90">
+                                        </Controls:BorderlessEntry>
+                                    </SfBorder:SfBorder>
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- Convertidor de Color-->
+            <Converters:BooleanToColorConverter x:Key="ColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Mis Expedientes">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton Text="{StaticResource Icon-Back}" Style="{StaticResource SfButtonStyle-Icon}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference MisExpedientesPage}}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <SfButtons:SfButton x:Name="AddButton" Text="Nuevo Expediente" HorizontalOptions="Start" Margin="10" Padding="10"
+                                BackgroundColor="White" BorderColor="Gray" CornerRadius="10" TextColor="{StaticResource Black}"
+                                Command="{Binding AgregarPopupCommand}"/>
+
+            <!--  ListView for Category  -->
+            <SfListView:SfListView
+                x:Name="CategoryTile" Grid.Row="1" ItemsSource="{Binding Pacientes}" ItemSpacing="2"
+                Style="{StaticResource SfListViewStyle-Base}">
+
+                <SfListView:SfListView.Behaviors>
+                    <Behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.DetailCommand, Source={x:Reference MisExpedientesPage}}" />
+                </SfListView:SfListView.Behaviors>
+
+                <SfListView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="{StaticResource White}" Padding="10" ColumnSpacing="10">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="{StaticResource Icon-Profile}"
+                                   Style="{StaticResource LabelStyle-IconPrimary}" />
+
+                            <Label Grid.Column="1" Text="{Binding NombreAdicional}"
+                                   Style="{StaticResource LabelStyle-Highlight}" />
+
+                        </Grid>
+                    </DataTemplate>
+                </SfListView:SfListView.ItemTemplate>
+
+            </SfListView:SfListView>
+
+        </Grid>
+
+    </ContentPage.Content>
+
+</ContentPage>

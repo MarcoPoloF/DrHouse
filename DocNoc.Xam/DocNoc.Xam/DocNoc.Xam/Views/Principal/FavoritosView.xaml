@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Favoritos (dn-56-3)..-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:SfBusyIndicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:SfPullToRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+             xmlns:SfRating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Principal.FavoritosView"
+             x:Name="FavoritosPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Cancelar Cita -->
+            <SfPopupLayout:SfPopupLayout x:Key="SortPopup" IsOpen="False">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="APLICAR" AppearanceMode="OneButton" 
+                                             ShowCloseButton="True" HeaderTitle="Ordenar Por" IsFullScreen="False"
+                                             AcceptCommand="{Binding Path=BindingContext.SortCommand, Source={x:Reference FavoritosPage}}">
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="20" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <SfButtons:SfRadioGroup>
+                                        <SfButtons:SfRadioButton Text="Cita más próxima" IsChecked="{Binding Path=BindingContext.SortCitaSeleccionado, Source={x:Reference FavoritosPage}}"/>
+                                        <SfButtons:SfRadioButton Text="Rating" IsChecked="{Binding Path=BindingContext.SortRatingSeleccionado, Source={x:Reference FavoritosPage}}" />
+                                        <SfButtons:SfRadioButton Text="Apellido" IsChecked="{Binding Path=BindingContext.SortApellidoSeleccionado, Source={x:Reference FavoritosPage}}" />
+                                    </SfButtons:SfRadioGroup>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- Converters -->
+            <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Favoritos">
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+        <!-- Grid: Page-->
+        <Grid>
+
+            <!-- SfPullToRefresh: Page -->
+            <SfPullToRefresh:SfPullToRefresh x:Name="PullToRefreshMedicos" IsRefreshing="{Binding IsBusy}" HeightRequest="1200"
+                                             RefreshCommand="{Binding RefreshCommand}" RefreshCommandParameter="{x:Reference PullToRefreshMedicos}">
+                <SfPullToRefresh:SfPullToRefresh.PullableContent>
+
+                    <!-- SfListView: Lista de Médicos -->
+                    <SfListView:SfListView x:Name="SfListViewMedicos" ItemsSource="{Binding Medicos}" ItemSize="120" 
+                        Style="{StaticResource SfListViewStyle-DoctorInfoCards}">
+                        <!-- Item Template: Lista de Médicos -->
+                        <SfListView:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <!-- Grid: Doctor Information Card -->
+                                <Grid Style="{StaticResource GridStyle-FavoritoInfoCard}">
+
+                                    <!-- Image: Profile Picture -->
+                                    <Image Grid.Column="0" Grid.RowSpan="5" HeightRequest="150" WidthRequest="150">
+                                        <Image.Source>
+                                            <UriImageSource
+                                                CacheValidity="14"
+                                                CachingEnabled="true"
+                                                Uri="{Binding RutaImagen}" />
+                                        </Image.Source>
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.PerfilMedicoCommand, Source={x:Reference Name=FavoritosPage}}" CommandParameter="{Binding}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+
+                                    <!-- Label: Full Name and Title -->
+                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding NombreCompletoTitulo}"
+                                           Style="{StaticResource LabelStyle-Title}"/>
+
+                                    <!-- Label: Doctor Specialties -->
+                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding TituloEspecialidad}"
+                                           Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+
+                                    <!-- Label: Professional License -->
+                                    <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Spacing="10">
+                                        <Label Text="{Binding CedulaLetra}"
+                                               Style="{StaticResource LabelStyle-HighlightPrimaryDarken}"/>
+                                        <Image Source="verificado.png" HeightRequest="16"
+                                               IsVisible="{Binding CedulaVerificada}"/>
+                                    </StackLayout>
+
+                                    <!-- Label: Rating -->
+                                    <SfRating:SfRating Grid.Column="1" Grid.Row="4" Value="{Binding Rating}"
+                                                       RatingSettings="{StaticResource SfRatingSettings-Default}"
+                                                       Style="{StaticResource SfRatingStyle-ReadOnly}" />
+                                    
+                                    <!--Botón Favorito-->
+                                    <StackLayout Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" VerticalOptions="Start">
+                                        <border:SfBorder BackgroundColor="{DynamicResource White}" WidthRequest="33" BorderWidth="0" CornerRadius="40">
+                                            <border:SfBorder.Content>
+                                                <Image Source="favoritefull.png" HeightRequest="33">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding BindingContext.RemoverFavoritoCommand,
+                                                                              Source={x:Reference Name=FavoritosPage}}"  CommandParameter="{Binding}"/>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </border:SfBorder.Content>
+                                        </border:SfBorder>
+                                    </StackLayout>
+                                    <!--Botón compartir-->
+                                    <StackLayout Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" VerticalOptions="Start" HeightRequest="20">
+                                        <border:SfBorder BackgroundColor="Transparent" BorderWidth="1" Padding="4"
+                                                         BorderColor="{DynamicResource Primary}" CornerRadius="20">
+                                            <border:SfBorder.Content>
+                                                <Image Source="share.png" HeightRequest="20" WidthRequest="20">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding BindingContext.ShareCommand,
+                                                                              Source={x:Reference Name=FavoritosPage}}"  CommandParameter="{Binding}"/>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </border:SfBorder.Content>
+                                        </border:SfBorder>
+                                    </StackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </SfListView:SfListView.ItemTemplate>
+                    </SfListView:SfListView>
+
+                </SfPullToRefresh:SfPullToRefresh.PullableContent>
+            </SfPullToRefresh:SfPullToRefresh>
+
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

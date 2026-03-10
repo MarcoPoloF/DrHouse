@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Resource Dictionary: List Styles-->
+<ResourceDictionary
+    x:Class="DocNoc.Xam.Styles.ListStyles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms">
+
+    <!-- STYLES: SfListView-->
+
+    <!-- SfListView Style: Base -->
+    <Style x:Key="SfListViewStyle-Base" TargetType="SfListView:SfListView">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FocusBorderThickness" Value="0" />
+        <Setter Property="SelectionBackgroundColor" Value="Transparent" />
+        <Setter Property="IsScrollBarVisible" Value="False" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="AutoFitMode" Value="Height" />
+        <Setter Property="IsStickyHeader" Value="True" />
+        <Setter Property="IsStickyFooter" Value="True" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="ItemSpacing" Value="0" />
+    </Style>
+
+    <!-- SfListView Style: Horizontal -->
+    <Style x:Key="SfListViewStyle-Horizontal" TargetType="SfListView:SfListView" BasedOn="{StaticResource SfListViewStyle-Base}">
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+
+    <!-- SfListView Style: Swipe -->
+    <Style x:Key="SfListViewStyle-Swipe" TargetType="SfListView:SfListView" BasedOn="{StaticResource SfListViewStyle-Base}">
+        <Setter Property="AllowSwiping" Value="True" />
+    </Style>
+
+    <!-- SfListView Style: Doctor Info Cards -->
+    <Style x:Key="SfListViewStyle-DoctorInfoCards" TargetType="SfListView:SfListView" BasedOn="{StaticResource SfListViewStyle-Swipe}">
+        <Setter Property="ItemSpacing" Value="0,0,0,10" />
+    </Style>
+
+    <!-- SfListView Style: Doctor Ratings -->
+    <Style x:Key="SfListViewStyle-DoctorRatings" TargetType="SfListView:SfListView" BasedOn="{StaticResource SfListViewStyle-Base}">
+        <Setter Property="ItemSpacing" Value="0,0,0,10" />
+    </Style>
+
+</ResourceDictionary>

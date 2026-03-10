@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Medicamentos (dn-49-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:sfDatePicker="clr-namespace:Syncfusion.XForms.Pickers;assembly=Syncfusion.SfPicker.XForms"
+             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Expedientes.MedicamentosView"
+             x:Name="MedicamentosPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Error de Suscripción -->
+            <SfPopupLayout:SfPopupLayout x:Key="ErrorSuscripcionPopup"  IsOpen="{Binding Path=BindingContext.ErrorSuscripcionVisible, Source={x:Reference MedicamentosPage}}">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="Visitar" DeclineButtonText="En otro momento" AppearanceMode="TwoButton" 
+                                             HeaderTitle="Doc+Noc" IsFullScreen="False"
+                                             AcceptCommand="{Binding Path=BindingContext.IrSuscripcionCommand, Source={x:Reference MedicamentosPage}}">
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <Grid Padding="5">
+                                    <Label Text="{Binding Path=BindingContext.ErrorSuscripcion, Source={x:Reference MedicamentosPage}}" 
+                                           HorizontalTextAlignment="Center" TextColor="{StaticResource Black}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- PopupLayout: Cancelar Cita -->
+            <SfPopupLayout:SfPopupLayout x:Key="AddPopup"  IsOpen="{Binding Path=BindingContext.AgregarVisible, Source={x:Reference MedicamentosPage}}">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="GUARDAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
+                                             ShowCloseButton="True" HeaderHeight="100" IsFullScreen="True"
+                                             AcceptCommand="{Binding Path=BindingContext.AddCommand, Source={x:Reference MedicamentosPage}}">
+                        <SfPopupLayout:PopupView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10">
+                                    <Label LineBreakMode="WordWrap" Text="PROGRAMAR MEDICAMENTO" FontSize="18" HorizontalOptions="Center" TextColor="{StaticResource Black}"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.HeaderTemplate>
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <ScrollView>
+                                    <StackLayout x:Name="stack" Padding="20" Spacing="10" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+
+                                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference MedicamentoEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                                            <Controls:BorderlessEntry x:Name="MedicamentoEntry"  Placeholder="Medicamento" Style="{StaticResource EntryTextStyle}"
+                                            Text="{Binding Path=BindingContext.Medicamento, Source={x:Reference MedicamentosPage}}" MinimumHeightRequest="90">
+                                            </Controls:BorderlessEntry>
+                                        </SfBorder:SfBorder>
+
+                                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference DosisEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                                            <Controls:BorderlessEntry x:Name="DosisEntry"  Placeholder="Dosis" Style="{StaticResource EntryTextStyle}"
+                                            Text="{Binding Path=BindingContext.Dosis, Source={x:Reference MedicamentosPage}}" MinimumHeightRequest="90">
+                                            </Controls:BorderlessEntry>
+                                        </SfBorder:SfBorder>
+
+                                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference HorasEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                                            <Controls:BorderlessEntry x:Name="HorasEntry"  Placeholder="Tomar cada (horas)" Style="{StaticResource EntryTextStyle}" 
+                                            Text="{Binding Path=BindingContext.TomarCada, Source={x:Reference MedicamentosPage}}" MinimumHeightRequest="90" Keyboard="Numeric">
+                                            </Controls:BorderlessEntry>
+                                        </SfBorder:SfBorder>
+
+                                        <SfBorder:SfBorder BorderColor="{Binding Source={x:Reference DiasEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                                            <Controls:BorderlessEntry x:Name="DiasEntry"  Placeholder="Duración (días)" Style="{StaticResource EntryTextStyle}"
+                                            Text="{Binding Path=BindingContext.Duracion, Source={x:Reference MedicamentosPage}}" MinimumHeightRequest="90" Keyboard="Numeric">
+                                            </Controls:BorderlessEntry>
+                                        </SfBorder:SfBorder>
+
+                                        <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
+                                            <Label Text="Hora de primera toma" TextColor="{StaticResource Black}"/>
+                                            <TimePicker x:Name="_timePicker"  Time="{Binding Path=BindingContext.HoraToma, Source={x:Reference MedicamentosPage}}" Format="T" TextColor="{StaticResource Black}"/>
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </ScrollView>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <!-- Converters -->
+            <!-- Convertidor de Color-->
+            <Converters:BooleanToColorConverter x:Key="ColorConverter" />
+            <!-- Inverse Boolean Converter -->
+            <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Medicamentos">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference MedicamentosPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ImageButton HorizontalOptions="End" Source="add.png" Margin="5" Command="{Binding AgregarPopupCommand}" 
+                         BackgroundColor="Transparent"/>
+
+            <!--  ListView for Category  -->
+            <SfListView:SfListView
+                x:Name="CategoryTile" Grid.Row="1" ItemsSource="{Binding Registros}"
+                Style="{StaticResource ExpedienteListViewStyle}">
+
+                <SfListView:SfListView.Behaviors>
+                    <Behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.DetailCommand, Source={x:Reference MedicamentosPage}}" />
+                </SfListView:SfListView.Behaviors>
+
+                <SfListView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="{DynamicResource Gray-White}" Padding="20" ColumnSpacing="10">
+                            <!-- Renglones -->
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!-- Columnas -->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Etiquetas -->
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="0" Grid.Column="0"
+                                   Text="Fecha"  LineBreakMode="NoWrap" TextColor="{StaticResource Black}" FontAttributes="Bold"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="1" Grid.Column="0"
+                                   Text="Medico"  LineBreakMode="NoWrap" TextColor="{StaticResource Black}" FontAttributes="Bold"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="2" Grid.Column="0"
+                                   Text="Medicamento"  LineBreakMode="NoWrap" TextColor="{StaticResource Black}" FontAttributes="Bold"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="3" Grid.Column="0"
+                                   Text="Dosis"  LineBreakMode="NoWrap" TextColor="{StaticResource Black}" FontAttributes="Bold"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="Cuidados y Recomendaciones"  LineBreakMode="NoWrap" TextColor="{StaticResource Black}" FontAttributes="Bold"/>
+                            <!-- Valores -->
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding FechaLetra}" LineBreakMode="WordWrap" TextColor="{StaticResource Black}"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="1" Grid.Column="1"
+                                   Text="{Binding Medico}" LineBreakMode="WordWrap" TextColor="{StaticResource Black}"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="2" Grid.Column="1"
+                                   Text="{Binding Medicamento}" LineBreakMode="WordWrap" TextColor="{StaticResource Black}"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="3" Grid.Column="1"
+                                   Text="{Binding Dosis}" LineBreakMode="WordWrap" TextColor="{StaticResource Black}"/>
+                            <Label FontFamily="{StaticResource Montserrat-SemiBold}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="{Binding CuidadoRecomendacion}" LineBreakMode="WordWrap" TextColor="{StaticResource Black}"/>
+                            <ImageButton HorizontalOptions="End" Source="appointments.png" Margin="5" 
+                                         Command="{Binding Path=BindingContext.AgregarPopupCommand2, Source={x:Reference MedicamentosPage}}" CommandParameter="{Binding}" 
+                                         Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" IsVisible="{Binding Programado, Converter={StaticResource InverseBoolean}}"/>
+                        </Grid>
+                    </DataTemplate>
+                </SfListView:SfListView.ItemTemplate>
+
+            </SfListView:SfListView>
+
+        </Grid>
+
+    </ContentPage.Content>
+
+</ContentPage>

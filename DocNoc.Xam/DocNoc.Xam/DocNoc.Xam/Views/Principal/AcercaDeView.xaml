@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Mi Perfil (dn-59-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+    xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+    xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
+    xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+    xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+    mc:Ignorable="d"
+    x:Class="DocNoc.Xam.Views.Principal.AcercaDeView"
+    x:Name="AcercaDePage"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: WebView -->
+            <SfPopupLayout:SfPopupLayout x:Key="CommentDetailPopup" IsOpen="{Binding Path=BindingContext.WebViewVisible, Source={x:Reference AcercaDePage}}">
+                <SfPopupLayout:SfPopupLayout.PopupView >
+                    <SfPopupLayout:PopupView AcceptButtonText="Cerrar" AppearanceMode="OneButton" ShowCloseButton="True" IsFullScreen="True"
+                        HeaderTitle="{Binding Path=BindingContext.WebViewTitulo, Source={x:Reference AcercaDePage}}">
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <Grid VerticalOptions="FillAndExpand">
+                                    <WebView Source="{Binding Path=BindingContext.WebViewRuta, Source={x:Reference AcercaDePage}}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+            <Converters:BooleanToColorConverter x:Key="ColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Acerca De">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Icon-Back}"
+                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference AcercaDePage}}" 
+                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource SfButtonStyle-Icon}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="0">
+
+                <!-- Grid: Nombre -->
+                <Grid Style="{StaticResource GridStyle-AboutRow}">
+                    <!-- Row Title -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-Highlight}" Text="Nombre" />
+                    <!-- Row Content -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-Highlight}" Text="Doc+Noc" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Versión -->
+                <Grid Style="{StaticResource GridStyle-AboutRow}">
+                    <!-- Row Title -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-Highlight}" Text="Versión" />
+                    <!-- Row Content -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-Highlight}" Text="18-dev" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Email de Contacto -->
+                <Grid Style="{StaticResource GridStyle-AboutRow}">
+                    <!-- Row Title -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-Highlight}" Text="Contacto" />
+                    <!-- Row Content -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-Highlight}" Text="hola@docnoc.mx" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Teléfono de Contacto -->
+                <Grid Style="{StaticResource GridStyle-AboutRow}">
+                    <!-- Row Title -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-Highlight}" Text="Teléfono" />
+                    <!-- Row Content -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-Highlight}" Text="44 2583 5306" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Ayuda -->
+                <Grid Style="{StaticResource GridStyle-AboutRow}">
+                    <!-- Row Title -->
+                    <Label Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource LabelStyle-Highlight}" 
+                           Text="Si requieres asistencia o tienes dudas, ve a la opción Ayuda que aparece en la sección Mi Perfil." />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Términos y Condiciones de Uso -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+                    <!-- On-tap Command -->
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TerminosCondicionesCommand}" />
+                    </Grid.GestureRecognizers>
+                    <!-- Row Icon -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimary}" Text="{StaticResource Icon-TermsService}" />
+                    <!-- Row Title -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-Highlight}" Text="Términos y Condiciones de Uso" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Aviso de Privacidad -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+                    <!-- On-tap Command -->
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AvisoPrivacidadCommand}" />
+                    </Grid.GestureRecognizers>
+                    <!-- Row Icon -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimary}" Text="{StaticResource Icon-PrivacyPolicy}" />
+                    <!-- Row Title -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-Highlight}" Text="Aviso de Privacidad" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Preguntas Frecuentes -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+                    <!-- On-tap Command -->
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PreguntasFrecuentesCommand}" />
+                    </Grid.GestureRecognizers>
+                    <!-- Row Icon -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimary}" Text="{StaticResource Icon-FAQ}" />
+                    <!-- Row Title -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-Highlight}" Text="Preguntas Frecuentes" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>

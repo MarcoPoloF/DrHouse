@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Mi Perfil (dn-59-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
+             xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
+             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Principal.MiPerfilView"
+             x:Name="MiPerfilPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converters:BooleanToColorConverter x:Key="ColorConverter" />
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Mi Perfil"/>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="0">
+
+                <!-- Grid: Datos Personales -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+                    <!-- On-tap Command -->
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DatosPersonalesCommand}" />
+                    </Grid.GestureRecognizers>
+                    <!-- Row Icon -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimaryLarge}" Text="{StaticResource Icon-Profile}" />
+                    <!-- Row Title -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-HighlightLarge}" Text="Datos Personales" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Cambiar Contraseña -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+                    <!-- On-tap Command -->
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CambiarPasswordCommand}" />
+                    </Grid.GestureRecognizers>
+                    <!-- Row Icon -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimaryLarge}" Text="{StaticResource Icon-ChangePassword}" />
+                    <!-- Row Title -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-HighlightLarge}" Text="Cambiar Contraseña" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Mis Expedientes -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+                    <!-- On-tap Command -->
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MisExpedientesCommand}" />
+                    </Grid.GestureRecognizers>
+                    <!-- Row Icon -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimaryLarge}" Text="{StaticResource Icon-Patients}" />
+                    <!-- Row Title -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-HighlightLarge}" Text="Mis Expedientes" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Datos de Facturación -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+                    <!-- On-platform visibility -->
+                    <Grid.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
+                    </Grid.IsVisible>
+                    <!-- On-tap Command -->
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DatosFacturacionCommand}" />
+                    </Grid.GestureRecognizers>
+                    <!-- Row Icon -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimaryLarge}" Text="{StaticResource Icon-BillingInfo}" />
+                    <!-- Row Title -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-HighlightLarge}" Text="Datos de Facturación" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}">
+                    <!-- On-platform visibility -->
+                    <BoxView.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
+                    </BoxView.IsVisible>
+                </BoxView>
+
+                <!-- Grid: Formas de Pago -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+                    <!-- On-platform visibility -->
+                    <Grid.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
+                    </Grid.IsVisible>
+                    <!-- On-tap Command -->
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding FormasPagoCommand}" />
+                    </Grid.GestureRecognizers>
+                    <!-- Row Icon -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimaryLarge}" Text="{StaticResource Icon-BillingInfo}" />
+                    <!-- Row Title -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-HighlightLarge}" Text="Formas de Pago" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}">
+                    <!-- On-platform visibility -->
+                    <BoxView.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
+                    </BoxView.IsVisible>
+                </BoxView>
+
+                <!-- Grid: Suscripción -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+                    <!-- On-platform visibility -->
+                    <Grid.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
+                    </Grid.IsVisible>
+                    <!-- On-tap Command -->
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SuscripcionCommand}" />
+                    </Grid.GestureRecognizers>
+                    <!-- Row Icon -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimaryLarge}" Text="{StaticResource Icon-BillingInfo}" />
+                    <!-- Row Title -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-HighlightLarge}" Text="Mi Suscripción" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}">
+                    <!-- On-platform visibility -->
+                    <BoxView.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
+                    </BoxView.IsVisible>
+                </BoxView>
+
+                <!-- Grid: Ajustes de Notificaciones -->
+                <!--<Grid Style="{StaticResource GridStyle-ProfileRow}">-->
+                    <!-- On-tap Command -->
+                    <!--<Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AjustesNotificacionesCommand}" />
+                    </Grid.GestureRecognizers>-->
+                    <!-- Row Icon -->
+                    <!--<Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimaryLarge}" Text="{StaticResource Icon-Bell}" />-->
+                    <!-- Row Title -->
+                    <!--<Label Grid.Column="1" Style="{StaticResource LabelStyle-HighlightLarge}" Text="Ajustes de Notificaciones" />
+                </Grid>-->
+
+                <!-- Grid: Ayuda -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AbrirChatAyudaCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimaryLarge}" Text="{StaticResource Icon-Ayuda}" />
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-HighlightLarge}" Text="Ayuda" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Acerca De -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AcercaDeCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconPrimaryLarge}" Text="{StaticResource Icon-TermsService}" />
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-HighlightLarge}" Text="Acerca De" />
+
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Cerrar Sesión -->
+                <Grid Style="{StaticResource GridStyle-ProfileRow}">
+                    <!-- On-tap Command -->
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CerrarSesionCommand}" />
+                    </Grid.GestureRecognizers>
+                    <!-- Row Icon -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-IconRedLarge}" Text="{StaticResource Icon-Logout}"/>
+                    <!-- Row Title -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-HighlightLarge}" Text="Cerrar Sesión" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>

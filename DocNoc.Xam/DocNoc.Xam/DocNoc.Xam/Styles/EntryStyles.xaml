@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Resource Dictionary: Entry Styles-->
+<ResourceDictionary
+    x:Class="DocNoc.Xam.Styles.EntryStyles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Controls="clr-namespace:DocNoc.Xam.Controls">
+
+    <!-- STYLES: Borderless Entry -->
+
+    <!-- BorderlessEntry Style: Base -->
+    <Style x:Key="BorderlessEntryStyle-Base" TargetType="Controls:BorderlessEntry">
+        <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+        <Setter Property="FontFamily" Value="{StaticResource Font-Highlight}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+        <Setter Property="TextColor" Value="{DynamicResource Black}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource Gray-600}" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="ReturnType" Value="Done" />
+    </Style>
+
+    <!-- BorderlessEntry Style: Round Border, White Color -->
+    <Style x:Key="BorderlessEntryStyle-RoundWhite" TargetType="Controls:BorderlessEntry"
+           BasedOn="{StaticResource BorderlessEntryStyle-Base}">
+        <Setter Property="Margin" Value="20,0" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource White}" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+    </Style>
+    
+
+</ResourceDictionary>

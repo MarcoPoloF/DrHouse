@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Resource Dictionary: Image Styles-->
+<ResourceDictionary
+    x:Class="DocNoc.Xam.Styles.ImageStyles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Image Style: Row Icon -->
+    <Style x:Key="ImageStyle-ProfileRow" TargetType="Image">
+        <Setter Property="HeightRequest" Value="24" />
+        <Setter Property="WidthRequest" Value="24" />
+    </Style>
+
+</ResourceDictionary>

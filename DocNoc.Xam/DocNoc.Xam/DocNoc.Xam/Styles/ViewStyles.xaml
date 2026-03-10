@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Resource Dictionary: View Styles-->
+<ResourceDictionary
+    x:Class="DocNoc.Xam.Styles.ViewStyles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:SfBusyIndicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms">
+
+    <!-- STYLES: BOXVIEW-->
+
+    <!-- BoxView Style: Separator -->
+    <Style x:Key="BoxViewStyle-Separator" TargetType="BoxView">
+        <Setter Property="HeightRequest" Value="1" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource Gray-200}" />
+    </Style>
+
+    <!-- BoxView Style: Appointment Date Separator -->
+    <Style x:Key="BoxViewStyle-AppointmentDateSeparator" TargetType="BoxView">
+        <Setter Property="HeightRequest" Value="1" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource Secondary}" />
+        <Setter Property="Margin" Value="10,5" />
+    </Style>
+
+    <!-- STYLES: BUSY INDICATOR -->
+
+    <!-- SfBusyIndicator Style: Sliced Circle -->
+    <Style x:Key="SfBusyIndicatorStyle-Sliced" TargetType="SfBusyIndicator:SfBusyIndicator">
+        <Setter Property="AnimationType" Value="SlicedCircle" />
+        <Setter Property="ViewBoxHeight" Value="50" />
+        <Setter Property="ViewBoxWidth" Value="50" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+    </Style>
+
+    <!-- SfBusyIndicator Style: Sliced Circle, Primary Color -->
+    <Style x:Key="SfBusyIndicatorStyle-SlicedPrimary" TargetType="SfBusyIndicator:SfBusyIndicator"
+           BasedOn="{StaticResource SfBusyIndicatorStyle-Sliced}">
+        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+    </Style>
+
+    <!-- SfBusyIndicator Style: Sliced Circle, White -->
+    <Style x:Key="SfBusyIndicatorStyle-SlicedWhite" TargetType="SfBusyIndicator:SfBusyIndicator"
+           BasedOn="{StaticResource SfBusyIndicatorStyle-Sliced}">
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+    </Style>
+
+    <!-- STYLES: Frames-->
+
+    <!-- Frame Style: List Box -->
+    <Style x:Key="FrameStyle-ListBox" TargetType="Frame">
+        <Setter Property="HasShadow" Value="False"/>
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="10" />
+    </Style>
+
+    <!-- Frame Style: List Image Box -->
+    <Style x:Key="FrameStyle-ListImageBox" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="IsClippedToBounds" Value="True" />
+    </Style>
+
+</ResourceDictionary>

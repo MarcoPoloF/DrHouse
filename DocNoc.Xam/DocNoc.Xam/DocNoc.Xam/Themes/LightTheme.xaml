@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="DocNoc.Xam.Themes.LightTheme"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Controls="clr-namespace:DocNoc.Xam.Controls">
+
+    <!-- COLORS -->
+
+    <!-- Colors: Theme -->
+    <Color x:Key="Primary">#009AFF</Color>
+    <Color x:Key="PrimaryColor">#009AFF</Color>
+    <Color x:Key="PrimaryDarkColor">#02649B</Color>
+    <Color x:Key="PrimaryDarkenColor">#004777</Color>
+    <Color x:Key="PrimaryLighterColor">#80CDFF</Color>
+    <Color x:Key="PrimaryLight">#B1E1FC</Color>
+    <Color x:Key="Secondary">#BF2740</Color>
+
+    <!-- Colors: Gradient -->
+    <Color x:Key="PrimaryGradient">#4EF5C0</Color>
+    <Color x:Key="SecondaryGradient">#009AFF</Color>
+
+    <!-- Colors: Palette -->
+    <Color x:Key="Green">#4EF5C0</Color>
+    <Color x:Key="Red">#F56960</Color>
+    <Color x:Key="Orange">#F5A179</Color>
+    <Color x:Key="Blue">#9EBDF7</Color>
+    <Color x:Key="Black">#4A4A4A</Color>
+    <Color x:Key="White">#ffffff</Color>
+    <Color x:Key="Gold">#fcbc0f</Color>
+    <Color x:Key="Transparent">Transparent</Color>
+
+    <!-- Colors: Grayscale -->
+    <Color x:Key="Gray-100">#f6f7f8</Color>
+    <Color x:Key="Gray-200">#ebecef</Color>
+    <Color x:Key="Gray-300">#ced2d9</Color>
+    <Color x:Key="Gray-400">#b2b8c2</Color>
+    <Color x:Key="Gray-500">#959eac</Color>
+    <Color x:Key="Gray-600">#788396</Color>
+    <Color x:Key="Gray-700">#606a7b</Color>
+    <Color x:Key="Gray-800">#4a515e</Color>
+    <Color x:Key="Gray-900">#333942</Color>
+    <Color x:Key="Gray-Black">#4A4A4A</Color>
+    <Color x:Key="Gray-White">#ffffff</Color>
+
+    <!-- Colors: Components -->
+    <Color x:Key="HyperLink">#000099</Color>
+    <Color x:Key="PageBackground">#E6F0FA</Color>
+
+    <!-- FONT SIZES -->
+    <x:Double x:Key="FontSize-Tiny">10</x:Double>
+    <x:Double x:Key="FontSize-Small">12</x:Double>
+    <x:Double x:Key="FontSize-Medium">14</x:Double>
+    <x:Double x:Key="FontSize-Large">16</x:Double>
+    <x:Double x:Key="FontSize-Huge">18</x:Double>
+
+    <!-- FONT STYLES -->
+    
+    <!-- Font: General Text -->
+    <OnPlatform x:Key="Font-Text" x:TypeArguments="x:String">
+        <OnPlatform.Platforms>
+            <On Platform="Android" Value="Poppins-Light.ttf#Poppins-Light" />
+            <On Platform="iOS" Value="Poppins-Light" />
+            <On Platform="UWP" Value="Assets/Poppins-Light.ttf#Poppins-Light" />
+        </OnPlatform.Platforms>
+    </OnPlatform>
+
+    <!-- Font: Highlighted Text -->
+    <OnPlatform x:Key="Font-Highlight" x:TypeArguments="x:String">
+        <OnPlatform.Platforms>
+            <On Platform="Android" Value="Poppins-Regular.ttf#Poppins-Regular" />
+            <On Platform="iOS" Value="Poppins-Regular" />
+            <On Platform="UWP" Value="Assets/Poppins-Regular.ttf#Poppins-Regular" />
+        </OnPlatform.Platforms>
+    </OnPlatform>
+
+    <!-- Font: Title Text -->
+    <OnPlatform x:Key="Font-Title" x:TypeArguments="x:String">
+        <OnPlatform.Platforms>
+            <On Platform="Android" Value="Poppins-SemiBold.ttf#Poppins-SemiBold" />
+            <On Platform="iOS" Value="Poppins-SemiBold" />
+            <On Platform="UWP" Value="Assets/Poppins-SemiBold.ttf#Poppins-SemiBold" />
+        </OnPlatform.Platforms>
+    </OnPlatform>
+
+    <!-- Font: Icons -->
+    <OnPlatform x:Key="Font-Icons" x:TypeArguments="x:String">
+        <OnPlatform.Platforms>
+            <On Platform="Android" Value="UIFontIcons.ttf#UIFontIcons" />
+            <On Platform="iOS" Value="UIFontIcons" />
+            <On Platform="UWP" Value="Assets/UIFontIcons.ttf#UIFontIcons" />
+        </OnPlatform.Platforms>
+    </OnPlatform>
+
+    <OnPlatform x:Key="Montserrat-SemiBold" x:TypeArguments="x:String">
+        <OnPlatform.Platforms>
+            <On Platform="Android" Value="Montserrat-SemiBold.ttf#Montserrat-SemiBold" />
+            <On Platform="iOS" Value="Montserrat-SemiBold" />
+            <On Platform="UWP" Value="Assets/Montserrat-SemiBold.ttf#Montserrat-SemiBold" />
+        </OnPlatform.Platforms>
+    </OnPlatform>
+
+    <OnPlatform x:Key="Montserrat-Regular" x:TypeArguments="x:String">
+        <OnPlatform.Platforms>
+            <On Platform="Android" Value="Montserrat-Regular.ttf#Montserrat-Regular" />
+            <On Platform="iOS" Value="Montserrat-Regular" />
+            <On Platform="UWP" Value="Assets/Montserrat-Regular.ttf#Montserrat-Regular" />
+        </OnPlatform.Platforms>
+    </OnPlatform>
+
+    <OnPlatform x:Key="Montserrat-Medium" x:TypeArguments="x:String">
+        <OnPlatform.Platforms>
+            <On Platform="Android" Value="Montserrat-Medium.ttf#Montserrat-Medium" />
+            <On Platform="iOS" Value="Montserrat-Medium" />
+            <On Platform="UWP" Value="Assets/Montserrat-Medium.ttf#Montserrat-Medium" />
+        </OnPlatform.Platforms>
+    </OnPlatform>
+
+    <OnPlatform x:Key="Montserrat-Bold" x:TypeArguments="x:String">
+        <OnPlatform.Platforms>
+            <On Platform="Android" Value="Montserrat-Bold.ttf#Montserrat-Bold" />
+            <On Platform="iOS" Value="Montserrat-Bold" />
+            <On Platform="UWP" Value="Assets/Montserrat-Bold.ttf#Montserrat-Bold" />
+        </OnPlatform.Platforms>
+    </OnPlatform>
+    
+    <OnPlatform x:Key="FontIcons" x:TypeArguments="x:String">
+        <OnPlatform.Platforms>
+            <On Platform="Android" Value="UIFontIcons.ttf#UIFontIcons" />
+            <On Platform="iOS" Value="UIFontIcons" />
+            <On Platform="UWP" Value="Assets/UIFontIcons.ttf#UIFontIcons" />
+        </OnPlatform.Platforms>
+    </OnPlatform>
+    
+    <!-- STYLES: PAGES -->
+    
+    <!-- Content Page: Default Style -->
+    <Style TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackground}" />
+    </Style>
+
+    <!-- STYLES: CONTROLS -->
+
+    <!-- Title View: Default Style -->
+    <Style TargetType="Controls:TitleView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource White}" />
+    </Style>
+
+</ResourceDictionary>

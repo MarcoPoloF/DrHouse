@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Resource Dictionary: Syncfusion Styles-->
+<ResourceDictionary
+    x:Class="DocNoc.Xam.Styles.SyncfusionStyles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:SfRating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms">
+
+    <SfRating:SfRatingSettings
+        x:Key="SfRatingSettings-Default"
+        RatedFill="{StaticResource Gold}"
+        RatedStroke="{StaticResource Gold}"
+        UnRatedStroke="{StaticResource Gray-600}"
+        UnRatedStrokeWidth="1" />
+
+    <!--  SfRating Style: Read-only  -->
+    <Style x:Key="SfRatingStyle-ReadOnly" TargetType="SfRating:SfRating">
+        <Setter Property="ItemCount" Value="5" />
+        <Setter Property="ReadOnly" Value="True" />
+        <Setter Property="ItemSize" Value="24" />
+        <Setter Property="ItemSpacing" Value="4" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+    </Style>
+
+</ResourceDictionary>

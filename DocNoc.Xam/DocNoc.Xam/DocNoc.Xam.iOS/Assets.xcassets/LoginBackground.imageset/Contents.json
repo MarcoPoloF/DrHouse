@@ -1,0 +1,27 @@
+{
+  "images": [
+    {
+      "appearances": [],
+      "scale": "2x",
+      "idiom": "iphone",
+      "filename": "iphone_login_background@2x1.png"
+    },
+    {
+      "appearances": [],
+      "scale": "3x",
+      "idiom": "iphone",
+      "filename": "iphone_login_background@3x1.png"
+    },
+    {
+      "appearances": [],
+      "scale": "2x",
+      "idiom": "ipad",
+      "filename": "ipad_login_background@2x1.png"
+    }
+  ],
+  "properties": {},
+  "info": {
+    "version": 1,
+    "author": ""
+  }
+}

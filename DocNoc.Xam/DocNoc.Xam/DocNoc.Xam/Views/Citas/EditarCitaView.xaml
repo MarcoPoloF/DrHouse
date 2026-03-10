@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Definición de View (XAML): Editar Cita (dn-27-3).-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ComboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
+             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:SfPicker="clr-namespace:Syncfusion.SfPicker.XForms;assembly=Syncfusion.SfPicker.XForms"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:SfRating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:SfTextInputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
+             mc:Ignorable="d"
+             x:Class="DocNoc.Xam.Views.Citas.EditarCitaView"
+             x:Name="EditarCitaPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <!-- ContentPage: Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Merged Dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+                <!-- Resource Dictionary: Main Stylesheet -->
+                <Styles:MainStylesheet/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- PopupLayout: Cancelar Cita -->
+            <SfPopupLayout:SfPopupLayout x:Key="EditarCitaPopup">
+                <SfPopupLayout:SfPopupLayout.PopupView>
+                    <SfPopupLayout:PopupView AcceptButtonText="Sí, modificar cita" DeclineButtonText="No" AppearanceMode="TwoButton"
+                                             ShowCloseButton="False" HeaderHeight="70" AcceptCommand="{Binding ConfirmCommand}">
+                        <SfPopupLayout:PopupView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10">
+                                    <Label LineBreakMode="WordWrap" Text="Modificar Cita" FontSize="19"
+                                           HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.HeaderTemplate>
+                        <SfPopupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout x:Name="stack" Orientation="Horizontal" Padding="20,10,5,5">
+                                    <Label BackgroundColor="White" TextColor="Gray" FontSize="16"
+                                           Text="¿Desea modificar la fecha programada para su cita?"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </SfPopupLayout:PopupView.ContentTemplate>
+                    </SfPopupLayout:PopupView>
+                </SfPopupLayout:SfPopupLayout.PopupView>
+            </SfPopupLayout:SfPopupLayout>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ContentPage: TitleView -->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="TitleLayout" Spacing="0">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="0, 36, 0, 0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Controls:TitleView Title="Modificar Cita">
+                    <Controls:TitleView.LeadingView>
+                        <!-- Button: Back -->
+                        <SfButtons:SfButton x:Name="BackButton" CornerRadius="4" Text="{StaticResource Back}"
+                                            Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference EditarCitaPage}}" 
+                                            CommandParameter="{x:Reference BackButton}" Style="{StaticResource IconButtonStyle}"/>
+                    </Controls:TitleView.LeadingView>
+                </Controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <!-- ContentPage: Content -->
+    <ContentPage.Content>
+
+        <ScrollView>
+            <StackLayout Spacing="0">
+
+                <!-- Grid: Fecha y Hora -->
+                <Grid Style="{StaticResource GridStyle-AboutRow}">
+                    <!-- Row Title -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-Highlight}" Text="Fecha y Hora" />
+                    <!-- Row Content -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-Highlight}" Text="{Binding Cita.FechaLetra}" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Paciente -->
+                <Grid Style="{StaticResource GridStyle-AboutRow}">
+                    <!-- Row Title -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-Highlight}" Text="Paciente" />
+                    <!-- Row Content -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-Highlight}" Text="{Binding Cita.PacienteLetra}" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Médico -->
+                <Grid Style="{StaticResource GridStyle-AboutRow}">
+                    <!-- Row Title -->
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle-Highlight}" Text="Médico" />
+                    <!-- Row Content -->
+                    <Label Grid.Column="1" Style="{StaticResource LabelStyle-Highlight}" Text="{Binding Cita.Doctor}" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Editar Cita -->
+                <Grid Style="{StaticResource GridStyle-AboutRow}">
+                    <!-- StackLayout: Especialidad -->
+                    <StackLayout Grid.Column="0" Grid.ColumnSpan="2"  HorizontalOptions="FillAndExpand" Spacing="0" BackgroundColor="Transparent">
+                        <Label Text="Nueva Cita" Style="{StaticResource LabelStyle-Highlight}"/>
+                        <!-- SfTextInputLayout: Especialidad -->
+                        <SfTextInputLayout:SfTextInputLayout Grid.Row="0" ContainerType="Outlined" ReserveSpaceForAssistiveLabels="False"
+                                                 ContainerBackgroundColor="{StaticResource White}">
+                            <ComboBox:SfComboBox DataSource="{Binding Path=BindingContext.CitasDisponibles, Source={x:Reference EditarCitaPage}}" 
+                                                 SelectedItem="{Binding Path=BindingContext.NuevaCita, Source={x:Reference EditarCitaPage}}"
+                                                 DisplayMemberPath="FechaPicker" TextSize="{StaticResource FontSize-Medium}"
+                                                 ShowClearButton="True"/>
+                        </SfTextInputLayout:SfTextInputLayout>
+                    </StackLayout>
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+                <!-- Grid: Solicitar Cambio de Cita -->
+                <Grid Style="{StaticResource GridStyle-AboutRow}">
+                    <!-- SfButton: Solicitar Cambio -->
+                    <SfButtons:SfButton Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding ConfirmCommand}"
+                                        Style="{StaticResource SfButtonStylePrimary}" Text="SOLICITAR CAMBIO AL MÉDICO" />
+                </Grid>
+
+                <BoxView Style="{StaticResource BoxViewStyle-Separator}" />
+
+            </StackLayout>
+        </ScrollView>
+        
+    </ContentPage.Content>
+
+</ContentPage>

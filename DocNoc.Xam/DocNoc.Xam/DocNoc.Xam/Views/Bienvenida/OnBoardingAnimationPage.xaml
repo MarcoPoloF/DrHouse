@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--View (XAML) de página "Bienvenida" (dn-01-3, dn-02-3, dn-03-3).-->
+<ContentPage
+    x:Class="DocNoc.Xam.Views.Bienvenida.OnBoardingAnimationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:rotator="clr-namespace:Syncfusion.SfRotator.XForms;assembly=Syncfusion.SfRotator.XForms"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <OnPlatform.Platforms>
+                        <On Platform="iOS" Value="0, 36, 0, 0" />
+                    </OnPlatform.Platforms>
+                </OnPlatform>
+            </Grid.Padding>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Rotator used to navigate the view  -->
+            <rotator:SfRotator
+                Margin="0"
+                BackgroundColor="{StaticResource PrimaryColor}"
+                DotPlacement="Default"
+                EnableLooping="False"
+                EnableSwiping="True"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                ItemsSource="{Binding Paneles}"
+                NavigationDirection="Horizontal"
+                SelectedIndex="{Binding SelectedIndex}">
+                <rotator:SfRotator.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding Imagen}"/>
+                    </DataTemplate>
+                </rotator:SfRotator.ItemTemplate>
+            </rotator:SfRotator>
+
+            <!--  Skip button  -->
+            <button:SfButton
+                Grid.Row="0"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                BackgroundColor="Red"
+                Command="{Binding SkipCommand}"
+                CornerRadius="20"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                Margin="10"
+                Padding="10"
+                Text="SALIR"
+                TextColor="White"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
