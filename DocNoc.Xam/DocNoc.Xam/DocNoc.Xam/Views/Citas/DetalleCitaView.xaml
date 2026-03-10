@@ -27,8 +27,8 @@
                 <Styles:MainStylesheet/>
             </ResourceDictionary.MergedDictionaries>
             <!-- PopupLayout: Cancelar Cita -->
-            <SfPopupLayout:SfPopupLayout x:Key="CancelarCitaPopup">
-                <SfPopupLayout:SfPopupLayout.PopupView>
+            <SfPopupLayout:SfPopup x:Key="CancelarCitaPopup">
+                <SfPopupLayout:SfPopup.PopupView>
                     <SfPopupLayout:PopupView AcceptButtonText="Sí, confirmo" DeclineButtonText="No, regresar." AppearanceMode="TwoButton"
                                              ShowCloseButton="False" HeaderHeight="70" AcceptCommand="{Binding Path=BindingContext.CancelCommand, Source={x:Reference DetalleCitaPage}}">
                         <SfPopupLayout:PopupView.HeaderTemplate>
@@ -48,8 +48,8 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
         </ResourceDictionary>
     </ContentPage.Resources>
 

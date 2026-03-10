@@ -31,8 +31,8 @@
                 <Styles:MainStylesheet/>
             </ResourceDictionary.MergedDictionaries>
             <!-- PopupLayout: Cancelar Cita -->
-            <SfPopupLayout:SfPopupLayout x:Key="SortPopup" IsOpen="False">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="SortPopup" IsOpen="False">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="APLICAR" AppearanceMode="OneButton" 
                                              ShowCloseButton="True" HeaderTitle="Ordenar Por" IsFullScreen="False"
                                              AcceptCommand="{Binding Path=BindingContext.SortCommand, Source={x:Reference FavoritosPage}}">
@@ -48,8 +48,8 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
             <!-- Converters -->
             <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
         </ResourceDictionary>

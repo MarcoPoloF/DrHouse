@@ -27,10 +27,10 @@
 
     <Shell.FlyoutHeader>
         <Grid HeightRequest="150">
-            <Image Source="docnoc_logo.png"
-                   Aspect="AspectFill"
+            <Image Aspect="AspectFill"
                    HeightRequest="100"
-                   HorizontalOptions="FillAndExpand" />
+                   HorizontalOptions="FillAndExpand"
+                   BackgroundColor="#009AFF" />
             <Label Text="Doc+Noc"
                    HorizontalOptions="End"
                    Margin="20"

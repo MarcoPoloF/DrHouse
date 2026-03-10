@@ -131,8 +131,8 @@ namespace DocNoc.Xam.Platforms.Android
                 }
                 catch
                 {
-                    int[] colore = new int[1] { -1 };
-                    return Bitmap.CreateBitmap(colore, 1, 1, Bitmap.Config.Argb8888!);
+                    int[] color = new int[1] { -1 };
+                    return Bitmap.CreateBitmap(color, 1, 1, Bitmap.Config.Argb8888!);
                 }
                 return null;
             }

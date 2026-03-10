@@ -11,7 +11,7 @@
              xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
              xmlns:SfBorder="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:SfButtons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-             xmlns:SfChat="clr-namespace:Syncfusion.XForms.Chat;assembly=Syncfusion.SfChat.XForms"
+             xmlns:SfChat="clr-namespace:Syncfusion.Maui.Chat;assembly=Syncfusion.Maui.Chat"
              xmlns:SfListView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:Styles="clr-namespace:DocNoc.Xam.Styles;assembly=DocNoc.Xam"
              mc:Ignorable="d"

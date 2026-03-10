@@ -26,8 +26,8 @@
                 <Styles:MainStylesheet/>
             </ResourceDictionary.MergedDictionaries>
             <!-- PopupLayout: WebView -->
-            <SfPopupLayout:SfPopupLayout x:Key="CommentDetailPopup" IsOpen="{Binding Path=BindingContext.WebViewVisible, Source={x:Reference AcercaDePage}}">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="CommentDetailPopup" IsOpen="{Binding Path=BindingContext.WebViewVisible, Source={x:Reference AcercaDePage}}">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="Cerrar" AppearanceMode="OneButton" ShowCloseButton="True" IsFullScreen="True"
                         HeaderTitle="{Binding Path=BindingContext.WebViewTitulo, Source={x:Reference AcercaDePage}}">
                         <SfPopupLayout:PopupView.ContentTemplate>
@@ -38,8 +38,8 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
             <Converters:BooleanToColorConverter x:Key="ColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>

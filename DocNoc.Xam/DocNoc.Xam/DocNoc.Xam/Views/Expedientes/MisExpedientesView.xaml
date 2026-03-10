@@ -30,8 +30,8 @@
                 <Styles:MainStylesheet/>
             </ResourceDictionary.MergedDictionaries>
             <!-- PopupLayout: Error de Suscripción -->
-            <SfPopupLayout:SfPopupLayout x:Key="ErrorSuscripcionPopup"  IsOpen="{Binding Path=BindingContext.ErrorSuscripcionVisible, Source={x:Reference MisExpedientesPage}}">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="ErrorSuscripcionPopup"  IsOpen="{Binding Path=BindingContext.ErrorSuscripcionVisible, Source={x:Reference MisExpedientesPage}}">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="Visitar" DeclineButtonText="En otro momento" AppearanceMode="TwoButton" 
                                              HeaderTitle="Doc+Noc" IsFullScreen="False"
                                              AcceptCommand="{Binding Path=BindingContext.IrSuscripcionCommand, Source={x:Reference MisExpedientesPage}}">
@@ -44,11 +44,11 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
             <!-- PopupLayout: Cancelar Cita -->
-            <SfPopupLayout:SfPopupLayout x:Key="AddPopup" IsOpen="{Binding Path=BindingContext.AgregarVisible, Source={x:Reference MisExpedientesPage}}">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="AddPopup" IsOpen="{Binding Path=BindingContext.AgregarVisible, Source={x:Reference MisExpedientesPage}}">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="GUARDAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" HeaderHeight="100" ShowCloseButton="False"
                                              AcceptCommand="{Binding Path=BindingContext.AddCommand, Source={x:Reference MisExpedientesPage}}">
                         <SfPopupLayout:PopupView.HeaderTemplate>
@@ -72,8 +72,8 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
             <!-- Convertidor de Color-->
             <Converters:BooleanToColorConverter x:Key="ColorConverter" />
         </ResourceDictionary>

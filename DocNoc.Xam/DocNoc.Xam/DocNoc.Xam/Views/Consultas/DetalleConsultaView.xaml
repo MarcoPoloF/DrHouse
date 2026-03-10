@@ -23,8 +23,8 @@
                 <ResourceDictionary Source="Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!-- PopupLayout: Cancelar Cita -->
-            <SfPopupLayout:SfPopupLayout x:Key="RatePopup" IsOpen="False">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="RatePopup" IsOpen="False">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="CALIFICAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
                                              ShowCloseButton="True" IsFullScreen="True"
                                              AcceptCommand="{Binding Path=BindingContext.CalificarCommand, Source={x:Reference DetalleConsultaPage}}"
@@ -127,8 +127,8 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
         </ResourceDictionary>
     </ContentPage.Resources>
 

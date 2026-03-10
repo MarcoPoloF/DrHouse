@@ -12,7 +12,7 @@
              xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
              xmlns:SfBorder="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:SfButtons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-             xmlns:sfDatePicker="clr-namespace:Syncfusion.XForms.Pickers;assembly=Syncfusion.SfPicker.XForms"
+             xmlns:sfDatePicker="clr-namespace:Syncfusion.Maui.Picker;assembly=Syncfusion.Maui.Picker"
              xmlns:SfListView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:SfPopupLayout="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              xmlns:SfTextInputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
@@ -33,8 +33,8 @@
                 <Styles:MainStylesheet/>
             </ResourceDictionary.MergedDictionaries>
             <!-- PopupLayout: Error de Suscripción -->
-            <SfPopupLayout:SfPopupLayout x:Key="ErrorSuscripcionPopup"  IsOpen="{Binding Path=BindingContext.ErrorSuscripcionVisible, Source={x:Reference HistoriaClinicaPage}}">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="ErrorSuscripcionPopup"  IsOpen="{Binding Path=BindingContext.ErrorSuscripcionVisible, Source={x:Reference HistoriaClinicaPage}}">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="Visitar" DeclineButtonText="En otro momento" AppearanceMode="TwoButton" 
                                              HeaderTitle="Doc+Noc" IsFullScreen="False"
                                              AcceptCommand="{Binding Path=BindingContext.IrSuscripcionCommand, Source={x:Reference HistoriaClinicaPage}}">
@@ -47,11 +47,11 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
             <!-- PopupLayout: Cancelar Cita -->
-            <SfPopupLayout:SfPopupLayout x:Key="AddPopup"  IsOpen="{Binding Path=BindingContext.AgregarVisible, Source={x:Reference HistoriaClinicaPage}}">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="AddPopup"  IsOpen="{Binding Path=BindingContext.AgregarVisible, Source={x:Reference HistoriaClinicaPage}}">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="GUARDAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
                                              ShowCloseButton="True" IsFullScreen="True"
                                              AcceptCommand="{Binding Path=BindingContext.AddCommand, Source={x:Reference HistoriaClinicaPage}}">
@@ -125,8 +125,8 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
             <Converters:BooleanToColorConverter x:Key="ColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>

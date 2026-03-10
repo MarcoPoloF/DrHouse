@@ -31,8 +31,8 @@
                 <Styles:MainStylesheet/>
             </ResourceDictionary.MergedDictionaries>
             <!-- PopupLayout: Búsqueda Avanzada -->
-            <SfPopupLayout:SfPopupLayout x:Key="BusquedaAvanzadaPopup" IsOpen="False">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="BusquedaAvanzadaPopup" IsOpen="False">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="BUSCAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
                                              ShowCloseButton="True" IsFullScreen="True"
                                              AcceptCommand="{Binding Path=BindingContext.BusquedaAvanzadaCommand, Source={x:Reference BuscarMedicoPage}}"
@@ -138,8 +138,8 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
         </ResourceDictionary>
     </ContentPage.Resources>
 

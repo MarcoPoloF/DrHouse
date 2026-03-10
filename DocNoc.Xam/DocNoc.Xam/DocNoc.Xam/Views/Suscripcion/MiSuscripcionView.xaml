@@ -34,8 +34,8 @@
                 <Styles:MainStylesheet/>
             </ResourceDictionary.MergedDictionaries>
             <!-- PopupLayout: Comprar Suscripción -->
-            <SfPopupLayout:SfPopupLayout x:Key="AddPopup" IsOpen="{Binding Path=BindingContext.ComprarAbierto, Source={x:Reference MiSuscripcionPage}}">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="AddPopup" IsOpen="{Binding Path=BindingContext.ComprarAbierto, Source={x:Reference MiSuscripcionPage}}">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="COMPRAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
                                              ShowCloseButton="True" HeaderHeight="100" IsFullScreen="True"
                                              AcceptCommand="{Binding Path=BindingContext.BuyCommand, Source={x:Reference MiSuscripcionPage}}">
@@ -87,8 +87,8 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
             <!-- Inverse Boolean Converter -->
             <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
         </ResourceDictionary>

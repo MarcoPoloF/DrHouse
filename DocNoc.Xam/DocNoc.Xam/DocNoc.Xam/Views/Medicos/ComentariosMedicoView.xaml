@@ -26,8 +26,8 @@
                 <Styles:MainStylesheet/>
             </ResourceDictionary.MergedDictionaries>
             <!-- PopupLayout: Ordenar Lista -->
-            <SfPopupLayout:SfPopupLayout x:Key="SortPopup" IsOpen="False">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="SortPopup" IsOpen="False">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="APLICAR" AppearanceMode="OneButton" 
                                              ShowCloseButton="True" HeaderTitle="Ordenar Por" IsFullScreen="False"
                                              AcceptCommand="{Binding Path=BindingContext.SortCommand, Source={x:Reference ComentariosMedicoPage}}">
@@ -42,11 +42,11 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
             <!-- PopupLayout: Ordenar Lista -->
-            <SfPopupLayout:SfPopupLayout x:Key="CommentDetailPopup" IsOpen="{Binding Path=BindingContext.DetalleVisible, Source={x:Reference ComentariosMedicoPage}}">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="CommentDetailPopup" IsOpen="{Binding Path=BindingContext.DetalleVisible, Source={x:Reference ComentariosMedicoPage}}">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="Cerrar" AppearanceMode="OneButton" ShowCloseButton="True" IsFullScreen="True"
                         HeaderTitle="Detalle de Comentario">
                         <SfPopupLayout:PopupView.ContentTemplate>
@@ -76,8 +76,8 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
             <!-- Converters -->
             <Converters:InverseBooleanConverter x:Key="InverseBoolean" />
         </ResourceDictionary>

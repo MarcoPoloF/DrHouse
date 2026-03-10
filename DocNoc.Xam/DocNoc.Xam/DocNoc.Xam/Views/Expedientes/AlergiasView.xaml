@@ -27,8 +27,8 @@
                 <ResourceDictionary Source="Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!-- PopupLayout: Cancelar Cita -->
-            <SfPopupLayout:SfPopupLayout x:Key="AddPopup" IsOpen="False">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="AddPopup" IsOpen="False">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="GUARDAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
                                              ShowCloseButton="True" HeaderHeight="100" IsFullScreen="True"
                                              AcceptCommand="{Binding Path=BindingContext.AddCommand, Source={x:Reference AlergiasPage}}">
@@ -53,8 +53,8 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
             <Converters:BooleanToColorConverter x:Key="ColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
