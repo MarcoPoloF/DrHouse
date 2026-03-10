@@ -5,15 +5,13 @@ using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models;
 using DocNoc.Xam.Models.Text;
 using PPS.Estandar;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Medicos
 {
     /// <summary>
     /// ViewModel for Category page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [DataContract]
     public class CategoryPageViewModel : DocNocViewModel
     {

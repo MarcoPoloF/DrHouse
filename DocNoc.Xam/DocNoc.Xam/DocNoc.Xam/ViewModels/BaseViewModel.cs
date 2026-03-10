@@ -4,14 +4,12 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text;
-using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.ViewModels
 {
     /// <summary>
     /// This viewmodel extends in another viewmodels.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [DataContract]
     public class BaseViewModel : INotifyPropertyChanged
     {

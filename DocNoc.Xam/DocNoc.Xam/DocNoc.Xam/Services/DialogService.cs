@@ -1,4 +1,5 @@
-﻿using DocNoc.Xam.Interfaces;
+using DocNoc.Xam.Interfaces;
+using Microsoft.Maui.Controls;
 using System.Threading.Tasks;
 
 namespace DocNoc.Xam.Services
@@ -7,7 +8,7 @@ namespace DocNoc.Xam.Services
     {
         public async Task Show(string title, string msg, string closeText)
         {
-            await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(title, msg, closeText);
+            await Application.Current!.MainPage!.DisplayAlert(title, msg, closeText);
         }
     }
 }

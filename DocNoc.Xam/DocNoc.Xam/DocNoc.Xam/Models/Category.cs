@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.Models
 {
     /// <summary>
     /// Model for category.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [DataContract]
     public class Category
     {

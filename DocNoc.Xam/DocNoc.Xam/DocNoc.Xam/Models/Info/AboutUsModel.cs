@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel;
-using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.Models.Info
 {
     /// <summary>
     /// Model for About us templates.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class AboutUsModel : INotifyPropertyChanged
     {
         #region Fields

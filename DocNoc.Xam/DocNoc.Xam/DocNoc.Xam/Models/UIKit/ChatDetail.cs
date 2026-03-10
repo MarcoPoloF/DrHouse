@@ -1,11 +1,9 @@
-﻿using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.Models.UIKit
 {
     /// <summary>
     /// Model for recent chat
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class ChatDetail
     {
         #region Public Properties

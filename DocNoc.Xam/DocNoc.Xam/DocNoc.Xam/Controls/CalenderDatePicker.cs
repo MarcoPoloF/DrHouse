@@ -1,9 +1,7 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+﻿using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Controls
 {
-    [Preserve(AllMembers = true)]
     public class CalenderDatePicker : DatePicker
     {
         public string PlaceHolderText { get; set; }

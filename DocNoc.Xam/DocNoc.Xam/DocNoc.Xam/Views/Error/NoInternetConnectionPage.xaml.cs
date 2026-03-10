@@ -1,13 +1,11 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using Xamarin.Forms.Xaml;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
 
 namespace DocNoc.Xam.Views.ErrorAndEmpty
 {
     /// <summary>
     /// Page to show the no internet connection error
     /// </summary>
-    [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NoInternetConnectionPage
     {

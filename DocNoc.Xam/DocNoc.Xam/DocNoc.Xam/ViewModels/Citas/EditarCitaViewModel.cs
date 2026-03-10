@@ -3,13 +3,12 @@ using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Principal;
 using PPS.Estandar;
-using Syncfusion.XForms.PopupLayout;
+using Syncfusion.Maui.Popup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Citas
 {
@@ -34,7 +33,7 @@ namespace DocNoc.Xam.ViewModels.Citas
 
             this.BackCommand = new Command(Regresar);
             this.ConfirmCommand = new Command(ModificarCita);
-            this.PopupCommand = new Command<SfPopupLayout>(AbrirPopup);
+            this.PopupCommand = new Command<SfPopup>(AbrirPopup);
 
             CargarCita();
 

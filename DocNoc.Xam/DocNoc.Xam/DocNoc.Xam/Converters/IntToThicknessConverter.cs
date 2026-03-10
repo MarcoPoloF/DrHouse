@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Globalization;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Converters
 {
     /// <summary>
     /// This class have methods to convert the integer values to thickness.     
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class IntToThicknessConverter : IValueConverter
     {
         /// <summary>

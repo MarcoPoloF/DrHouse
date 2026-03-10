@@ -4,12 +4,14 @@ using DocNoc.Xam.ViewModels;
 using DocNoc.Xam.Views.Acceso;
 using DocNoc.Xam.Views.ErrorAndEmpty;
 using System.Windows.Input;
-using Xamarin.Essentials;
-using Xamarin.Forms;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Networking;
+using Microsoft.Maui.Storage;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam
 {
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShell : Shell
     {
         public ICommand LogoutCommand => new Command(GoToLogout);
         NavigationService navigationService = (NavigationService)TypeLocator.Instance.Resolve(typeof(INavigationService));
@@ -58,52 +60,22 @@ namespace DocNoc.Xam
 
             this.Items.Add(barra);
 
-            //FlyoutItem item = new FlyoutItem() { Title = "Home" };
-            //ShellContent content = new ShellContent();
-
-            ////Home Page
-            //content.Title = "Home";
-            //content.Content = navigationService.GetPageWithBindingContext(typeof(HomePageViewModel), string.Empty, string.Empty);
-            //item.Items.Add(content);
-            //this.Items.Add(item);
-
-            ////Buscar Page
-            //item = new FlyoutItem() { Title = "Buscar" };
-            //content = new ShellContent();
-            //content.Title = "Buscar";
-            //content.Content = navigationService.GetPageWithBindingContext(typeof(HomePageViewModel), string.Empty, string.Empty);
-            //item.Items.Add(content);
-            //this.Items.Add(item);
-
-            ////Aboutus Page
-            //item = new FlyoutItem() { Title = "Acerca de" };
-            //content = new ShellContent();
-            //content.Title = "About";
-            //content.Content = navigationService.GetPageWithBindingContext(typeof(AboutUsViewModel), string.Empty, string.Empty);
-            //item.Items.Add(content);
-            ////this.Items.Add(item);
-
-            ////Logout Menu
-            //MenuItem logout = new MenuItem() { Text = "Logout", Command = new Command(GoToLogout) };
-            //this.Items.Add(logout);
-
             RegisterRoutes();
         }
 
         internal static Page Init()
         {
-            //ListenNetworkChanges();
             IntializeBuildContainer();
 
             var navigationService = TypeLocator.Instance.Resolve(typeof(INavigationService)) as INavigationService;
             var startup = TypeLocator.Instance.Resolve(typeof(Startup)) as Startup;
 
-            var mainPage = startup.GetMainPage();
+            var mainPage = startup!.GetMainPage();
 
             if (mainPage == typeof(ViewModels.Principal.HomePageViewModel))
                 return new AppShell();
 
-            var paginaLogin = ((NavigationService)navigationService).GetPageWithBindingContext(mainPage, string.Empty, string.Empty);
+            var paginaLogin = ((NavigationService)navigationService!).GetPageWithBindingContext(mainPage, string.Empty, string.Empty);
 
             return new NavigationPage(paginaLogin);
         }
@@ -111,11 +83,8 @@ namespace DocNoc.Xam
         private void RegisterRoutes()
         {
             //-- Registro de Rutas: Acceso --//
-            //Registro de página de Login.
             Routing.RegisterRoute("login", typeof(LoginPage));
-            //Registro de página de Reiniciar Contraseña.
             Routing.RegisterRoute("reiniciarcontrasena", typeof(SimpleForgotPasswordPage));
-            //Registro de página de Registro.
             Routing.RegisterRoute("registro", typeof(SimpleSignUpPage));
         }
 
@@ -146,7 +115,7 @@ namespace DocNoc.Xam
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
-        private static void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        private static void Connectivity_ConnectivityChanged(object? sender, ConnectivityChangedEventArgs e)
         {
             CheckInternet();
         }
@@ -157,11 +126,11 @@ namespace DocNoc.Xam
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 onErrorPage = true;
-                Application.Current.MainPage.Navigation.PushAsync(new NoInternetConnectionPage());
+                Application.Current!.MainPage!.Navigation.PushAsync(new NoInternetConnectionPage());
             }
             else if (onErrorPage)
             {
-                Application.Current.MainPage.Navigation.PopAsync();
+                Application.Current!.MainPage!.Navigation.PopAsync();
                 onErrorPage = false;
             }
         }

@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 using NavigationModel = DocNoc.Xam.Models.Principal.NavigationModel;
 
 namespace DocNoc.Xam.ViewModels.Principal
@@ -9,7 +8,6 @@ namespace DocNoc.Xam.ViewModels.Principal
     /// <summary>
     /// ViewModel for the Navigation list with cards page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [DataContract]
     public class NavigationViewModel
     {

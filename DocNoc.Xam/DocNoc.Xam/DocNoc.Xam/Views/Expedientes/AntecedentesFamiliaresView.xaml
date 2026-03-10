@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!--Definición de View (XAML): Antecedentes Familiares (dn-43-3).-->
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Behaviors="clr-namespace:DocNoc.Xam.Behaviors"
              xmlns:Controls="clr-namespace:DocNoc.Xam.Controls"
              xmlns:Converters="clr-namespace:DocNoc.Xam.Converters"
-             xmlns:Core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:Core="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:Helpers="clr-namespace:DocNoc.Xam.Helpers"
-             xmlns:SfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
-             xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-             xmlns:SfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             xmlns:SfPopupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:SfBorder="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:SfButtons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             xmlns:SfListView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:SfPopupLayout="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              mc:Ignorable="d"
              x:Class="DocNoc.Xam.Views.Expedientes.AntecedentesFamiliaresView"
              x:Name="AntecedentesPage"
@@ -27,8 +27,8 @@
                 <ResourceDictionary Source="Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!-- PopupLayout: Cancelar Cita -->
-            <SfPopupLayout:SfPopupLayout x:Key="AddPopup" IsOpen="False">
-                <SfPopupLayout:SfPopupLayout.PopupView >
+            <SfPopupLayout:SfPopup x:Key="AddPopup" IsOpen="False">
+                <SfPopupLayout:SfPopup.PopupView >
                     <SfPopupLayout:PopupView AcceptButtonText="GUARDAR" DeclineButtonText="CANCELAR" AppearanceMode="TwoButton" 
                                              ShowCloseButton="True" HeaderHeight="100" IsFullScreen="True"
                                              AcceptCommand="{Binding Path=BindingContext.AddCommand, Source={x:Reference AntecedentesPage}}">
@@ -65,8 +65,8 @@
                             </DataTemplate>
                         </SfPopupLayout:PopupView.ContentTemplate>
                     </SfPopupLayout:PopupView>
-                </SfPopupLayout:SfPopupLayout.PopupView>
-            </SfPopupLayout:SfPopupLayout>
+                </SfPopupLayout:SfPopup.PopupView>
+            </SfPopupLayout:SfPopup>
             <Converters:BooleanToColorConverter x:Key="ColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>

@@ -1,14 +1,12 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization.Json;
 using DocNoc.Xam.ViewModels.Medicos;
-using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.DataService
 {
     /// <summary>
     /// Data service to load the data from json file.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class CatalogDataService
     {
         #region fields

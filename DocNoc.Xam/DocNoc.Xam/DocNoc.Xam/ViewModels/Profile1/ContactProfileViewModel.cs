@@ -3,16 +3,14 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Model = DocNoc.Xam.Models.Profile;
-using Syncfusion.XForms.Border;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Syncfusion.Maui.Core;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Profile1
 {
     /// <summary>
     /// ViewModel for Individual profile page
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class ContactProfileViewModel : BaseViewModel
     {
         #region Field

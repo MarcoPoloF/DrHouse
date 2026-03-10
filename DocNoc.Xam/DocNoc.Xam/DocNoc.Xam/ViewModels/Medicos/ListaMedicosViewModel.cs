@@ -4,12 +4,11 @@ using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Principal;
 using PPS.Estandar;
-using Syncfusion.XForms.PopupLayout;
+using Syncfusion.Maui.Popup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Medicos
 {
@@ -33,7 +32,7 @@ namespace DocNoc.Xam.ViewModels.Medicos
             DialogText = text.Get<DialogTxt>("dialog", pref);
 
             this.BackCommand = new Command(Regresar);
-            this.PopupCommand = new Command<SfPopupLayout>(AbrirPopup);
+            this.PopupCommand = new Command<SfPopup>(AbrirPopup);
             this.RefreshCommand = new Command(CargarDatos);
             this.SortCommand = new Command(ActualizarOrdenamiento);
             this.AgendarCitaCommand = new Command<ResultadoBusquedaMedicoAPP>(NavegarAgendarCita);

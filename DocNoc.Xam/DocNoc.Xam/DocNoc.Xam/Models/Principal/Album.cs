@@ -1,12 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.Models.Principal
 {
     /// <summary>
     /// Model for Album list.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [DataContract]
     public class Album
     {

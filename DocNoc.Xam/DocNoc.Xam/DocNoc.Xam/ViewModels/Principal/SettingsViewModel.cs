@@ -1,12 +1,10 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+﻿using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Principal
 {
     /// <summary>
     /// Viewmodel of settings page
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class SettingsViewModel
     {
 

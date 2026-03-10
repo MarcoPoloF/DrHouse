@@ -1,14 +1,12 @@
-﻿using Xamarin.Forms;
+﻿using Microsoft.Maui.Controls;
 using DocNoc.Xam.Models.Transaction;
 using System.Collections.ObjectModel;
-using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.ViewModels.Transaction
 {
     /// <summary>
     /// ViewModel for my cards page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class MyCardsViewModel : BaseViewModel
     {
         #region Properties

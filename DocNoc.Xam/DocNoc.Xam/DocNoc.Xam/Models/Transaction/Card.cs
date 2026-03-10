@@ -1,11 +1,9 @@
-﻿using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.Models.Transaction
 {
     /// <summary>
     /// Model for my cards page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class Card
     {
         #region Properties

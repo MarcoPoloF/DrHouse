@@ -1,12 +1,11 @@
-﻿using Xamarin.Forms;
+﻿using Microsoft.Maui.Controls;
 using DocNoc.Xam.Models.Citas;
 using System.Collections.ObjectModel;
-using Xamarin.Forms.Internals;
 using System.Collections.Generic;
 using DocNoc.Models;
 using System;
 using DocNoc.Xam.Interfaces;
-using Syncfusion.XForms.ProgressBar;
+using Syncfusion.Maui.ProgressBar;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Globalization;
@@ -16,7 +15,6 @@ namespace DocNoc.Xam.ViewModels.Citas
     /// <summary>
     /// ViewModel for my address page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class MyAddressViewModel : DocNocViewModel
     {
         #region Fields

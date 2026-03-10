@@ -1,12 +1,10 @@
-﻿using Xamarin.Forms.Internals;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls.Xaml;
 
 namespace DocNoc.Xam.Views.Medicos
 {
     /// <summary>
     /// Class helps to reduce repetitive markup, and allows an apps appearance to be more easily changed.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Styles
     {

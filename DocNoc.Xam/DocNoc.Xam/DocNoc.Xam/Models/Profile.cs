@@ -1,12 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.Models
 {
     /// <summary>
     /// Model for SocialProfile
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class Profile
     {
         #region Fields

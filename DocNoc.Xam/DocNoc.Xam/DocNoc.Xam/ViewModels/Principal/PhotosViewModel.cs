@@ -3,15 +3,13 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using DocNoc.Xam.Models.Principal;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Principal
 {
     /// <summary>
     /// Photos view model.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [DataContract]
     public class PhotosViewModel : BaseViewModel
     {

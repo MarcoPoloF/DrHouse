@@ -5,13 +5,12 @@ using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Principal;
 using PPS.Estandar;
-using Syncfusion.XForms.PopupLayout;
+using Syncfusion.Maui.Popup;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Mensajeria
 {

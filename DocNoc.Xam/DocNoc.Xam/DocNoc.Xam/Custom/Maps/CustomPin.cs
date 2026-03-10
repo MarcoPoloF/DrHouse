@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Xamarin.Forms.Maps;
+using Microsoft.Maui.Controls.Maps;
 
 namespace DocNoc.Xam.Custom.Maps
 {

@@ -3,12 +3,11 @@ using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Principal;
 using PPS.Estandar;
-using Syncfusion.SfPullToRefresh.XForms;
+using Syncfusion.Maui.PullToRefresh;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Citas
 {

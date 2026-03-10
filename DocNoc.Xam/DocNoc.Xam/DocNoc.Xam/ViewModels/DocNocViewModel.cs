@@ -8,8 +8,8 @@ using Newtonsoft.Json.Linq;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using PPS.Estandar;
-using Syncfusion.XForms.BadgeView;
-using Syncfusion.XForms.PopupLayout;
+using Syncfusion.Maui.Core;
+using Syncfusion.Maui.Popup;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,8 +18,11 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
-using Xamarin.Forms;
+using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Networking;
+using Microsoft.Maui.Storage;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels
 {
@@ -62,12 +65,12 @@ namespace DocNoc.Xam.ViewModels
         }
         protected string errorSuscripcion;
 
-        public SfPopupLayout PopupActivo
+        public SfPopup PopupActivo
         {
             get { return popupActivo; }
             set { SetProperty(ref popupActivo, value); }
         }
-        protected SfPopupLayout popupActivo;
+        protected SfPopup popupActivo;
 
         public bool IsBusy
         {
@@ -174,7 +177,7 @@ namespace DocNoc.Xam.ViewModels
             return salida;
         }
 
-        protected void AbrirPopup(SfPopupLayout popupLayout)
+        protected void AbrirPopup(SfPopup popupLayout)
         {
             PopupActivo = popupLayout;
 

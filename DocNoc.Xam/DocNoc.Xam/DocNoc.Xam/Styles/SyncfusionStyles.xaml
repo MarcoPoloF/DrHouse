@@ -2,9 +2,9 @@
 <!-- Resource Dictionary: Syncfusion Styles-->
 <ResourceDictionary
     x:Class="DocNoc.Xam.Styles.SyncfusionStyles"
-    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:SfRating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms">
+    xmlns:SfRating="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs">
 
     <SfRating:SfRatingSettings
         x:Key="SfRatingSettings-Default"

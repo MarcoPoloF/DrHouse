@@ -1,15 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.ErrorAndEmpty
 {
     /// <summary>
     /// ViewModel for no internet connection page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class NoInternetConnectionPageViewModel : BaseViewModel
     {
         #region Fields

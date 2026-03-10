@@ -4,13 +4,12 @@ using DocNoc.Xam.Models.Bienvenida;
 using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Acceso;
 using DocNoc.Xam.Views.Bienvenida;
-using Syncfusion.SfRotator.XForms;
+using Syncfusion.Maui.Rotator;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Bienvenida
 {

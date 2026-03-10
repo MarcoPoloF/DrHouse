@@ -2,7 +2,7 @@
 <!-- Resource Dictionary: Entry Styles-->
 <ResourceDictionary
     x:Class="DocNoc.Xam.Styles.EntryStyles"
-    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Controls="clr-namespace:DocNoc.Xam.Controls">
 

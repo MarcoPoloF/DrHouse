@@ -1,15 +1,13 @@
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using DocNoc.Xam.Models;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Principal
 {
     /// <summary>
     /// ViewModel for Category page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [DataContract]
     public class CategoryPageViewModel : BaseViewModel
     {

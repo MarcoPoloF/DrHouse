@@ -1,6 +1,9 @@
 ﻿using DocNoc.Xam.Interfaces;
 using System.Runtime.Serialization.Json;
-using Xamarin.Essentials;
+using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Networking;
+using Microsoft.Maui.Storage;
 
 namespace DocNoc.Xam.Services
 {

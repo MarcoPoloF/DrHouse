@@ -3,16 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
-using Xamarin.Forms;
-using Xamarin.Forms.Maps;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Devices.Sensors;
 
 namespace DocNoc.Xam.Custom.Maps
 {
-    public class CustomMap : Xamarin.Forms.Maps.Map
+    public class CustomMap : Microsoft.Maui.Controls.Maps.Map
     {
         //Declaración de la BindableProperty que recibe la colección IEnumerable de Custom Pins.
         public static readonly BindableProperty MapPinsProperty = BindableProperty.Create("MapPins", typeof(IEnumerable<CustomPin>), typeof(CustomMap),
@@ -32,7 +31,7 @@ namespace DocNoc.Xam.Custom.Maps
         }
 
         //Constructor básico.
-        public CustomMap() : this(MapSpan.FromCenterAndRadius(new Position(0, 0), Distance.FromKilometers(5)))
+        public CustomMap() : this(MapSpan.FromCenterAndRadius(new Location(0, 0), Distance.FromKilometers(5)))
         {
             LoadCurrentPosition();
         }
@@ -42,16 +41,16 @@ namespace DocNoc.Xam.Custom.Maps
             var map = bindable as CustomMap;
 
             if (oldValue is INotifyCollectionChanged)
-                (oldValue as INotifyCollectionChanged).CollectionChanged -= map.OnCollectionChanged;
+                (oldValue as INotifyCollectionChanged)!.CollectionChanged -= map!.OnCollectionChanged;
             if (newValue is INotifyCollectionChanged)
-                (newValue as INotifyCollectionChanged).CollectionChanged += map.OnCollectionChanged;
+                (newValue as INotifyCollectionChanged)!.CollectionChanged += map!.OnCollectionChanged;
 
-            map.OnCollectionChanged(map, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            map!.OnCollectionChanged(map, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             if (newValue != null)
                 map.OnCollectionChanged(map, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, (IList)newValue));
         }
 
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Reset)
                 Pins.Clear();
@@ -75,7 +74,7 @@ namespace DocNoc.Xam.Custom.Maps
             }
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             // We should be able to just replace the changed pin, but rebuild is required to force map refresh
             Pins.Clear();
@@ -89,7 +88,7 @@ namespace DocNoc.Xam.Custom.Maps
             {
                 var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
 
-                if(status != PermissionStatus.Granted)
+                if (status != PermissionStatus.Granted)
                 {
                     status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
                 }
@@ -101,47 +100,17 @@ namespace DocNoc.Xam.Custom.Maps
 
                     if (location != null)
                     {
-                        Position currentPosition = new Position(location.Latitude, location.Longitude);
+                        Location currentPosition = new Location(location.Latitude, location.Longitude);
                         this.MoveToRegion(MapSpan.FromCenterAndRadius(currentPosition, Distance.FromKilometers(5)));
                     }
                 }
-
-                //var status = await Permissions.CheckStatusAsync<Permissions.LocationAlways>();
-                //var status1 = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
-
-                //if ((status != PermissionStatus.Granted) && (status1 != PermissionStatus.Granted))
-                //{
-                //    status = await Permissions.RequestAsync<Permissions.LocationAlways>();
-
-                //    if (status != PermissionStatus.Granted)
-                //    {
-                //        status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
-                //    }
-                //}
-                //else
-                //{
-                //    if ((status != PermissionStatus.Granted) && (status1 == PermissionStatus.Granted))
-                //        status = status1;
-                //}
-
-                //if (status == PermissionStatus.Granted)
-                //{
-                //    var request = new GeolocationRequest(GeolocationAccuracy.Medium);
-                //    var location = await Geolocation.GetLocationAsync(request);
-
-                //    if (location != null)
-                //    {
-                //        Position currentPosition = new Position(location.Latitude, location.Longitude);
-                //        this.MoveToRegion(MapSpan.FromCenterAndRadius(currentPosition, Distance.FromKilometers(5)));
-                //    }
-                //}
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("ERROR", $"Ocurrió un error al acceder al mapa: {ex.Message}", "Ok");
+                await Application.Current!.MainPage!.DisplayAlert("ERROR", $"Ocurrió un error al acceder al mapa: {ex.Message}", "Ok");
             }
-
         }
+
         public void PinSelected(CustomPin customPin)
         {
             if (PinSelection != null)
@@ -150,6 +119,6 @@ namespace DocNoc.Xam.Custom.Maps
             }
         }
 
-        public event EventHandler<SelectedItemChangedEventArgs> PinSelection;
+        public event EventHandler<SelectedItemChangedEventArgs>? PinSelection;
     }
 }

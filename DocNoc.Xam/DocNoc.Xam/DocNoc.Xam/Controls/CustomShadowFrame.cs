@@ -1,12 +1,10 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+﻿using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Controls
 {
     /// <summary>
     /// Customizes the shadow effects of the Frame control in iOS to make the shadow effects looks similar to Android.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class CustomShadowFrame : Frame
     {
         public static readonly BindableProperty RadiusProperty =

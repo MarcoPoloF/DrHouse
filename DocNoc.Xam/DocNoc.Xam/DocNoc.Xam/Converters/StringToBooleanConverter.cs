@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 using DocNoc.Xam.Controls;
 
 namespace DocNoc.Xam.Converters
@@ -10,7 +9,6 @@ namespace DocNoc.Xam.Converters
     /// <summary>
     /// This class have methods to convert the string values to boolean.     
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class StringToBooleanConverter : IValueConverter
     {
         /// <summary>

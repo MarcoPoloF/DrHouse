@@ -1,15 +1,13 @@
 ﻿using System.ComponentModel;
-using Syncfusion.XForms.Border;
-using Syncfusion.XForms.Cards;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Syncfusion.Maui.Core;
+using Syncfusion.Maui.Cards;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Helpers
 {
     /// <summary>
     /// This class is used to set margin or padding based on flow direction (LTR or RTL).
     /// </summary>
-    [Preserve(AllMembers = true)]
     public static class RTLHelper
     {
         #region Bindable Properties

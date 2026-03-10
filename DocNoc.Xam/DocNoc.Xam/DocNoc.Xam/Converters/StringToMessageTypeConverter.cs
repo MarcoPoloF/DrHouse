@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Globalization;
 using DocNoc.Xam.Models.UIKit;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Converters
 {
     /// <summary>
     /// This class have methods to convert string to chat-message type.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class StringToMessageTypeConverter : IValueConverter
     {
         /// <summary>
