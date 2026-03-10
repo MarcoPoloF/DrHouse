@@ -19,7 +19,7 @@
     <ApplicationVersion>18</ApplicationVersion>
 
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">12.0</SupportedOSPlatformVersion>
-    <TargetPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">17.2</TargetPlatformVersion>
+    <TargetPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">18.0</TargetPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">22.0</SupportedOSPlatformVersion>
     <TargetPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">34.0</TargetPlatformVersion>
   </PropertyGroup>
