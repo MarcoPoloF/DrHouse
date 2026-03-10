@@ -3,13 +3,12 @@ using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Principal;
 using PPS.Estandar;
-using Syncfusion.XForms.Buttons;
-using Syncfusion.XForms.Chat;
-using Syncfusion.XForms.PopupLayout;
+using Syncfusion.Maui.Buttons;
+using Syncfusion.Maui.Chat;
+using Syncfusion.Maui.Popup;
 using System;
 using System.Collections.Generic;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Mensajeria
 {

@@ -1,14 +1,12 @@
 ﻿using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Acceso
 {
     /// <summary>
     /// Definición de ViewModel: Login (dn-04-3).
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class LoginPageViewModel : LoginViewModel
     {
         #region Fields

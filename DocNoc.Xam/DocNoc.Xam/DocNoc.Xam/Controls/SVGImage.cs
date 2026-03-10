@@ -2,13 +2,14 @@
 using System.IO;
 using System.Reflection;
 using SkiaSharp;
-using SkiaSharp.Views.Forms;
-using Xamarin.Forms;
+using SkiaSharp.Views.Maui;
+using SkiaSharp.Views.Maui.Controls;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Controls
 {
     /// <summary>
-    /// This is a helper class to render the SVG files. 
+    /// This is a helper class to render the SVG files.
     /// </summary>
     public class SVGImage : ContentView
     {
@@ -21,36 +22,31 @@ namespace DocNoc.Xam.Controls
         public SVGImage()
         {
             this.Padding = new Thickness(0);
-            this.BackgroundColor = Color.Transparent;
+            this.BackgroundColor = Colors.Transparent;
             this.Content = this.canvasView;
             this.canvasView.PaintSurface += this.CanvasView_PaintSurface;
         }
 
         // Property to set the SVG image path
-        public string Source
+        public string? Source
         {
-            get => (string)this.GetValue(SourceProperty);
+            get => (string?)this.GetValue(SourceProperty);
             set => this.SetValue(SourceProperty, value);
         }
 
         /// <summary>
-        /// Method to invaldate the canvas to update the image
+        /// Method to invalidate the canvas to update the image
         /// </summary>
-        /// <param name="bindable">The target canvas</param>
-        /// <param name="oldValue">Previous state</param>
-        /// <param name="newValue">Updated state</param>
         public static void RedrawCanvas(BindableObject bindable, object oldValue, object newValue)
         {
-            SVGImage sVGImage = bindable as SVGImage;
+            SVGImage? sVGImage = bindable as SVGImage;
             sVGImage?.canvasView.InvalidateSurface();
         }
 
         /// <summary>
-        /// This method update the canvas area with teh image
+        /// This method updates the canvas area with the image
         /// </summary>
-        /// <param name="sender">The sender</param>
-        /// <param name="args">The arguments</param>
-        private void CanvasView_PaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        private void CanvasView_PaintSurface(object? sender, SKPaintSurfaceEventArgs args)
         {
             SKCanvas skCanvas = args.Surface.Canvas;
             skCanvas.Clear();
@@ -62,22 +58,26 @@ namespace DocNoc.Xam.Controls
 
             // Get the assembly information to access the local image
             var assembly = typeof(SVGImage).GetTypeInfo().Assembly.GetName();
+            var resourceName = assembly.Name + ".Images." + Source;
 
-            // Update the canvas with the SVG image
-            using (Stream stream = typeof(SVGImage).GetTypeInfo().Assembly.GetManifestResourceStream(assembly.Name + ".Images." + Source))
-            {
-                SkiaSharp.Extended.Svg.SKSvg skSVG = new SkiaSharp.Extended.Svg.SKSvg();
-                skSVG.Load(stream);
-                SKImageInfo imageInfo = args.Info;
-                skCanvas.Translate(imageInfo.Width / 2f, imageInfo.Height / 2f);
-                SKRect rectBounds = skSVG.ViewBox;
-                float xRatio = imageInfo.Width / rectBounds.Width;
-                float yRatio = imageInfo.Height / rectBounds.Height;
-                float minRatio = Math.Min(xRatio, yRatio);
-                skCanvas.Scale(minRatio);
-                skCanvas.Translate(-rectBounds.MidX, -rectBounds.MidY);
-                skCanvas.DrawPicture(skSVG.Picture);
-            }
+            using var stream = typeof(SVGImage).GetTypeInfo().Assembly.GetManifestResourceStream(resourceName);
+            if (stream == null) return;
+
+            // Use SkiaSharp.Extended.UI.Maui's SVG support
+            using var skSvg = new SkiaSharp.Extended.Svg.SKSvg();
+            skSvg.Load(stream);
+
+            if (skSvg.Picture == null) return;
+
+            SKImageInfo imageInfo = args.Info;
+            skCanvas.Translate(imageInfo.Width / 2f, imageInfo.Height / 2f);
+            SKRect rectBounds = skSvg.ViewBox;
+            float xRatio = imageInfo.Width / rectBounds.Width;
+            float yRatio = imageInfo.Height / rectBounds.Height;
+            float minRatio = Math.Min(xRatio, yRatio);
+            skCanvas.Scale(minRatio);
+            skCanvas.Translate(-rectBounds.MidX, -rectBounds.MidY);
+            skCanvas.DrawPicture(skSvg.Picture);
         }
     }
 }

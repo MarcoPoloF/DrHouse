@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Converters
 {
@@ -9,7 +8,6 @@ namespace DocNoc.Xam.Converters
     /// This class have methods to convert the Boolean values to color objects. 
     /// This is needed to validate in the Entry controls. If the validation is failed, it will return the color code of error, otherwise it will be transparent.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class BooleanToColorConverter : IValueConverter
     {
         /// <summary>
@@ -24,7 +22,7 @@ namespace DocNoc.Xam.Converters
         {
             if (parameter == null)
             {
-                return Color.Default;
+                return null;
             }
 
             switch (parameter.ToString())
@@ -69,7 +67,7 @@ namespace DocNoc.Xam.Converters
                     Application.Current.Resources.TryGetValue("Gray-White", out var graywhite);
                     return (Color)graywhite;
                 default:
-                    return Color.Transparent;
+                    return Colors.Transparent;
             }
         }
 

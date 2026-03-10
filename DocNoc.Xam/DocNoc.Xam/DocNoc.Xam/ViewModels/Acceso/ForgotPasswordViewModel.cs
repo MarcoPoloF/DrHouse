@@ -1,15 +1,13 @@
 ﻿using DocNoc.Models;
 using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Acceso
 {
     /// <summary>
     /// Definición de ViewModel: Recuperar Contraseña (dn-06-3)
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class ForgotPasswordViewModel : LoginViewModel
     {
         #region Fields

@@ -5,13 +5,12 @@ using DocNoc.Xam.Models.Consultorios;
 using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Principal;
 using PPS.Estandar;
-using Syncfusion.XForms.Buttons;
-using Syncfusion.XForms.PopupLayout;
+using Syncfusion.Maui.Buttons;
+using Syncfusion.Maui.Popup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Principal
 {
@@ -34,7 +33,7 @@ namespace DocNoc.Xam.ViewModels.Principal
             //Carga de textos: Dialog.
             DialogText = text.Get<DialogTxt>("dialog", pref);
 
-            this.PopupCommand = new Command<SfPopupLayout>(AbrirPopup);
+            this.PopupCommand = new Command<SfPopup>(AbrirPopup);
             this.RefreshCommand = new Command(CargarDatos);
             this.BusquedaCommand = new Command<Especialidad>(Busqueda);
             this.BusquedaAvanzadaCommand = new Command(BusquedaAvanzada);

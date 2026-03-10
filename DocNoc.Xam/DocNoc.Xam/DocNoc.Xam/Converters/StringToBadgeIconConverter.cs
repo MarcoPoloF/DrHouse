@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Globalization;
-using Syncfusion.XForms.BadgeView;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Syncfusion.Maui.Core;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Converters
 {
     /// <summary>
     /// This class have methods to convert the availability-status of chat message recipients from string to Syncfusion.XForms.BadgeView.BadgeIcon.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class StringToBadgeIconConverter : IValueConverter
     {
         /// <summary>

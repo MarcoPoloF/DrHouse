@@ -1,12 +1,10 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+﻿using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Models.Bienvenida
 {
     /// <summary>
     /// Model for OnBoarding
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class Boarding
     {
         #region Properties

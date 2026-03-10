@@ -1,11 +1,9 @@
-﻿using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.Models.Citas
 {
     /// <summary>
     /// Model for my address page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class Address
     {
         #region Properties

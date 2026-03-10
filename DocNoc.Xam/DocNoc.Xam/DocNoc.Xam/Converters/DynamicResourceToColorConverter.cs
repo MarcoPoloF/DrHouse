@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Converters
 {
@@ -9,7 +8,6 @@ namespace DocNoc.Xam.Converters
     /// This class have methods to convert the DynamicResource to color objects. 
     /// This is needed when DynamicResource is set based on idiom/platform.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class DynamicResourceToColorConverter : IValueConverter
     {
         /// <summary>

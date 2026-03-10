@@ -3,12 +3,11 @@ using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Principal;
 using PPS.Estandar;
-using Syncfusion.XForms.PopupLayout;
+using Syncfusion.Maui.Popup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Expedientes
 {
@@ -32,7 +31,7 @@ namespace DocNoc.Xam.ViewModels.Expedientes
             DialogText = text.Get<DialogTxt>("dialog", pref);
 
             this.BackCommand = new Command(Regresar);
-            this.PopupCommand = new Command<SfPopupLayout>(AbrirPopup);
+            this.PopupCommand = new Command<SfPopup>(AbrirPopup);
             this.EditCommand = new Command(EditarDatos);
 
             ValidarTipoUsuario();

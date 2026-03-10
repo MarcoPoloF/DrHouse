@@ -1,15 +1,13 @@
 ﻿using DocNoc.Xam.Models.UIKit;
-using Syncfusion.ListView.XForms;
+using Syncfusion.Maui.ListView;
 using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Controls
 {
     /// <summary>
     /// This class extends the behavior of the SfListView control to filter the ListViewItem based on text.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class SearchableChatList : SearchableListView
     {
         #region Contructor
@@ -64,7 +62,7 @@ namespace DocNoc.Xam.Controls
             Application.Current.Resources.TryGetValue("Gray-100", out var retVal);
             this.SelectionBackgroundColor = (Color)retVal;
             await Task.Delay(100);
-            this.SelectionBackgroundColor = Color.Transparent;
+            this.SelectionBackgroundColor = Colors.Transparent;
             this.SelectedItems.Clear();
         }
 

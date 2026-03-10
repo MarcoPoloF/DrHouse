@@ -3,22 +3,23 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Model = DocNoc.Xam.Models.Profile;
-using Syncfusion.XForms.Border;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Syncfusion.Maui.Core;
+using Microsoft.Maui.Controls;
 using DocNoc.Models;
 using DocNoc.Xam.Interfaces;
 using System;
 using System.Globalization;
 using System.Collections.Generic;
-using Xamarin.Essentials;
+using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Networking;
+using Microsoft.Maui.Storage;
 
 namespace DocNoc.Xam.ViewModels.Medicos
 {
     /// <summary>
     /// ViewModel for Individual profile page
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class ContactProfileViewModel : DocNocViewModel
     {
         #region Field

@@ -1,13 +1,11 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using Xamarin.Forms.Xaml;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
 
 namespace DocNoc.Xam.Views.Templates
 {
     /// <summary>
     /// Navigation list template.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NavigationListTemplate : Grid
     {

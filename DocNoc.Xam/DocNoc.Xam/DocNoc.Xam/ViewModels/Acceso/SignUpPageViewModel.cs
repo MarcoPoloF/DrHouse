@@ -1,15 +1,13 @@
 ﻿using DocNoc.Models;
 using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Acceso
 {
     /// <summary>
     /// Definición de ViewModel: Registro (dn-05-3)
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class SignUpPageViewModel : LoginViewModel
     {
         #region Fields

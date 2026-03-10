@@ -1,15 +1,13 @@
 ﻿using DocNoc.Xam.Models;
-using Syncfusion.XForms.ComboBox;
+using Syncfusion.Maui.Inputs;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Controls
 {
-    [Preserve(AllMembers = true)]
     public class CountryComboBox : SfComboBox, INotifyPropertyChanged
     {
         #region Fields

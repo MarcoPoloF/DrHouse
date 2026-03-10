@@ -5,16 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using DocNoc.Xam.Models.Bienvenida;
 using DocNoc.Xam.ViewModels.Bienvenida;
-using Syncfusion.SfRotator.XForms;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Syncfusion.Maui.Rotator;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Behaviors.Bienvenida
 {
     /// <summary>
     /// This class extends the behavior of the SfRotator control to animate the view.
     /// </summary>
-    //[Preserve(AllMembers = true)]
     //public class SfRotatorBehavior : Behavior<SfRotator>
     //{
     //    #region Fields

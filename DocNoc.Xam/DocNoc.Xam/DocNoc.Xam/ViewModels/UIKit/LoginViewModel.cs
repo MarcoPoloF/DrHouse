@@ -1,11 +1,9 @@
-﻿using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.ViewModels.UIKit
 {
     /// <summary>
     /// ViewModel for login page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class LoginViewModel : BaseViewModel
     {
         #region Fields

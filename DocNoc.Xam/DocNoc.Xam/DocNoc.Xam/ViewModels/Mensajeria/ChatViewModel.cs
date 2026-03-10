@@ -3,16 +3,18 @@ using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Principal;
 using PPS.Estandar;
-using Syncfusion.XForms.Chat;
-using Syncfusion.XForms.PopupLayout;
+using Syncfusion.Maui.Chat;
+using Syncfusion.Maui.Popup;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Networking;
+using Microsoft.Maui.Storage;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Mensajeria
 {
@@ -31,7 +33,7 @@ namespace DocNoc.Xam.ViewModels.Mensajeria
             Dialog = dial;
 
             this.BackCommand = new Command(Regresar);
-            this.PopupCommand = new Command<SfPopupLayout>(AbrirPopup);
+            this.PopupCommand = new Command<SfPopup>(AbrirPopup);
             //this.LoadNewMessagesCommand = new Command(LoadNewMessages);
             this.LoadOldMessagesCommand = new Command(LoadOldMessages);
             this.SendMessageCommand = new Command<SendMessageEventArgs>(SendMessage);

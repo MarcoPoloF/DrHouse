@@ -1,12 +1,10 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+﻿using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Controls
 {
     /// <summary>
     /// The Title view
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class TitleView : Grid
     {
         #region Bindable Properties

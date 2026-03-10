@@ -4,11 +4,10 @@ using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Principal;
 using Openpay.Xamarin;
 using PPS.Estandar;
-using Syncfusion.XForms.PopupLayout;
+using Syncfusion.Maui.Popup;
 using System;
 using System.Collections.Generic;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 using Openpay;
 using Openpay.Xamarin.Abstractions;
 
@@ -34,7 +33,7 @@ namespace DocNoc.Xam.ViewModels.Suscripcion
             DialogText = text.Get<DialogTxt>("dialog", pref);
 
             this.BackCommand = new Command(Regresar);
-            this.PopupCommand = new Command<SfPopupLayout>(AbrirPopup);
+            this.PopupCommand = new Command<SfPopup>(AbrirPopup);
             this.AddCommand = new Command(InsertarFormaPago);
 
             IsBusy = false;

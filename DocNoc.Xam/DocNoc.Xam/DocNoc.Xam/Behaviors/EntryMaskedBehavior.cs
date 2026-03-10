@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using DocNoc.Xam.Controls;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Behaviors
 {
     /// <summary>
     /// This class extends the behavior of the EntryBehavior control to invoke a command when an event occurs.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class EntryMaskedBehavior : Behavior<Entry>
     {
         #region Fields

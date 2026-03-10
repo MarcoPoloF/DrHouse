@@ -5,14 +5,13 @@ using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Principal;
 using PPS.Estandar;
-using Syncfusion.XForms.PopupLayout;
+using Syncfusion.Maui.Popup;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using Xamarin.Forms.Maps;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Maps;
 
 namespace DocNoc.Xam.ViewModels.Medicos
 {

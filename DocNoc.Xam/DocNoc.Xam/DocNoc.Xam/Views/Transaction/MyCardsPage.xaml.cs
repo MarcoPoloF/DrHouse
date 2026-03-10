@@ -1,12 +1,10 @@
-﻿using Xamarin.Forms.Internals;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls.Xaml;
 
 namespace DocNoc.Xam.Views.Transaction
 {
     /// <summary>
     /// Page Displaying saved cards.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MyCardsPage
     {

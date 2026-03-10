@@ -2,9 +2,9 @@
 <!-- Resource Dictionary: Button Styles-->
 <ResourceDictionary
     x:Class="DocNoc.Xam.Styles.ButtonStyles"
-    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:SfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
+    xmlns:SfButtons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons">
 
     <!-- SfButton Style: Base -->
     <Style x:Key="SfButtonStyle-Base" TargetType="SfButtons:SfButton">

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
-using Syncfusion.ListView.XForms;
-using Xamarin.Forms;
+using Syncfusion.Maui.ListView;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Behaviors
 {
@@ -61,7 +61,7 @@ namespace DocNoc.Xam.Behaviors
         /// </summary>
         /// <param name="sender">The Sender</param>
         /// <param name="e">ItemTapped EventArgs</param>
-        private void BindableListView_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
+        private void BindableListView_ItemTapped(object sender, Syncfusion.Maui.ListView.ItemTappedEventArgs e)
         {
             if (this.Command == null)
             {

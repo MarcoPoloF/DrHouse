@@ -1,12 +1,10 @@
-﻿using Xamarin.Forms.Internals;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls.Xaml;
 
 namespace DocNoc.Xam.Views.Acceso
 {
     /// <summary>
     /// View used to show the email entry with validation status.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EmailEntry
     {

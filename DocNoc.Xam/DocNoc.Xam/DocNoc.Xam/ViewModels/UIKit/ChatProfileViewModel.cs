@@ -1,13 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.UIKit
 {
     /// <summary>
     /// ViewModel for profile page
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class ChatProfileViewModel
     {
         #region Constructor
@@ -63,7 +61,7 @@ namespace DocNoc.Xam.ViewModels.UIKit
             Application.Current.Resources.TryGetValue("Gray-100", out var retVal);
             (obj as Grid).BackgroundColor = (Color)retVal;
             await Task.Delay(100);
-            (obj as Grid).BackgroundColor = Color.Transparent;
+            (obj as Grid).BackgroundColor = Colors.Transparent;
         }
 
         /// <summary>
@@ -75,7 +73,7 @@ namespace DocNoc.Xam.ViewModels.UIKit
             Application.Current.Resources.TryGetValue("Gray-100", out var retVal);
             (obj as Grid).BackgroundColor = (Color)retVal;
             await Task.Delay(100);
-            (obj as Grid).BackgroundColor = Color.Transparent;
+            (obj as Grid).BackgroundColor = Colors.Transparent;
         }
 
         #endregion

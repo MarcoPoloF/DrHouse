@@ -1,13 +1,11 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using Xamarin.Forms.Xaml;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
 
 namespace DocNoc.Xam.Views.Bienvenida
 {
     /// <summary>
     /// Definición de View (C#): Bienvenida (dn-01-3, dn-02-3, dn-03-3).
     /// </summary>
-    [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OnBoardingAnimationPage
     {

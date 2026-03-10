@@ -1,12 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.Models.Principal
 {
     /// <summary>
     /// Model for the Navigation List and Tile with Cards page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [DataContract]
     public class NavigationModel
     {

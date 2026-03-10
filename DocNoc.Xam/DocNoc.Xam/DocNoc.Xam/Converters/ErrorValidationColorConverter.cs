@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 using DocNoc.Xam.Controls;
 using DocNoc.Xam.ViewModels.Acceso;
 
@@ -12,7 +11,6 @@ namespace DocNoc.Xam.Converters
     /// This class have methods to convert the Boolean values to color objects. 
     /// This is needed to validate in the Entry controls. If the validation is failed, it will return the color code of error, otherwise it will be transparent.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class ErrorValidationColorConverter : IValueConverter
     {
         /// <summary>
@@ -37,7 +35,7 @@ namespace DocNoc.Xam.Converters
 
                 if (!(emailEntry?.BindingContext is LoginViewModel bindingContext))
                 {
-                    return Color.Transparent;
+                    return Colors.Transparent;
                 }
 
                 var isFocused = (bool)value;
@@ -48,7 +46,7 @@ namespace DocNoc.Xam.Converters
                     return Color.FromRgba(255, 255, 255, 0.6);
                 }
 
-                return bindingContext.IsInvalidEmail ? Color.FromHex("#FF4A4A") : Color.Transparent;
+                return bindingContext.IsInvalidEmail ? Color.FromHex("#FF4A4A") : Colors.Transparent;
 
             }
 

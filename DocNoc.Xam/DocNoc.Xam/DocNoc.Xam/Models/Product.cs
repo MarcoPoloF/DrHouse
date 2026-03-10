@@ -2,14 +2,12 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.Serialization;
-using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.Models
 {
     /// <summary>
     /// Model for pages with product.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [DataContract]
     public class Product : INotifyPropertyChanged
     {

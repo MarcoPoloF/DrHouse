@@ -3,13 +3,12 @@ using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models.Text;
 using DocNoc.Xam.ViewModels.Principal;
 using PPS.Estandar;
-using Syncfusion.XForms.PopupLayout;
+using Syncfusion.Maui.Popup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Citas
 {
@@ -39,7 +38,7 @@ namespace DocNoc.Xam.ViewModels.Citas
             this.CancelCommand = new Command(CancelarCita);
             this.EditCommand = new Command(EditarCita);
             this.NotifyDoctorCommand = new Command(NotificarLlegada);
-            this.PopupCommand = new Command<SfPopupLayout>(AbrirPopup);
+            this.PopupCommand = new Command<SfPopup>(AbrirPopup);
             this.RefreshCommand = new Command(CargarCita);
             this.ShareFilesCommand = new Command(CompartirArchivos);
             this.NotificarLlegadaCommand = new Command(NotificarLlegada);

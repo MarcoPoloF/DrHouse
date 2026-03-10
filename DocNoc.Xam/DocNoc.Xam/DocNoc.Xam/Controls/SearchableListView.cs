@@ -1,13 +1,11 @@
-﻿using Syncfusion.ListView.XForms;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+﻿using Syncfusion.Maui.ListView;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Controls
 {
     /// <summary>
     /// This class extends the behavior of the SfListView control to filter the ListViewItem based on text.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class SearchableListView : SfListView
     {
         #region Field

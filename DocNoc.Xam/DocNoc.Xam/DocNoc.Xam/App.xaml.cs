@@ -1,8 +1,8 @@
 using Openpay.Xamarin;
 using System;
-using Xamarin.Essentials;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
 
 namespace DocNoc.Xam
 {
@@ -16,16 +16,12 @@ namespace DocNoc.Xam
 
         public App()
         {
-            //Registro de Licencia de Syncfusion
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTQ4NzAyQDMxMzkyZTMzMmUzMGlSZVJhVE1OcnBjOTA3SktaT21JYW1JMzRNTlJPdit3eGhrcjM5NDNXbkk9");
-            
             InitializeComponent();
 
             VersionTracking.Track();
 
-            //Al iniciar la aplicación, se emplea AppShell.Init() para obtener la p�gina de inicio.
+            //Al iniciar la aplicación, se emplea AppShell.Init() para obtener la página de inicio.
             MainPage = AppShell.Init();
-            //MainPage = new NavigationPage(AppShell.Init());
         }
 
         protected override void OnStart()

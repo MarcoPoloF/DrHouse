@@ -1,16 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocNoc.Xam.UWP", "DocNoc.Xam\DocNoc.Xam.UWP\DocNoc.Xam.UWP.csproj", "{EB7512AC-8314-4584-9B74-1482821652B5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocNoc.Xam.Android", "DocNoc.Xam\DocNoc.Xam.Android\DocNoc.Xam.Android.csproj", "{7AD81FCB-914C-4BAA-B27B-B55BC869CC58}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocNoc.Xam.iOS", "DocNoc.Xam\DocNoc.Xam.iOS\DocNoc.Xam.iOS.csproj", "{C7663CBE-5D93-415A-823C-AFCA8A94DB3C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocNoc.Xam", "DocNoc.Xam\DocNoc.Xam\DocNoc.Xam.csproj", "{7F8D9A9F-A4EF-4EA1-B258-AACC678E7A84}"
 EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F8D9A9F-A4EF-4EA1-B258-AACC678E7A84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F8D9A9F-A4EF-4EA1-B258-AACC678E7A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F8D9A9F-A4EF-4EA1-B258-AACC678E7A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F8D9A9F-A4EF-4EA1-B258-AACC678E7A84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FABF01E9-4DF7-4FDA-913C-A52601EAFCA0}
+	EndGlobalSection
+EndGlobal
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

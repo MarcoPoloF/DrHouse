@@ -1,12 +1,10 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+﻿using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Controls
 {
     /// <summary>
     /// This class is extended from Xamarin.Forms.Editor to extend the size and to remove the border for the editor control in the Android and UWP platforms.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class BorderlessEditor : Editor
     {
         /// <summary>

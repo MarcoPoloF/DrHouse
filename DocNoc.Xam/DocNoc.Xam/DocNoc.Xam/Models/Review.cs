@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.Models
 {
     /// <summary>
     /// Model for review list.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [DataContract]
     public class Review
     {

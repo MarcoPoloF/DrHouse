@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Globalization;
 using System.Runtime.Serialization;
-using Xamarin.Forms.Internals;
 
 namespace DocNoc.Xam.Models.Principal
 {
     /// <summary>
     /// Photo model.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [DataContract]
     public class Photo
     {

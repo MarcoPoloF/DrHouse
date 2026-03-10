@@ -4,15 +4,13 @@ using System.Runtime.Serialization;
 using DocNoc.Models;
 using DocNoc.Xam.Interfaces;
 using DocNoc.Xam.Models;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Medicos
 {
     /// <summary>
     /// ViewModel for catalog page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class CatalogPageViewModel : DocNocViewModel
     {
         #region Fields

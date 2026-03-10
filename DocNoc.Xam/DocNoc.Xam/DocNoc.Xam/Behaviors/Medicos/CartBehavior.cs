@@ -1,13 +1,11 @@
 ﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.Behaviors.Medicos
 {
     /// <summary>
     /// This class extends the behavior of the catalog page and detail page
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class CartBehavior : Behavior<ContentPage>
     {
         #region Fields

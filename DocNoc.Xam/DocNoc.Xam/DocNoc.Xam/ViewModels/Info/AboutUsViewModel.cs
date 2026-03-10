@@ -1,14 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using DocNoc.Xam.Models.Info;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Info
 {
     /// <summary>
     /// ViewModel of AboutUs templates.
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class AboutUsViewModel : DocNocViewModel
     {
         #region Fields

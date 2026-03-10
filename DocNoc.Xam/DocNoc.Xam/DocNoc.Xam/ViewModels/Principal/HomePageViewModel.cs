@@ -7,15 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
+using Microsoft.Maui.Controls;
 
 namespace DocNoc.Xam.ViewModels.Principal
 {
     /// <summary>
     /// Definición de ViewModel: Home (dn-07-3).
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class HomePageViewModel : DocNocViewModel
     {
         #region Fields

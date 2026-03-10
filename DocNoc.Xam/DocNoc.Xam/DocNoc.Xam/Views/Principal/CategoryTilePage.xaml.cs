@@ -1,13 +1,11 @@
 using DocNoc.Xam.DataService;
-using Xamarin.Forms.Internals;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls.Xaml;
 
 namespace DocNoc.Xam.Views.Principal
 {
     /// <summary>
     /// The Category Tile page.
     /// </summary>
-    [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryTilePage
     {
